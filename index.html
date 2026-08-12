@@ -3,1500 +3,2014 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Boletim de Garantia | Nors Centro Oeste</title>
+<title>Boletim de Garantia</title>
 
+<style>
 
-    <style>
+/* =========================================================
+   RESET
+========================================================= */
 
-        /* =========================================================
-           CONFIGURAÇÕES GERAIS
-        ========================================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+html {
+    background: #e9edf0;
+}
 
-        html {
-            background: #eef1f3;
-        }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #e9edf0;
+    color: #17212b;
+    padding: 30px;
+}
 
-        body {
 
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+/* =========================================================
+   PALETA
+========================================================= */
 
-            background: #eef1f3;
+:root {
 
-            color: #20262b;
+    --azul: #0078b8;
+    --azul-escuro: #10212d;
+    --azul-claro: #e8f5fb;
 
-            padding: 30px;
+    --cinza-1: #f5f7f8;
+    --cinza-2: #e1e6e9;
+    --cinza-3: #87939b;
 
-        }
+    --verde: #218447;
+    --verde-bg: #edf8f1;
 
-        .boletim {
+    --vermelho: #c52d2d;
+    --vermelho-bg: #fff0f0;
 
-            width: 100%;
+    --amarelo: #d99500;
+    --amarelo-bg: #fff7e5;
 
-            max-width: 900px;
+    --texto: #17212b;
+}
 
-            margin: 0 auto;
 
-            background: #ffffff;
+/* =========================================================
+   CONTAINER PRINCIPAL
+========================================================= */
 
-            box-shadow:
-                0 8px 30px rgba(0, 0, 0, 0.12);
+.boletim {
 
-        }
+    width: 100%;
+    max-width: 1000px;
 
+    margin: auto;
 
-        /* =========================================================
-           CABEÇALHO
-        ========================================================= */
+    background: #ffffff;
 
-        .header {
+    box-shadow:
+        0 15px 45px rgba(20, 35, 45, .15);
 
-            background: #111820;
+    overflow: hidden;
+}
 
-            color: #ffffff;
 
-            padding: 28px 35px;
+/* =========================================================
+   CABEÇALHO
+========================================================= */
 
-            display: flex;
+.header {
 
-            justify-content: space-between;
+    position: relative;
 
-            align-items: center;
+    padding: 34px 42px;
 
-            border-bottom: 6px solid #0078b8;
+    background:
+        linear-gradient(
+            135deg,
+            #10212d 0%,
+            #162e3d 65%,
+            #0078b8 100%
+        );
 
-        }
+    color: white;
 
-        .logo-area h1 {
+    display: flex;
 
-            font-size: 27px;
+    justify-content: space-between;
 
-            line-height: 1.1;
+    align-items: center;
 
-            letter-spacing: 1px;
+}
 
-            color: #ffffff;
 
-        }
+/* detalhe lateral */
 
-        .logo-area p {
+.header::after {
 
-            margin-top: 7px;
+    content: "";
 
-            font-size: 13px;
+    position: absolute;
 
-            color: #bfc7cc;
+    left: 0;
+    bottom: 0;
 
-        }
+    width: 100%;
 
-        .numero {
+    height: 5px;
 
-            text-align: right;
+    background: #38a9dc;
 
-        }
+}
 
-        .numero strong {
 
-            display: block;
+.marca {
 
-            font-size: 13px;
+    display: flex;
 
-            color: #8fd3f5;
+    align-items: center;
 
-            margin-bottom: 2px;
+    gap: 15px;
 
-        }
+}
 
-        .numero span {
 
-            font-size: 20px;
+.marca-simbolo {
 
-            font-weight: bold;
+    width: 52px;
+    height: 52px;
 
-            color: #ffffff;
+    border: 2px solid rgba(255,255,255,.7);
 
-        }
+    border-radius: 50%;
 
+    display: flex;
 
-        /* =========================================================
-           TÍTULO
-        ========================================================= */
+    align-items: center;
 
-        .titulo {
+    justify-content: center;
 
-            padding: 30px 35px 20px;
+    font-size: 22px;
 
-        }
+    font-weight: bold;
 
-        .categoria {
+}
 
-            display: inline-block;
 
-            background: #0078b8;
+.marca h1 {
 
-            color: #ffffff;
+    font-size: 27px;
 
-            padding: 7px 13px;
+    letter-spacing: 1.5px;
 
-            font-size: 11px;
+}
 
-            font-weight: bold;
 
-            border-radius: 4px;
+.marca p {
 
-            margin-bottom: 12px;
+    margin-top: 5px;
 
-            text-transform: uppercase;
+    font-size: 12px;
 
-        }
+    color: #c8d7df;
 
-        .titulo h2 {
+    letter-spacing: .5px;
 
-            font-size: 30px;
+}
 
-            line-height: 1.15;
 
-            color: #111820;
+.numero {
 
-        }
+    text-align: right;
 
-        .titulo p {
+}
 
-            margin-top: 10px;
 
-            font-size: 15px;
+.numero-label {
 
-            line-height: 1.5;
+    font-size: 11px;
 
-            color: #68737b;
+    text-transform: uppercase;
 
-        }
+    color: #9ed8f4;
 
+    font-weight: bold;
 
-        /* =========================================================
-           ALERTA
-        ========================================================= */
+}
 
-        .alerta {
 
-            margin: 10px 35px 25px;
+.numero-valor {
 
-            padding: 18px 20px;
+    font-size: 24px;
 
-            background: #fff4dc;
+    font-weight: 800;
 
-            border-left: 5px solid #f0a500;
+    margin-top: 2px;
 
-            border-radius: 4px;
+}
 
-        }
 
-        .alerta strong {
+#numeroValor:hover {
 
-            display: block;
+    border-color: rgba(255,255,255,.5);
 
-            margin-bottom: 5px;
+    background: rgba(255,255,255,.08);
 
-            color: #9a6800;
+}
 
-            font-size: 16px;
 
-        }
+#numeroValor:focus {
 
-        .alerta p {
+    border-color: #9ed8f4;
 
-            font-size: 14px;
+    background: rgba(255,255,255,.12);
 
-            line-height: 1.5;
+    box-shadow: 0 0 0 3px rgba(158,216,244,.25);
 
-            color: #20262b;
+}
 
-        }
 
+/* =========================================================
+   FAIXA DE TEMA
+========================================================= */
 
-        /* =========================================================
-           CONTEÚDO
-        ========================================================= */
+.tema {
 
-        .conteudo {
+    padding: 25px 42px 10px;
 
-            padding: 0 35px 35px;
+}
 
-        }
 
-        .secao {
+.tag {
 
-            margin-top: 28px;
+    display: inline-flex;
 
-        }
+    align-items: center;
 
-        .secao-titulo {
+    gap: 7px;
 
-            display: flex;
+    padding: 7px 12px;
 
-            align-items: center;
+    background: var(--azul-claro);
 
-            gap: 10px;
+    color: var(--azul);
 
-            font-size: 19px;
+    font-size: 11px;
 
-            font-weight: bold;
+    font-weight: 800;
 
-            color: #111820;
+    border-radius: 4px;
 
-            margin-bottom: 15px;
+    letter-spacing: .5px;
 
-            padding-bottom: 9px;
+}
 
-            border-bottom: 2px solid #e7ebee;
 
-        }
+.tema h2 {
 
-        .icone {
+    margin-top: 15px;
 
-            width: 32px;
+    max-width: 760px;
 
-            height: 32px;
+    font-size: 34px;
 
-            min-width: 32px;
+    line-height: 1.08;
 
-            display: flex;
+    color: var(--azul-escuro);
 
-            align-items: center;
+}
 
-            justify-content: center;
 
-            background: #0078b8;
+.tema h2 span {
 
-            color: #ffffff;
+    color: var(--azul);
 
-            border-radius: 50%;
+}
 
-            font-size: 15px;
 
-        }
+.tema p {
 
-        .texto {
+    margin-top: 12px;
 
-            font-size: 14px;
+    max-width: 760px;
 
-            line-height: 1.6;
+    font-size: 15px;
 
-            color: #20262b;
+    line-height: 1.6;
 
-        }
+    color: #64717a;
 
+}
 
-        /* =========================================================
-           FOTOS
-        ========================================================= */
 
-        .fotos {
+/* =========================================================
+   REGRA DE OURO
+========================================================= */
 
-            display: grid;
+.regra {
 
-            grid-template-columns: 1fr 1fr;
+    margin: 25px 42px;
 
-            gap: 20px;
+    padding: 20px 22px;
 
-        }
+    display: flex;
 
-        .foto-card {
+    align-items: center;
 
-            border: 1px solid #dce1e4;
+    gap: 18px;
 
-            border-radius: 7px;
+    background: var(--amarelo-bg);
 
-            overflow: hidden;
+    border: 1px solid #f0d89b;
 
-            background: #f8fafb;
+    border-left: 6px solid #efa900;
 
-        }
+    border-radius: 6px;
 
-        .foto {
+}
 
-            height: 260px;
 
-            position: relative;
+.regra-icone {
 
-            display: flex;
+    width: 42px;
+    height: 42px;
 
-            align-items: center;
+    flex-shrink: 0;
 
-            justify-content: center;
+    background: #efa900;
 
-            overflow: hidden;
+    color: white;
 
-            background: #dfe4e7;
+    border-radius: 50%;
 
-        }
+    display: flex;
 
+    justify-content: center;
 
-        /* =========================================================
-           ÁREA DE UPLOAD
-        ========================================================= */
+    align-items: center;
 
-        .upload-placeholder {
+    font-size: 20px;
 
-            display: flex;
+}
 
-            flex-direction: column;
 
-            align-items: center;
+.regra strong {
 
-            justify-content: center;
+    display: block;
 
-            gap: 7px;
+    color: #9a6800;
 
-            padding: 20px;
+    font-size: 15px;
 
-            text-align: center;
+    margin-bottom: 5px;
 
-            color: #68737b;
+}
 
-        }
 
-        .upload-icon {
+.regra p {
 
-            font-size: 34px;
+    font-size: 14px;
 
-            line-height: 1;
+    line-height: 1.5;
 
-            margin-bottom: 4px;
+    color: #3f4549;
 
-        }
+}
 
-        .upload-placeholder strong {
 
-            font-size: 14px;
+/* =========================================================
+   AVISO DE EDIÇÃO
+========================================================= */
 
-            color: #5e6970;
+.aviso-edicao {
 
-        }
+    margin: 0 42px 10px;
 
-        .upload-placeholder span:not(.upload-icon) {
+    padding: 10px 16px;
 
-            font-size: 12px;
+    background: #f0f7fb;
 
-            color: #68737b;
+    border: 1px dashed #9ed8f4;
 
-        }
+    border-radius: 6px;
 
+    font-size: 12px;
 
-        /* =========================================================
-           BOTÃO UPLOAD
-        ========================================================= */
+    color: #205a75;
 
-        .botao-upload {
+    line-height: 1.5;
 
-            display: inline-block;
+}
 
-            margin-top: 10px;
 
-            padding: 10px 17px;
+/* =========================================================
+   CAMPOS EDITÁVEIS
+========================================================= */
 
-            background: #0078b8;
+[contenteditable="true"] {
 
-            color: #ffffff;
+    outline: none;
 
-            border-radius: 5px;
+    border: 1px dashed transparent;
 
-            font-size: 12px;
+    border-radius: 4px;
 
-            font-weight: bold;
+    padding: 2px 5px;
 
-            cursor: pointer;
+    margin: -2px -5px;
 
-            transition: background 0.2s ease;
+    cursor: text;
 
-        }
+    transition: background .15s, border-color .15s, box-shadow .15s;
 
-        .botao-upload:hover {
+}
 
-            background: #005f91;
 
-        }
+[contenteditable="true"]:hover {
 
-        .botao-upload input {
+    border-color: #9ed8f4;
 
-            display: none;
+    background: #f5fbfe;
 
-        }
+}
 
 
-        /* =========================================================
-           IMAGEM PREVIEW
-        ========================================================= */
+[contenteditable="true"]:focus {
 
-        .imagem-preview {
+    border-color: var(--azul);
 
-            display: none;
+    background: #eef8fd;
 
-            position: absolute;
+    box-shadow: 0 0 0 3px rgba(0,120,184,.12);
 
-            inset: 0;
+}
 
-            width: 100%;
 
-            height: 100%;
+[contenteditable="true"]:empty:before {
 
-            object-fit: contain;
+    content: attr(data-placeholder);
 
-            background: #dfe4e7;
+    color: #9aa7ae;
 
-        }
+}
 
-        .foto.tem-imagem .upload-placeholder {
 
-            display: none;
+/* =========================================================
+   CONTEÚDO
+========================================================= */
 
-        }
+.conteudo {
 
-        .foto.tem-imagem .imagem-preview {
+    padding: 5px 42px 40px;
 
-            display: block;
+}
 
-        }
 
+.secao {
 
-        /* =========================================================
-           BOTÃO REMOVER IMAGEM
-        ========================================================= */
+    margin-top: 28px;
 
-        .remover-imagem {
+}
 
-            display: none;
 
-            position: absolute;
+.titulo-secao {
 
-            top: 10px;
+    display: flex;
 
-            right: 10px;
+    align-items: center;
 
-            z-index: 10;
+    gap: 11px;
 
-            padding: 7px 10px;
+    margin-bottom: 17px;
 
-            border: none;
+}
 
-            border-radius: 5px;
 
-            background: #c52b2b;
+.titulo-icone {
 
-            color: #ffffff;
+    width: 34px;
+    height: 34px;
 
-            font-size: 11px;
+    border-radius: 50%;
 
-            font-weight: bold;
+    background: var(--azul);
 
-            cursor: pointer;
+    color: white;
 
-        }
+    display: flex;
 
-        .foto.tem-imagem .remover-imagem {
+    justify-content: center;
 
-            display: block;
+    align-items: center;
 
-        }
+    font-weight: bold;
 
-        .remover-imagem:hover {
+}
 
-            background: #a51f1f;
 
-        }
+.titulo-secao h3 {
 
+    font-size: 20px;
 
-        /* =========================================================
-           LEGENDA DAS FOTOS
-        ========================================================= */
+    color: var(--azul-escuro);
 
-        .legenda {
+}
 
-            padding: 15px;
 
-            background: #f8fafb;
+.linha {
 
-            font-size: 13px;
+    height: 2px;
 
-            line-height: 1.5;
+    background: #e4e9ec;
 
-            color: #20262b;
+    margin-top: 8px;
 
-        }
+}
 
-        .legenda strong {
 
-            display: block;
+/* =========================================================
+   MENSAGEM IDENTIFICADA
+========================================================= */
 
-            margin-bottom: 5px;
+.problema {
 
-        }
+    padding: 18px 20px;
 
+    background: #f7f9fa;
 
-        /* =========================================================
-           CARDS NÃO FAÇA / FAÇA ASSIM
-        ========================================================= */
+    border-left: 4px solid var(--azul);
 
-        .cards {
+    font-size: 14px;
 
-            display: grid;
+    line-height: 1.6;
 
-            grid-template-columns: 1fr 1fr;
+    color: #3f4c54;
 
-            gap: 18px;
+    min-height: 60px;
 
-        }
+}
 
-        .card {
 
-            padding: 20px;
+/* =========================================================
+   COMPARAÇÃO DAS FOTOS
+========================================================= */
 
-            border-radius: 6px;
+.comparacao {
 
-        }
+    display: grid;
 
-        .card h3 {
+    grid-template-columns: 1fr 1fr;
 
-            margin-bottom: 10px;
+    gap: 22px;
 
-            font-size: 16px;
+}
 
-        }
 
-        .card ul {
+.foto-card {
 
-            padding-left: 20px;
+    border-radius: 8px;
 
-        }
+    overflow: hidden;
 
-        .card li {
+    background: white;
 
-            margin-bottom: 6px;
+    border: 1px solid #dce3e7;
 
-            font-size: 14px;
+    box-shadow:
+        0 5px 16px rgba(20,40,50,.07);
 
-            line-height: 1.5;
+}
 
-        }
 
-        .card.incorreto {
+.foto-topo {
 
-            background: #fff0f0;
+    padding: 12px 15px;
 
-            border: 1px solid #f0caca;
+    display: flex;
 
-        }
+    align-items: center;
 
-        .card.incorreto h3 {
+    justify-content: space-between;
 
-            color: #c52b2b;
+    font-size: 12px;
 
-        }
+    font-weight: 800;
 
-        .card.correto {
+    letter-spacing: .4px;
 
-            background: #eef9f1;
+}
 
-            border: 1px solid #c6e6ce;
 
-        }
+.foto-card.errado .foto-topo {
 
-        .card.correto h3 {
+    background: var(--vermelho-bg);
 
-            color: #238442;
+    color: var(--vermelho);
 
-        }
+}
 
 
-        /* =========================================================
-           CHECKLIST
-        ========================================================= */
+.foto-card.certo .foto-topo {
 
-        .checklist {
+    background: var(--verde-bg);
 
-            display: grid;
+    color: var(--verde);
 
-            grid-template-columns: 1fr 1fr;
+}
 
-            gap: 10px;
 
-        }
+.status {
 
-        .check {
+    width: 23px;
+    height: 23px;
 
-            display: flex;
+    border-radius: 50%;
 
-            align-items: center;
+    display: flex;
 
-            min-height: 48px;
+    justify-content: center;
 
-            padding: 10px 14px;
+    align-items: center;
 
-            background: #f4f6f7;
+    color: white;
 
-            border-radius: 5px;
+}
 
-            font-size: 14px;
 
-            color: #20262b;
+.errado .status {
 
-        }
+    background: var(--vermelho);
 
-        .check::before {
+}
 
-            content: "✓";
 
-            flex-shrink: 0;
+.certo .status {
 
-            width: 21px;
+    background: var(--verde);
 
-            height: 21px;
+}
 
-            margin-right: 8px;
 
-            display: inline-flex;
+/* =========================================================
+   ÁREA DA FOTO
+========================================================= */
 
-            align-items: center;
+.foto-area {
 
-            justify-content: center;
+    position: relative;
 
-            background: #238442;
+    height: 290px;
 
-            color: #ffffff;
+    background: #e2e7ea;
 
-            border-radius: 50%;
+    overflow: hidden;
 
-            font-size: 12px;
+}
 
-            font-weight: bold;
 
-        }
+.placeholder {
 
+    position: absolute;
 
-        /* =========================================================
-           DICA DA GARANTIA
-        ========================================================= */
+    inset: 0;
 
-        .dica {
+    display: flex;
 
-            margin-top: 28px;
+    flex-direction: column;
 
-            padding: 22px;
+    justify-content: center;
 
-            background: #111820;
+    align-items: center;
 
-            color: #ffffff;
+    text-align: center;
 
-            border-radius: 7px;
+    color: #75828a;
 
-        }
+    padding: 20px;
 
-        .dica-titulo {
+}
 
-            display: block;
 
-            margin-bottom: 8px;
+.placeholder-icon {
 
-            color: #72c6ef;
+    font-size: 42px;
 
-            font-size: 16px;
+    margin-bottom: 10px;
 
-            font-weight: bold;
+    opacity: .7;
 
-        }
+}
 
-        .dica p {
 
-            font-size: 14px;
+.placeholder strong {
 
-            line-height: 1.5;
+    font-size: 14px;
 
-            color: #ffffff;
+}
 
-        }
 
-        .dica-frase {
+.placeholder span {
 
-            font-weight: bold;
+    margin-top: 5px;
 
-            color: #ffffff;
+    font-size: 11px;
 
-        }
+}
 
 
-        /* =========================================================
-           ASSINATURA DIGITAL
-        ========================================================= */
+.imagem {
 
-        .assinatura-container {
+    display: none;
 
-            border: 1px solid #dce1e4;
+    position: absolute;
 
-            border-radius: 7px;
+    inset: 0;
 
-            overflow: hidden;
+    width: 100%;
 
-            background: #ffffff;
+    height: 100%;
 
-        }
+    object-fit: cover;
 
-        .assinatura-header {
+}
 
-            padding: 15px 18px;
 
-            background: #f4f6f7;
+.foto-area.tem-imagem .imagem {
 
-            border-bottom: 1px solid #dce1e4;
+    display: block;
 
-        }
+}
 
-        .assinatura-header strong {
 
-            display: block;
+.foto-area.tem-imagem .placeholder {
 
-            font-size: 14px;
+    display: none;
 
-            color: #111820;
+}
 
-        }
 
-        .assinatura-header span {
+/* =========================================================
+   BOTÃO UPLOAD
+========================================================= */
 
-            display: block;
+.upload {
 
-            margin-top: 4px;
+    margin-top: 12px;
 
-            font-size: 12px;
+    padding: 9px 14px;
 
-            color: #68737b;
+    background: var(--azul);
 
-        }
+    color: white;
 
-        .assinatura-area {
+    border-radius: 4px;
 
-            position: relative;
+    cursor: pointer;
 
-            width: 100%;
+    font-size: 11px;
 
-            height: 220px;
+    font-weight: bold;
 
-            background: #ffffff;
+}
 
-            overflow: hidden;
 
-        }
+.upload:hover {
 
-        .canvas-assinatura {
+    background: #005e91;
 
-            position: absolute;
+}
 
-            inset: 0;
 
-            width: 100%;
+.upload input {
 
-            height: 100%;
+    display: none;
 
-            display: block;
+}
 
-            cursor: crosshair;
 
-            touch-action: none;
+/* =========================================================
+   REMOVER FOTO
+========================================================= */
 
-            user-select: none;
+.remover {
 
-            -webkit-user-select: none;
+    display: none;
 
-            -webkit-touch-callout: none;
+    position: absolute;
 
-        }
+    right: 10px;
 
-        .assinatura-placeholder {
+    top: 10px;
 
-            position: absolute;
+    z-index: 5;
 
-            inset: 0;
+    border: none;
 
-            display: flex;
+    padding: 7px 10px;
 
-            flex-direction: column;
+    border-radius: 4px;
 
-            align-items: center;
+    background: rgba(0,0,0,.75);
 
-            justify-content: center;
+    color: white;
 
-            pointer-events: none;
+    cursor: pointer;
 
-            color: #a1a9ae;
+    font-size: 10px;
 
-            transition: opacity 0.2s ease;
+    font-weight: bold;
 
-        }
+}
 
-        .assinatura-placeholder span {
 
-            font-size: 30px;
+.tem-imagem .remover {
 
-            margin-bottom: 7px;
+    display: block;
 
-        }
+}
 
-        .assinatura-placeholder strong {
 
-            font-size: 15px;
+/* =========================================================
+   TEXTO FOTO
+========================================================= */
 
-            color: #68737b;
+.foto-descricao {
 
-        }
+    padding: 17px;
 
-        .assinatura-placeholder small {
+}
 
-            margin-top: 5px;
 
-            font-size: 11px;
+.foto-descricao strong {
 
-            color: #9aa3a8;
+    display: block;
 
-        }
+    font-size: 14px;
 
-        .assinatura-area::after {
+    margin-bottom: 6px;
 
-            content: "";
+}
 
-            position: absolute;
 
-            left: 8%;
+.errado .foto-descricao strong {
 
-            right: 8%;
+    color: var(--vermelho);
 
-            bottom: 38px;
+}
 
-            height: 1px;
 
-            background: #cfd5d9;
+.certo .foto-descricao strong {
 
-            pointer-events: none;
+    color: var(--verde);
 
-        }
+}
 
-        .assinatura-acoes {
 
-            display: flex;
+.foto-descricao p {
 
-            justify-content: flex-end;
+    font-size: 13px;
 
-            padding: 10px 15px;
+    line-height: 1.5;
 
-            background: #f8fafb;
+    color: #58656d;
 
-            border-top: 1px solid #e1e5e7;
+}
 
-        }
 
-        .botao-limpar-assinatura {
+/* =========================================================
+   PASSO A PASSO
+========================================================= */
 
-            padding: 9px 14px;
+.passos {
 
-            border: none;
+    display: grid;
 
-            border-radius: 5px;
+    grid-template-columns: repeat(3, 1fr);
 
-            background: #68737b;
+    gap: 15px;
 
-            color: #ffffff;
+}
 
-            font-size: 11px;
 
-            font-weight: bold;
+.passo {
 
-            cursor: pointer;
+    position: relative;
 
-        }
+    padding: 20px 17px;
 
-        .botao-limpar-assinatura:hover {
+    border: 1px solid #dfe5e8;
 
-            background: #4e5960;
+    border-radius: 7px;
 
-        }
+    background: #fff;
 
-        .dados-assinatura {
+}
 
-            display: grid;
 
-            grid-template-columns: 2fr 1fr;
+.passo-numero {
 
-            gap: 15px;
+    width: 34px;
+    height: 34px;
 
-            padding: 15px;
+    border-radius: 50%;
 
-            background: #f8fafb;
+    background: var(--azul);
 
-            border-top: 1px solid #dce1e4;
+    color: white;
 
-        }
+    display: flex;
 
-        .campo-assinatura {
+    align-items: center;
 
-            display: flex;
+    justify-content: center;
 
-            flex-direction: column;
+    font-weight: bold;
 
-            gap: 6px;
+    margin-bottom: 12px;
 
-        }
+}
 
-        .campo-assinatura label {
 
-            font-size: 11px;
+.passo h4 {
 
-            font-weight: bold;
+    font-size: 14px;
 
-            color: #5e6970;
+    color: var(--azul-escuro);
 
-            text-transform: uppercase;
+    margin-bottom: 7px;
 
-        }
+}
 
-        .campo-assinatura input {
 
-            width: 100%;
+.passo p {
 
-            height: 40px;
+    font-size: 12px;
 
-            padding: 0 11px;
+    line-height: 1.5;
 
-            border: 1px solid #cfd6da;
+    color: #68757d;
 
-            border-radius: 5px;
+}
 
-            background: #ffffff;
 
-            color: #20262b;
+/* =========================================================
+   NÃO FAÇA / FAÇA
+========================================================= */
 
-            font-family: Arial, Helvetica, sans-serif;
+.duas-colunas {
 
-            font-size: 13px;
+    display: grid;
 
-            outline: none;
+    grid-template-columns: 1fr 1fr;
 
-        }
+    gap: 18px;
 
-        .campo-assinatura input:focus {
+}
 
-            border-color: #0078b8;
 
-            box-shadow:
-                0 0 0 2px rgba(0, 120, 184, 0.10);
+.lista-card {
 
-        }
+    border-radius: 7px;
 
+    padding: 20px;
 
-        /* =========================================================
-           RODAPÉ
-        ========================================================= */
+}
 
-        .footer {
 
-            display: flex;
+.lista-card h4 {
 
-            justify-content: space-between;
+    font-size: 15px;
 
-            align-items: center;
+    margin-bottom: 14px;
 
-            padding: 18px 35px;
+}
 
-            background: #f1f3f4;
 
-            border-top: 1px solid #dce1e4;
+.lista-card ul {
 
-            font-size: 11px;
+    list-style: none;
 
-            color: #68737b;
+}
 
-        }
 
-        .footer strong {
+.lista-card li {
 
-            color: #111820;
+    display: flex;
 
-        }
+    align-items: flex-start;
 
+    gap: 9px;
 
-        /* =========================================================
-           ÁREA DE AÇÕES
-        ========================================================= */
+    margin-bottom: 10px;
 
-        .acoes {
+    font-size: 13px;
 
-            max-width: 900px;
+    line-height: 1.45;
 
-            margin: 20px auto 0;
+}
 
-            display: flex;
 
-            justify-content: center;
+.li-icone {
 
-            gap: 10px;
+    flex-shrink: 0;
 
-        }
+    width: 16px;
 
-        .botao {
+    font-weight: bold;
 
-            padding: 12px 20px;
+    line-height: 1.45;
 
-            border: none;
+}
 
-            border-radius: 5px;
 
-            font-size: 13px;
+.li-texto {
 
-            font-weight: bold;
+    flex: 1;
 
-            cursor: pointer;
+}
 
-        }
 
-        .botao-imprimir {
+.nao {
 
-            background: #111820;
+    background: var(--vermelho-bg);
 
-            color: #ffffff;
+    border: 1px solid #efcccc;
 
-        }
+}
 
-        .botao-imprimir:hover {
 
-            background: #26333d;
+.nao h4 {
 
-        }
+    color: var(--vermelho);
 
+}
 
-        /* =========================================================
-           RESPONSIVIDADE
-        ========================================================= */
 
-        @media (max-width: 700px) {
+.nao .li-icone {
 
-            body {
+    color: var(--vermelho);
 
-                padding: 10px;
+}
 
-            }
 
-            .header {
+.sim {
 
-                flex-direction: column;
+    background: var(--verde-bg);
 
-                align-items: flex-start;
+    border: 1px solid #c8e4d1;
 
-                gap: 15px;
+}
 
-                padding: 22px;
 
-            }
+.sim h4 {
 
-            .numero {
+    color: var(--verde);
 
-                text-align: left;
+}
 
-            }
 
-            .titulo,
-            .conteudo {
+.sim .li-icone {
 
-                padding-left: 22px;
+    color: var(--verde);
 
-                padding-right: 22px;
+}
 
-            }
 
-            .alerta {
+/* =========================================================
+   CHECKLIST
+========================================================= */
 
-                margin-left: 22px;
+.checklist {
 
-                margin-right: 22px;
+    display: grid;
 
-            }
+    grid-template-columns: 1fr 1fr;
 
-            .titulo h2 {
+    gap: 9px;
 
-                font-size: 25px;
+}
 
-            }
 
-            .fotos,
-            .cards,
-            .checklist {
+.check {
 
-                grid-template-columns: 1fr;
+    display: flex;
 
-            }
+    align-items: center;
 
-            .footer {
+    gap: 10px;
 
-                flex-direction: column;
+    padding: 13px;
 
-                align-items: flex-start;
+    background: #f5f7f8;
 
-                gap: 8px;
+    border: 1px solid #e2e7e9;
 
-                padding: 18px 22px;
+    border-radius: 5px;
 
-            }
+    font-size: 12px;
 
-            .dados-assinatura {
+    color: #37444c;
 
-                grid-template-columns: 1fr;
+}
 
-            }
 
-            .assinatura-area {
+.check-icon {
 
-                height: 240px;
+    width: 22px;
+    height: 22px;
 
-            }
+    flex-shrink: 0;
 
-            .assinatura-acoes {
+    border-radius: 50%;
 
-                justify-content: stretch;
+    background: var(--verde);
 
-            }
+    color: white;
 
-            .botao-limpar-assinatura {
+    display: flex;
 
-                width: 100%;
+    justify-content: center;
 
-            }
+    align-items: center;
 
-        }
+    font-size: 11px;
 
+    font-weight: bold;
 
-        /* =========================================================
-           IMPRESSÃO / PDF
-        ========================================================= */
+}
 
-        @media print {
 
-            *,
-            *::before,
-            *::after {
+/* =========================================================
+   DICA FINAL
+========================================================= */
 
-                -webkit-print-color-adjust: exact !important;
+.dica-final {
 
-                print-color-adjust: exact !important;
+    margin-top: 28px;
 
-            }
+    padding: 24px;
 
-            html {
+    border-radius: 8px;
 
-                background: #ffffff !important;
+    background:
+        linear-gradient(
+            135deg,
+            #10212d,
+            #17445c
+        );
 
-            }
+    color: white;
 
-            body {
+    text-align: center;
 
-                margin: 0 !important;
+}
 
-                padding: 0 !important;
 
-                background: #ffffff !important;
+.dica-final .mini {
 
-                color: #20262b !important;
+    color: #7dd0f6;
 
-            }
+    font-size: 11px;
 
-            .boletim {
+    font-weight: bold;
 
-                width: 100% !important;
+    letter-spacing: 1px;
 
-                max-width: none !important;
+    text-transform: uppercase;
 
-                margin: 0 !important;
+}
 
-                background: #ffffff !important;
 
-                box-shadow: none !important;
+.dica-final h3 {
 
-            }
+    margin-top: 7px;
 
-            .header {
+    font-size: 19px;
 
-                background: #111820 !important;
+}
 
-                color: #ffffff !important;
 
-                border-bottom: 6px solid #0078b8 !important;
+.dica-final p {
 
-            }
+    max-width: 700px;
 
-            .logo-area h1 {
+    margin: 9px auto 0;
 
-                color: #ffffff !important;
+    color: #d6e3e9;
 
-            }
+    font-size: 13px;
 
-            .logo-area p {
+    line-height: 1.6;
 
-                color: #bfc7cc !important;
+}
 
-            }
 
-            .numero strong {
+/* =========================================================
+   ASSINATURAS
+========================================================= */
 
-                color: #8fd3f5 !important;
+.assinaturas-grid {
 
-            }
+    display: grid;
 
-            .numero span {
+    grid-template-columns: repeat(3, 1fr);
 
-                color: #ffffff !important;
+    gap: 15px;
 
-            }
+}
 
-            .categoria {
 
-                background: #0078b8 !important;
+.assinatura-slot {
 
-                color: #ffffff !important;
+    border: 1px solid #dfe5e8;
 
-            }
+    border-radius: 8px;
 
-            .titulo h2 {
+    padding: 18px;
 
-                color: #111820 !important;
+    background: #fff;
 
-            }
+    text-align: center;
 
-            .titulo p {
+    display: flex;
 
-                color: #68737b !important;
+    flex-direction: column;
 
-            }
+    align-items: center;
 
-            .alerta {
+    gap: 10px;
 
-                background: #fff4dc !important;
+}
 
-                border-left: 5px solid #f0a500 !important;
 
-            }
+.assinatura-slot.assinado {
 
-            .alerta strong {
+    border-color: #c8e4d1;
 
-                color: #9a6800 !important;
+    background: var(--verde-bg);
 
-            }
+}
 
-            .alerta p {
 
-                color: #20262b !important;
+.assinatura-label {
 
-            }
+    font-size: 13px;
 
-            .secao-titulo {
+    font-weight: 800;
 
-                color: #111820 !important;
+    color: var(--azul-escuro);
 
-                border-bottom-color: #e7ebee !important;
+}
 
-            }
 
-            .icone {
+.btn-assinar {
 
-                background: #0078b8 !important;
+    border: none;
 
-                color: #ffffff !important;
+    padding: 10px 16px;
 
-            }
+    background: var(--azul);
 
-            .foto-card {
+    color: white;
 
-                background: #f8fafb !important;
+    border-radius: 5px;
 
-                border-color: #dce1e4 !important;
+    cursor: pointer;
 
-            }
+    font-size: 12px;
 
-            .foto {
+    font-weight: bold;
 
-                background: #dfe4e7 !important;
+}
 
-            }
 
-            .legenda {
+.btn-assinar:hover {
 
-                background: #f8fafb !important;
+    background: #005e91;
 
-                color: #20262b !important;
+}
 
-            }
 
-            .card.incorreto {
+.assinatura-resultado {
 
-                background: #fff0f0 !important;
+    width: 100%;
 
-                border-color: #f0caca !important;
+}
 
-            }
 
-            .card.incorreto h3 {
+.assinatura-resultado:empty {
 
-                color: #c52b2b !important;
+    display: none;
 
-            }
+}
 
-            .card.correto {
 
-                background: #eef9f1 !important;
+.assinatura-img {
 
-                border-color: #c6e6ce !important;
+    width: 100%;
 
-            }
+    max-width: 220px;
 
-            .card.correto h3 {
+    margin: 0 auto 8px;
 
-                color: #238442 !important;
+    border: 1px solid #c8e4d1;
 
-            }
+    border-radius: 5px;
 
-            .check {
+    background: white;
 
-                background: #f4f6f7 !important;
+}
 
-                color: #20262b !important;
 
-            }
+.assinatura-img img {
 
-            .check::before {
+    width: 100%;
 
-                background: #238442 !important;
+    display: block;
 
-                color: #ffffff !important;
+}
 
-            }
 
-            .dica {
+.assinatura-info {
 
-                background: #111820 !important;
+    font-size: 11.5px;
 
-                color: #ffffff !important;
+    line-height: 1.6;
 
-            }
+    color: #2c4a37;
 
-            .dica-titulo {
+    text-align: left;
 
-                color: #72c6ef !important;
+}
 
-            }
 
-            .dica p,
-            .dica-frase {
+.assinatura-info strong {
 
-                color: #ffffff !important;
+    color: var(--verde);
 
-            }
+}
 
-            .footer {
 
-                background: #f1f3f4 !important;
+.assinatura-data {
 
-                border-top-color: #dce1e4 !important;
+    display: block;
 
-                color: #68737b !important;
+    margin-top: 4px;
 
-            }
+    font-size: 10.5px;
 
-            .footer strong {
+    color: #5c7a68;
 
-                color: #111820 !important;
+}
 
-            }
 
-            .acoes,
-            .botao-upload,
-            .remover-imagem,
-            .assinatura-acoes {
+.btn-refazer {
 
-                display: none !important;
+    margin-top: 8px;
 
-            }
+    border: none;
 
-            .assinatura-container {
+    background: none;
 
-                border-color: #dce1e4 !important;
+    color: var(--azul);
 
-            }
+    font-size: 11px;
 
-            .assinatura-header {
+    font-weight: bold;
 
-                background: #f4f6f7 !important;
+    cursor: pointer;
 
-            }
+    text-decoration: underline;
 
-            .assinatura-area {
+}
 
-                background: #ffffff !important;
 
-            }
+/* =========================================================
+   RODAPÉ
+========================================================= */
 
-            .assinatura-placeholder {
+.footer {
 
-                display: none !important;
+    padding: 17px 42px;
 
-            }
+    background: #f1f4f5;
 
-            .dados-assinatura {
+    border-top: 1px solid #dfe5e8;
 
-                background: #f8fafb !important;
+    display: flex;
 
-            }
+    justify-content: space-between;
 
-            .header,
-            .alerta,
-            .foto-card,
-            .cards,
-            .card,
-            .checklist,
-            .dica,
-            .assinatura-container,
-            .footer {
+    font-size: 10px;
 
-                break-inside: avoid;
+    color: #77838a;
 
-                page-break-inside: avoid;
+}
 
-            }
 
-            .secao {
+.footer strong {
 
-                break-inside: avoid;
+    color: #34434c;
 
-                page-break-inside: avoid;
+}
 
-            }
 
-            @page {
+/* =========================================================
+   BOTÃO DE IMPRESSÃO
+========================================================= */
 
-                size: A4;
+.acoes {
 
-                margin: 10mm;
+    max-width: 1000px;
 
-            }
+    margin: 20px auto;
 
-        }
+    display: flex;
 
-    </style>
+    justify-content: center;
+
+}
+
+
+.btn-imprimir {
+
+    border: none;
+
+    padding: 13px 22px;
+
+    background: #10212d;
+
+    color: white;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+
+}
+
+
+.btn-imprimir:hover {
+
+    background: #0078b8;
+
+}
+
+
+/* =========================================================
+   MODAL DE ASSINATURA
+========================================================= */
+
+.modal-overlay {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(16, 33, 45, .55);
+
+    z-index: 100;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+}
+
+
+.modal-overlay.aberto {
+
+    display: flex;
+
+}
+
+
+.modal-box {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 480px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 28px 26px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+
+}
+
+
+.modal-fechar {
+
+    position: absolute;
+
+    top: 14px;
+
+    right: 14px;
+
+    border: none;
+
+    background: #f1f4f5;
+
+    width: 28px;
+
+    height: 28px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    color: #55636a;
+
+}
+
+
+.modal-box h3 {
+
+    font-size: 18px;
+
+    color: var(--azul-escuro);
+
+    margin-bottom: 6px;
+
+}
+
+
+.modal-sub {
+
+    font-size: 12.5px;
+
+    color: #68757d;
+
+    margin-bottom: 18px;
+
+    line-height: 1.5;
+
+}
+
+
+.modal-box label {
+
+    display: block;
+
+    font-size: 11.5px;
+
+    font-weight: bold;
+
+    color: #37444c;
+
+    margin-bottom: 5px;
+
+    margin-top: 14px;
+
+}
+
+
+.modal-box input[type="text"] {
+
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: 1px solid #d5dde1;
+
+    border-radius: 5px;
+
+    font-size: 13px;
+
+    font-family: inherit;
+
+}
+
+
+.modal-box input[type="text"]:focus {
+
+    outline: none;
+
+    border-color: var(--azul);
+
+    box-shadow: 0 0 0 3px rgba(0,120,184,.12);
+
+}
+
+
+.btn-modal-avancar {
+
+    width: 100%;
+
+    margin-top: 22px;
+
+    border: none;
+
+    padding: 12px;
+
+    background: var(--azul);
+
+    color: white;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+}
+
+
+.btn-modal-avancar:hover {
+
+    background: #005e91;
+
+}
+
+
+#canvasAssinatura {
+
+    width: 100%;
+
+    height: 180px;
+
+    border: 1.5px dashed #b7c3c9;
+
+    border-radius: 6px;
+
+    background: #fbfcfc;
+
+    touch-action: none;
+
+    cursor: crosshair;
+
+}
+
+
+.modal-canvas-acoes {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 8px;
+
+}
+
+
+.btn-limpar {
+
+    border: none;
+
+    background: none;
+
+    color: var(--vermelho);
+
+    font-size: 11.5px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    text-decoration: underline;
+
+}
+
+
+.modal-step2-botoes {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+}
+
+
+.btn-voltar {
+
+    flex: 1;
+
+    border: 1px solid #d5dde1;
+
+    background: white;
+
+    color: #37444c;
+
+    padding: 11px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 12.5px;
+
+    font-weight: bold;
+
+}
+
+
+.btn-confirmar {
+
+    flex: 2;
+
+    border: none;
+
+    background: var(--verde);
+
+    color: white;
+
+    padding: 11px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 12.5px;
+
+    font-weight: bold;
+
+}
+
+
+.btn-confirmar:hover {
+
+    background: #196b38;
+
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media(max-width: 750px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .header {
+        padding: 25px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .numero {
+        text-align: left;
+    }
+
+    .tema,
+    .conteudo {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .regra,
+    .aviso-edicao {
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+    .tema h2 {
+        font-size: 27px;
+    }
+
+    .comparacao,
+    .duas-colunas,
+    .checklist,
+    .assinaturas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .passos {
+        grid-template-columns: 1fr;
+    }
+
+    .footer {
+        padding-left: 25px;
+        padding-right: 25px;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+}
+
+
+/* =========================================================
+   IMPRESSÃO
+========================================================= */
+
+@media print {
+
+    *,
+    *::before,
+    *::after {
+
+        -webkit-print-color-adjust: exact !important;
+
+        print-color-adjust: exact !important;
+
+    }
+
+
+    html {
+
+        background: white !important;
+
+    }
+
+
+    body {
+
+        padding: 0 !important;
+
+        margin: 0 !important;
+
+        background: white !important;
+
+    }
+
+
+    .boletim {
+
+        max-width: none !important;
+
+        width: 100% !important;
+
+        box-shadow: none !important;
+
+        margin: 0 !important;
+
+    }
+
+
+    .acoes,
+    .no-print,
+    .aviso-edicao,
+    .modal-overlay {
+
+        display: none !important;
+
+    }
+
+
+    .upload,
+    .remover {
+
+        display: none !important;
+
+    }
+
+
+    [contenteditable="true"] {
+
+        border-color: transparent !important;
+
+        border-width: 0 !important;
+
+        background: transparent !important;
+
+        box-shadow: none !important;
+
+    }
+
+
+    .header {
+
+        background:
+            linear-gradient(
+                135deg,
+                #10212d 0%,
+                #162e3d 65%,
+                #0078b8 100%
+            ) !important;
+
+    }
+
+
+    .regra {
+
+        background: #fff7e5 !important;
+
+        border-left-color: #efa900 !important;
+
+    }
+
+
+    .foto-card {
+
+        break-inside: avoid;
+
+        page-break-inside: avoid;
+
+    }
+
+
+    .passo {
+
+        break-inside: avoid;
+
+        page-break-inside: avoid;
+
+    }
+
+
+    .lista-card {
+
+        break-inside: avoid;
+
+        page-break-inside: avoid;
+
+    }
+
+
+    .checklist,
+    .duas-colunas,
+    .comparacao,
+    .passos {
+
+        break-inside: avoid;
+
+        page-break-inside: avoid;
+
+    }
+
+
+    .check {
+
+        break-inside: avoid;
+
+        page-break-inside: avoid;
+
+    }
+
+
+    .assinatura-slot {
+
+        break-inside: avoid;
+
+        page-break-inside: avoid;
+
+    }
+
+
+    .dica-final {
+
+        background:
+            linear-gradient(
+                135deg,
+                #10212d,
+                #17445c
+            ) !important;
+
+        break-inside: avoid;
+
+        page-break-inside: avoid;
+
+    }
+
+
+    .footer {
+
+        break-inside: avoid;
+
+        page-break-inside: avoid;
+
+    }
+
+
+    @page {
+
+        size: A4;
+
+        margin: 8mm;
+
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -1504,1160 +2018,1373 @@
 <body>
 
 
-    <div class="boletim">
+<div class="boletim">
 
 
-        <!-- =====================================================
-             CABEÇALHO
-        ====================================================== -->
+<!-- =========================================================
+     CABEÇALHO
+========================================================= -->
 
-        <header class="header">
-
-            <div class="logo-area">
-
-                <h1>
-                    BOLETIM DE GARANTIA
-                </h1>
-
-                <p>
-                    NORS CENTRO OESTE • CONCESSIONÁRIA VOLVO
-                </p>
-
-            </div>
-
-            <div class="numero">
-
-                <strong>
-                    BOLETIM Nº
-                </strong>
-
-                <span>
-                    001/2026
-                </span>
-
-            </div>
-
-        </header>
+<header class="header">
 
 
-        <!-- =====================================================
-             TÍTULO
-        ====================================================== -->
+    <div class="marca">
 
-        <section class="titulo">
 
-            <span class="categoria">
-                GARANTIA • EVIDÊNCIA FOTOGRÁFICA
-            </span>
+        <div class="marca-simbolo">
+            ✓
+        </div>
 
-            <h2>
 
-                Como registrar corretamente
-                <br>
-                uma falha em garantia
+        <div>
 
-            </h2>
+            <h1>
+                BOLETIM DE GARANTIA
+            </h1>
 
             <p>
-
-                A qualidade das evidências facilita a análise
-                e evita solicitações de complemento no processo
-                de garantia.
-
-            </p>
-
-        </section>
-
-
-        <!-- =====================================================
-             ALERTA
-        ====================================================== -->
-
-        <div class="alerta">
-
-            <strong>
-                ⚠ ATENÇÃO
-            </strong>
-
-            <p>
-
-                Antes de desmontar ou substituir um componente,
-                certifique-se de registrar as evidências necessárias
-                para comprovar a falha.
-
+                DEPARTAMENTO DE GARANTIA
             </p>
 
         </div>
 
 
-        <!-- =====================================================
-             CONTEÚDO
-        ====================================================== -->
+    </div>
 
-        <main class="conteudo">
 
+    <div class="numero">
 
-            <!-- =================================================
-                 O QUE IDENTIFICAMOS
-            ================================================== -->
+        <div class="numero-label">
+            Boletim nº
+        </div>
 
-            <section class="secao">
+        <div
+            class="numero-valor"
+            id="numeroValor"
+            contenteditable="true"
+            data-placeholder="000/0000"
+        >
+            001/2026
+        </div>
 
-                <div class="secao-titulo">
+    </div>
 
-                    <span class="icone">
-                        !
-                    </span>
 
-                    O que identificamos?
+</header>
 
-                </div>
 
-                <p class="texto">
 
-                    Foram identificados processos em que as
-                    fotografias não permitem visualizar claramente
-                    o componente, sua identificação ou a região
-                    onde ocorreu a falha.
+<!-- =========================================================
+     TEMA
+========================================================= -->
 
-                </p>
+<section class="tema">
 
-            </section>
 
+    <span class="tag">
+        ● GARANTIA • EVIDÊNCIA FOTOGRÁFICA
+    </span>
 
-            <!-- =================================================
-                 FOTOS
-            ================================================== -->
 
-            <section class="secao">
+    <h2>
 
-                <div class="secao-titulo">
+        <span>Como registrar</span>
+        corretamente uma falha em garantia
 
-                    <span class="icone">
-                        📷
-                    </span>
+    </h2>
 
-                    Veja a diferença
 
-                </div>
+    <p>
 
+        Uma boa evidência fotográfica permite que o processo
+        seja compreendido mesmo por quem não está na oficina.
+        Quanto melhor o registro, mais rápido e assertivo será
+        o processo de garantia.
 
-                <div class="fotos">
+    </p>
 
 
-                    <!-- FOTO INCORRETA -->
+</section>
 
-                    <div class="foto-card">
 
-                        <div
-                            class="foto"
-                            id="areaFotoIncorreta"
-                        >
 
-                            <div class="upload-placeholder">
+<!-- =========================================================
+     REGRA DE OURO
+========================================================= -->
 
-                                <span class="upload-icon">
-                                    📷
-                                </span>
+<div class="regra">
 
-                                <strong>
-                                    FOTO INCORRETA
-                                </strong>
 
-                                <span>
-                                    Selecione uma imagem
-                                </span>
+    <div class="regra-icone">
+        !
+    </div>
 
-                                <label class="botao-upload">
 
-                                    Selecionar imagem
+    <div>
 
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        onchange="
-                                            carregarImagem(
-                                                this,
-                                                'imagemIncorreta',
-                                                'areaFotoIncorreta'
-                                            )
-                                        "
-                                    >
+        <strong>
+            REGRA DE OURO DA GARANTIA
+        </strong>
 
-                                </label>
 
-                            </div>
+        <p>
 
+            <b>Antes de desmontar ou substituir qualquer componente,
+            registre primeiro as evidências da falha.</b>
 
-                            <img
-                                id="imagemIncorreta"
-                                class="imagem-preview"
-                                alt="Foto incorreta"
-                            >
+            Depois da desmontagem, algumas evidências importantes
+            podem deixar de existir.
 
+        </p>
 
-                            <button
-                                type="button"
-                                class="remover-imagem"
-                                onclick="
-                                    removerImagem(
-                                        'imagemIncorreta',
-                                        'areaFotoIncorreta'
-                                    )
-                                "
-                            >
+    </div>
 
-                                ✕ Remover
 
-                            </button>
+</div>
 
-                        </div>
 
+<!-- =========================================================
+     AVISO DE EDIÇÃO (não aparece na impressão)
+========================================================= -->
 
-                        <div class="legenda">
+<div class="aviso-edicao no-print">
 
-                            <strong style="color:#c52b2b;">
+    ✎ Os campos com borda tracejada (ao passar o mouse fica azul)
+    são editáveis: clique neles e digite o novo texto. Esse aviso
+    não é impresso.
 
-                                ✕ Evidência insuficiente
+</div>
 
-                            </strong>
 
-                            A fotografia não permite identificar
-                            claramente a região da falha.
 
-                        </div>
+<!-- =========================================================
+     CONTEÚDO
+========================================================= -->
 
-                    </div>
+<main class="conteudo">
 
 
-                    <!-- FOTO CORRETA -->
 
-                    <div class="foto-card">
+<!-- =========================================================
+     O QUE IDENTIFICAMOS
+========================================================= -->
 
-                        <div
-                            class="foto"
-                            id="areaFotoCorreta"
-                        >
+<section class="secao">
 
-                            <div class="upload-placeholder">
 
-                                <span class="upload-icon">
-                                    📷
-                                </span>
+    <div class="titulo-secao">
 
-                                <strong>
-                                    FOTO CORRETA
-                                </strong>
+        <div class="titulo-icone">
+            !
+        </div>
 
-                                <span>
-                                    Selecione uma imagem
-                                </span>
+        <div>
+            <h3>O que identificamos?</h3>
+            <div class="linha"></div>
+        </div>
 
-                                <label class="botao-upload">
+    </div>
 
-                                    Selecionar imagem
 
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        onchange="
-                                            carregarImagem(
-                                                this,
-                                                'imagemCorreta',
-                                                'areaFotoCorreta'
-                                            )
-                                        "
-                                    >
+    <div
+        class="problema"
+        contenteditable="true"
+        data-placeholder="Descreva aqui o que foi identificado neste boletim..."
+    >
 
-                                </label>
+        Foram identificados processos em que as fotografias
+        não permitem visualizar claramente o componente,
+        sua identificação ou a região onde ocorreu a falha.
 
-                            </div>
+        <b>Isso pode gerar solicitação de complemento
+        e atraso na análise da garantia.</b>
 
+    </div>
 
-                            <img
-                                id="imagemCorreta"
-                                class="imagem-preview"
-                                alt="Foto correta"
-                            >
 
+</section>
 
-                            <button
-                                type="button"
-                                class="remover-imagem"
-                                onclick="
-                                    removerImagem(
-                                        'imagemCorreta',
-                                        'areaFotoCorreta'
-                                    )
-                                "
-                            >
 
-                                ✕ Remover
 
-                            </button>
+<!-- =========================================================
+     COMPARAÇÃO
+========================================================= -->
 
-                        </div>
+<section class="secao">
 
 
-                        <div class="legenda">
+    <div class="titulo-secao">
 
-                            <strong style="color:#238442;">
+        <div class="titulo-icone">
+            📷
+        </div>
 
-                                ✓ Evidência adequada
+        <div>
+            <h3>Veja a diferença</h3>
+            <div class="linha"></div>
+        </div>
 
-                            </strong>
+    </div>
 
-                            A imagem mostra claramente o
-                            componente e a região da falha.
 
-                        </div>
 
-                    </div>
+    <div class="comparacao">
 
-                </div>
 
-            </section>
 
+        <!-- FOTO ERRADA -->
 
-            <!-- =================================================
-                 COMO PROCEDER
-            ================================================== -->
+        <div class="foto-card errado">
 
-            <section class="secao">
 
-                <div class="secao-titulo">
+            <div class="foto-topo">
 
-                    <span class="icone">
-                        🔧
-                    </span>
-
-                    Como devemos proceder?
-
-                </div>
-
-
-                <div class="cards">
-
-
-                    <div class="card incorreto">
-
-                        <h3>
-                            ✕ NÃO FAÇA
-                        </h3>
-
-                        <ul>
-
-                            <li>
-                                Enviar somente uma foto distante.
-                            </li>
-
-                            <li>
-                                Fotografar sem mostrar a identificação.
-                            </li>
-
-                            <li>
-                                Desmontar antes de registrar a falha.
-                            </li>
-
-                            <li>
-                                Enviar imagens sem contexto.
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-
-                    <div class="card correto">
-
-                        <h3>
-                            ✓ FAÇA ASSIM
-                        </h3>
-
-                        <ul>
-
-                            <li>
-                                Faça uma foto geral do componente.
-                            </li>
-
-                            <li>
-                                Aproxime a câmera da região da falha.
-                            </li>
-
-                            <li>
-                                Registre a identificação do componente.
-                            </li>
-
-                            <li>
-                                Registre as evidências do diagnóstico.
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 CHECKLIST
-            ================================================== -->
-
-            <section class="secao">
-
-                <div class="secao-titulo">
-
-                    <span class="icone">
-                        ✓
-                    </span>
-
-                    Checklist antes de enviar
-
-                </div>
-
-
-                <div class="checklist">
-
-                    <div class="check">
-                        Foto geral do componente
-                    </div>
-
-                    <div class="check">
-                        Foto aproximada da falha
-                    </div>
-
-                    <div class="check">
-                        Identificação / número da peça
-                    </div>
-
-                    <div class="check">
-                        Evidência do diagnóstico
-                    </div>
-
-                    <div class="check">
-                        Códigos de falha, quando aplicável
-                    </div>
-
-                    <div class="check">
-                        Informações adicionais necessárias
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 DICA
-            ================================================== -->
-
-            <div class="dica">
-
-                <span class="dica-titulo">
-                    💡 DICA DA GARANTIA
+                <span>
+                    ✕ REGISTRO INCORRETO
                 </span>
 
-                <p>
+                <span class="status">
+                    ✕
+                </span>
 
-                    Pense sempre:
+            </div>
 
-                    <span class="dica-frase">
 
-                        "Se outra pessoa analisar este processo
-                        sem estar na oficina, ela conseguirá
-                        entender a falha somente pelas evidências
-                        que estou enviando?"
+            <div
+                class="foto-area"
+                id="areaErrada"
+            >
 
+
+                <div class="placeholder">
+
+
+                    <div class="placeholder-icon">
+                        📷
+                    </div>
+
+
+                    <strong>
+                        INSIRA A FOTO DO EXEMPLO INCORRETO
+                    </strong>
+
+
+                    <span>
+                        Clique abaixo para selecionar uma imagem
                     </span>
 
+
+                    <label class="upload">
+
+                        + Inserir imagem
+
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onchange="
+                                carregarImagem(
+                                    this,
+                                    'imgErrada',
+                                    'areaErrada'
+                                )
+                            "
+                        >
+
+                    </label>
+
+
+                </div>
+
+
+                <img
+                    id="imgErrada"
+                    class="imagem"
+                    alt="Exemplo incorreto"
+                >
+
+
+                <button
+                    class="remover"
+                    type="button"
+                    onclick="
+                        removerImagem(
+                            'imgErrada',
+                            'areaErrada'
+                        )
+                    "
+                >
+                    ✕ Remover
+                </button>
+
+
+            </div>
+
+
+            <div class="foto-descricao">
+
+                <strong
+                    contenteditable="true"
+                    data-placeholder="Título curto..."
+                >Evidência insuficiente</strong>
+
+                <p
+                    contenteditable="true"
+                    data-placeholder="Descreva o que está errado nesta foto..."
+                >
+                    A imagem não permite identificar claramente
+                    o componente, a falha ou a região afetada.
                 </p>
 
             </div>
 
 
-            <!-- =================================================
-                 ASSINATURA DIGITAL
-            ================================================== -->
+        </div>
 
-            <section class="secao">
 
-                <div class="secao-titulo">
 
-                    <span class="icone">
-                        ✍
+        <!-- FOTO CORRETA -->
+
+        <div class="foto-card certo">
+
+
+            <div class="foto-topo">
+
+                <span>
+                    ✓ REGISTRO CORRETO
+                </span>
+
+                <span class="status">
+                    ✓
+                </span>
+
+            </div>
+
+
+            <div
+                class="foto-area"
+                id="areaCerta"
+            >
+
+
+                <div class="placeholder">
+
+
+                    <div class="placeholder-icon">
+                        📷
+                    </div>
+
+
+                    <strong>
+                        INSIRA A FOTO DO EXEMPLO CORRETO
+                    </strong>
+
+
+                    <span>
+                        Clique abaixo para selecionar uma imagem
                     </span>
 
-                    Assinatura digital
+
+                    <label class="upload">
+
+                        + Inserir imagem
+
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onchange="
+                                carregarImagem(
+                                    this,
+                                    'imgCerta',
+                                    'areaCerta'
+                                )
+                            "
+                        >
+
+                    </label>
+
 
                 </div>
 
 
-                <p class="texto" style="margin-bottom:15px;">
+                <img
+                    id="imgCerta"
+                    class="imagem"
+                    alt="Exemplo correto"
+                >
 
-                    Após a leitura deste boletim, o responsável
-                    poderá registrar sua assinatura diretamente
-                    na tela.
 
+                <button
+                    class="remover"
+                    type="button"
+                    onclick="
+                        removerImagem(
+                            'imgCerta',
+                            'areaCerta'
+                        )
+                    "
+                >
+                    ✕ Remover
+                </button>
+
+
+            </div>
+
+
+            <div class="foto-descricao">
+
+                <strong
+                    contenteditable="true"
+                    data-placeholder="Título curto..."
+                >Evidência adequada</strong>
+
+                <p
+                    contenteditable="true"
+                    data-placeholder="Descreva o que está certo nesta foto..."
+                >
+                    A imagem mostra o componente, sua identificação
+                    e a região exata onde a falha foi identificada.
                 </p>
 
-
-                <div class="assinatura-container">
-
-
-                    <div class="assinatura-header">
-
-                        <strong>
-                            Assinatura do responsável
-                        </strong>
-
-                        <span>
-                            Use o dedo, caneta digital ou mouse para assinar.
-                        </span>
-
-                    </div>
-
-
-                    <div
-                        class="assinatura-area"
-                        id="areaAssinatura"
-                    >
-
-                        <canvas
-                            id="canvasAssinatura"
-                            class="canvas-assinatura"
-                        ></canvas>
-
-
-                        <div
-                            id="assinaturaPlaceholder"
-                            class="assinatura-placeholder"
-                        >
-
-                            <span>
-                                ✍
-                            </span>
-
-                            <strong>
-                                Assine aqui
-                            </strong>
-
-                            <small>
-                                Toque e arraste para realizar sua assinatura
-                            </small>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="assinatura-acoes">
-
-                        <button
-                            type="button"
-                            class="botao-limpar-assinatura"
-                            onclick="limparAssinatura()"
-                        >
-
-                            ↺ Limpar assinatura
-
-                        </button>
-
-                    </div>
-
-
-                    <div class="dados-assinatura">
-
-
-                        <div class="campo-assinatura">
-
-                            <label>
-                                Nome do responsável
-                            </label>
-
-                            <input
-                                type="text"
-                                id="nomeResponsavel"
-                                placeholder="Digite o nome completo"
-                            >
-
-                        </div>
-
-
-                        <div class="campo-assinatura">
-
-                            <label>
-                                Data
-                            </label>
-
-                            <input
-                                type="date"
-                                id="dataAssinatura"
-                            >
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-        </main>
-
-
-        <!-- =====================================================
-             RODAPÉ
-        ====================================================== -->
-
-        <footer class="footer">
-
-            <div>
-
-                <strong>
-                    NORS CENTRO OESTE
-                </strong>
-
-                <br>
-
-                Departamento de Garantia
-
             </div>
 
-            <div>
 
-                Documento interno • Agosto/2026
-
-            </div>
-
-        </footer>
+        </div>
 
 
     </div>
 
 
-    <!-- =========================================================
-         AÇÕES
-    ========================================================= -->
+</section>
 
-    <div class="acoes">
 
-        <button
-            type="button"
-            class="botao botao-imprimir"
-            onclick="imprimirBoletim()"
+
+<!-- =========================================================
+     PASSO A PASSO
+========================================================= -->
+
+<section class="secao">
+
+
+    <div class="titulo-secao">
+
+        <div class="titulo-icone">
+            ✓
+        </div>
+
+        <div>
+            <h3>Como devemos fazer?</h3>
+            <div class="linha"></div>
+        </div>
+
+    </div>
+
+
+
+    <div class="passos">
+
+
+        <div class="passo">
+
+            <div class="passo-numero">
+                01
+            </div>
+
+            <h4>
+                Foto geral
+            </h4>
+
+            <p>
+                Mostre o componente instalado e sua localização
+                no veículo.
+            </p>
+
+        </div>
+
+
+        <div class="passo">
+
+            <div class="passo-numero">
+                02
+            </div>
+
+            <h4>
+                Aproximar da falha
+            </h4>
+
+            <p>
+                Aproxime a câmera e mostre claramente a região
+                onde está o problema.
+            </p>
+
+        </div>
+
+
+        <div class="passo">
+
+            <div class="passo-numero">
+                03
+            </div>
+
+            <h4>
+                Identificar
+            </h4>
+
+            <p>
+                Registre número da peça, etiqueta, código de falha
+                ou qualquer identificação disponível.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     NÃO FAÇA / FAÇA
+========================================================= -->
+
+<section class="secao">
+
+
+    <div class="titulo-secao">
+
+        <div class="titulo-icone">
+            !
+        </div>
+
+        <div>
+            <h3>O que evitar</h3>
+            <div class="linha"></div>
+        </div>
+
+    </div>
+
+
+
+    <div class="duas-colunas">
+
+
+        <div class="lista-card nao">
+
+            <h4>
+                ✕ NÃO FAÇA
+            </h4>
+
+
+            <ul>
+
+                <li>
+                    <span class="li-icone">✕</span>
+                    <span class="li-texto" contenteditable="true">Enviar somente uma foto distante.</span>
+                </li>
+
+                <li>
+                    <span class="li-icone">✕</span>
+                    <span class="li-texto" contenteditable="true">Fotografar sem mostrar a identificação.</span>
+                </li>
+
+                <li>
+                    <span class="li-icone">✕</span>
+                    <span class="li-texto" contenteditable="true">Desmontar antes de registrar a falha.</span>
+                </li>
+
+                <li>
+                    <span class="li-icone">✕</span>
+                    <span class="li-texto" contenteditable="true">Enviar imagens sem contexto.</span>
+                </li>
+
+                <li>
+                    <span class="li-icone">✕</span>
+                    <span class="li-texto" contenteditable="true">Utilizar fotos escuras, desfocadas ou cortadas.</span>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+        <div class="lista-card sim">
+
+            <h4>
+                ✓ FAÇA ASSIM
+            </h4>
+
+
+            <ul>
+
+                <li>
+                    <span class="li-icone">✓</span>
+                    <span class="li-texto" contenteditable="true">Faça uma foto geral do componente.</span>
+                </li>
+
+                <li>
+                    <span class="li-icone">✓</span>
+                    <span class="li-texto" contenteditable="true">Aproxime a câmera da região da falha.</span>
+                </li>
+
+                <li>
+                    <span class="li-icone">✓</span>
+                    <span class="li-texto" contenteditable="true">Mostre claramente a identificação.</span>
+                </li>
+
+                <li>
+                    <span class="li-icone">✓</span>
+                    <span class="li-texto" contenteditable="true">Registre as evidências do diagnóstico.</span>
+                </li>
+
+                <li>
+                    <span class="li-icone">✓</span>
+                    <span class="li-texto" contenteditable="true">Garanta que a imagem esteja nítida e iluminada.</span>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     CHECKLIST
+========================================================= -->
+
+<section class="secao">
+
+
+    <div class="titulo-secao">
+
+        <div class="titulo-icone">
+            ✓
+        </div>
+
+        <div>
+            <h3>Checklist antes de enviar</h3>
+            <div class="linha"></div>
+        </div>
+
+    </div>
+
+
+
+    <div class="checklist">
+
+
+        <div class="check">
+            <span class="check-icon">✓</span>
+            Foto geral do componente
+        </div>
+
+
+        <div class="check">
+            <span class="check-icon">✓</span>
+            Foto aproximada da falha
+        </div>
+
+
+        <div class="check">
+            <span class="check-icon">✓</span>
+            Identificação / número da peça
+        </div>
+
+
+        <div class="check">
+            <span class="check-icon">✓</span>
+            Evidência do diagnóstico
+        </div>
+
+
+        <div class="check">
+            <span class="check-icon">✓</span>
+            Código de falha, quando aplicável
+        </div>
+
+
+        <div class="check">
+            <span class="check-icon">✓</span>
+            Informações adicionais necessárias
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     DICA FINAL
+========================================================= -->
+
+<div class="dica-final">
+
+
+    <div class="mini">
+        DICA DA GARANTIA
+    </div>
+
+
+    <h3>
+        Pense como quem vai analisar o processo.
+    </h3>
+
+
+    <p>
+
+        "Se outra pessoa receber este processo sem estar na oficina,
+        ela conseguirá entender a falha somente pelas evidências
+        que estou enviando?"
+
+    </p>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     ASSINATURAS
+========================================================= -->
+
+<section class="secao">
+
+
+    <div class="titulo-secao">
+
+        <div class="titulo-icone">
+            ✍
+        </div>
+
+        <div>
+            <h3>Assinaturas</h3>
+            <div class="linha"></div>
+        </div>
+
+    </div>
+
+
+    <div class="assinaturas-grid">
+
+
+        <div
+            class="assinatura-slot"
+            id="slotGarantia"
+            data-titulo="Assinatura Garantia"
+            data-funcao="Garantia"
         >
 
-            🖨 Imprimir / Salvar PDF
+            <div class="assinatura-label">
+                Assinatura Garantia
+            </div>
 
-        </button>
+            <button
+                class="btn-assinar no-print"
+                type="button"
+                onclick="abrirAssinatura(this.closest('.assinatura-slot'))"
+            >
+                ✍ Assinar
+            </button>
+
+            <div class="assinatura-resultado"></div>
+
+        </div>
+
+
+        <div
+            class="assinatura-slot"
+            id="slotLider"
+            data-titulo="Assinatura Líder/Responsável"
+            data-funcao="Líder/Responsável"
+        >
+
+            <div class="assinatura-label">
+                Assinatura Líder/Responsável
+            </div>
+
+            <button
+                class="btn-assinar no-print"
+                type="button"
+                onclick="abrirAssinatura(this.closest('.assinatura-slot'))"
+            >
+                ✍ Assinar
+            </button>
+
+            <div class="assinatura-resultado"></div>
+
+        </div>
+
+
+        <div
+            class="assinatura-slot"
+            id="slotMecanico"
+            data-titulo="Assinatura Mecânico"
+            data-funcao="Mecânico"
+        >
+
+            <div class="assinatura-label">
+                Assinatura Mecânico
+            </div>
+
+            <button
+                class="btn-assinar no-print"
+                type="button"
+                onclick="abrirAssinatura(this.closest('.assinatura-slot'))"
+            >
+                ✍ Assinar
+            </button>
+
+            <div class="assinatura-resultado"></div>
+
+        </div>
+
 
     </div>
 
 
-    <!-- =========================================================
-         JAVASCRIPT
-    ========================================================= -->
+</section>
 
-    <script>
 
+</main>
 
-        /* ========================================================
-           IMAGENS
-        ======================================================== */
 
-        function carregarImagem(
-            input,
-            imagemId,
-            areaId
-        ) {
 
-            const arquivo =
-                input.files[0];
+<!-- =========================================================
+     RODAPÉ
+========================================================= -->
 
+<footer class="footer">
 
-            if (!arquivo) {
-                return;
-            }
 
+    <div>
 
-            if (!arquivo.type.startsWith("image/")) {
+        <strong>
+            Departamento de Garantia
+        </strong>
 
-                alert(
-                    "Por favor, selecione uma imagem válida."
-                );
+    </div>
 
-                input.value = "";
 
-                return;
-            }
+    <div>
 
+        Boletim interno • 001/2026
 
-            const imagem =
-                document.getElementById(imagemId);
+    </div>
 
 
-            const area =
-                document.getElementById(areaId);
+</footer>
 
 
-            const leitor =
-                new FileReader();
+</div>
 
 
-            leitor.onload = function(evento) {
 
-                imagem.src =
-                    evento.target.result;
+<!-- =========================================================
+     BOTÃO
+========================================================= -->
 
+<div class="acoes">
 
-                area.classList.add(
-                    "tem-imagem"
-                );
+    <button
+        class="btn-imprimir"
+        onclick="imprimirBoletim()"
+    >
 
-            };
+        🖨 Imprimir / Salvar em PDF
 
+    </button>
 
-            leitor.readAsDataURL(arquivo);
+</div>
 
-        }
 
 
-        /* ========================================================
-           REMOVER IMAGEM
-        ======================================================== */
+<!-- =========================================================
+     MODAL DE ASSINATURA
+========================================================= -->
 
-        function removerImagem(
-            imagemId,
-            areaId
-        ) {
+<div class="modal-overlay" id="modalAssinatura">
 
-            const imagem =
-                document.getElementById(imagemId);
+    <div class="modal-box">
 
+        <button
+            class="modal-fechar"
+            type="button"
+            onclick="fecharModal()"
+        >
+            ✕
+        </button>
 
-            const area =
-                document.getElementById(areaId);
 
+        <!-- ETAPA 1 - DADOS -->
 
-            imagem.src = "";
+        <div id="modalStep1">
 
+            <h3 id="modalTitulo">Assinatura</h3>
 
-            area.classList.remove(
-                "tem-imagem"
-            );
+            <p class="modal-sub">
+                Preencha seus dados antes de assinar.
+            </p>
 
+            <label for="inputNome">Nome completo</label>
 
-            const input =
-                area.querySelector(
-                    'input[type="file"]'
-                );
+            <input
+                type="text"
+                id="inputNome"
+                placeholder="Digite o nome completo"
+            >
 
+            <label for="inputCPF">CPF</label>
 
-            if (input) {
+            <input
+                type="text"
+                id="inputCPF"
+                placeholder="000.000.000-00"
+            >
 
-                input.value = "";
+            <label for="inputFuncao">Função</label>
 
-            }
+            <input
+                type="text"
+                id="inputFuncao"
+                placeholder="Função"
+            >
 
-        }
+            <button
+                class="btn-modal-avancar"
+                type="button"
+                onclick="avancarParaAssinatura()"
+            >
+                Avançar para assinatura →
+            </button>
 
+        </div>
 
-        /* ========================================================
-           IMPRESSÃO
-        ======================================================== */
 
-        function imprimirBoletim() {
+        <!-- ETAPA 2 - ASSINATURA -->
 
-            window.print();
+        <div id="modalStep2" style="display:none;">
 
-        }
+            <h3>Assine abaixo</h3>
 
+            <p class="modal-sub">
+                Use o mouse ou o dedo para assinar no campo abaixo.
+            </p>
 
-        /* ========================================================
-           ASSINATURA DIGITAL
-        ======================================================== */
+            <canvas id="canvasAssinatura" width="460" height="180"></canvas>
 
-        let canvasAssinatura;
+            <div class="modal-canvas-acoes">
 
-        let contextoAssinatura;
+                <button
+                    class="btn-limpar"
+                    type="button"
+                    onclick="limparAssinatura()"
+                >
+                    Limpar
+                </button>
 
-        let desenhando = false;
+            </div>
 
-        let assinaturaRealizada = false;
+            <div class="modal-step2-botoes">
 
+                <button
+                    class="btn-voltar"
+                    type="button"
+                    onclick="voltarStep1()"
+                >
+                    ← Voltar
+                </button>
 
-        /* ========================================================
-           INICIALIZAÇÃO
-        ======================================================== */
+                <button
+                    class="btn-confirmar"
+                    type="button"
+                    onclick="confirmarAssinatura()"
+                >
+                    Confirmar assinatura
+                </button>
 
-        function inicializarAssinatura() {
+            </div>
 
-            canvasAssinatura =
-                document.getElementById(
-                    "canvasAssinatura"
-                );
+        </div>
 
 
-            if (!canvasAssinatura) {
-                return;
-            }
+    </div>
 
+</div>
 
-            contextoAssinatura =
-                canvasAssinatura.getContext("2d");
 
 
-            configurarCanvas();
+<script>
 
+/* =========================================================
+   NÚMERO AUTOMÁTICO DO BOLETIM
+   (incrementa a cada abertura do link neste navegador)
+========================================================= */
 
-            canvasAssinatura.addEventListener(
-                "pointerdown",
-                iniciarAssinatura
-            );
+function atualizarNumeroBoletim() {
 
+    const anoAtual = new Date().getFullYear();
 
-            canvasAssinatura.addEventListener(
-                "pointermove",
-                desenharAssinatura
-            );
+    const chave = "boletim_contador_" + anoAtual;
 
+    let contador = parseInt(localStorage.getItem(chave) || "0", 10);
 
-            canvasAssinatura.addEventListener(
-                "pointerup",
-                finalizarAssinatura
-            );
+    contador += 1;
 
+    localStorage.setItem(chave, contador);
 
-            canvasAssinatura.addEventListener(
-                "pointercancel",
-                finalizarAssinatura
-            );
+    const numeroFormatado =
+        String(contador).padStart(3, "0") + "/" + anoAtual;
 
+    document.getElementById("numeroValor").textContent = numeroFormatado;
 
-            canvasAssinatura.addEventListener(
-                "pointerleave",
-                finalizarAssinatura
-            );
+}
 
+window.addEventListener("DOMContentLoaded", atualizarNumeroBoletim);
 
-            /* Data automática */
 
-            const campoData =
-                document.getElementById(
-                    "dataAssinatura"
-                );
+/* =========================================================
+   INSERIR IMAGEM
+========================================================= */
 
+function carregarImagem(input, imagemId, areaId) {
 
-            if (
-                campoData &&
-                !campoData.value
-            ) {
+    const arquivo = input.files[0];
 
-                const hoje =
-                    new Date();
+    if (!arquivo) {
+        return;
+    }
 
 
-                const ano =
-                    hoje.getFullYear();
+    if (!arquivo.type.startsWith("image/")) {
 
+        alert("Selecione uma imagem válida.");
 
-                const mes =
-                    String(
-                        hoje.getMonth() + 1
-                    ).padStart(2, "0");
+        input.value = "";
 
+        return;
+    }
 
-                const dia =
-                    String(
-                        hoje.getDate()
-                    ).padStart(2, "0");
 
+    const imagem =
+        document.getElementById(imagemId);
 
-                campoData.value =
-                    `${ano}-${mes}-${dia}`;
 
-            }
+    const area =
+        document.getElementById(areaId);
 
-        }
 
+    const leitor =
+        new FileReader();
 
-        /* ========================================================
-           CONFIGURAR CANVAS
-        ======================================================== */
 
-        function configurarCanvas() {
+    leitor.onload = function(evento) {
 
-            const area =
-                document.getElementById(
-                    "areaAssinatura"
-                );
+        imagem.src =
+            evento.target.result;
 
-
-            if (!area) {
-                return;
-            }
-
-
-            const largura =
-                area.clientWidth;
-
-
-            const altura =
-                area.clientHeight;
-
-
-            const escala =
-                window.devicePixelRatio || 1;
-
-
-            canvasAssinatura.width =
-                largura * escala;
-
-
-            canvasAssinatura.height =
-                altura * escala;
-
-
-            canvasAssinatura.style.width =
-                largura + "px";
-
-
-            canvasAssinatura.style.height =
-                altura + "px";
-
-
-            contextoAssinatura.setTransform(
-                escala,
-                0,
-                0,
-                escala,
-                0,
-                0
-            );
-
-
-            contextoAssinatura.lineWidth =
-                2.2;
-
-
-            contextoAssinatura.lineCap =
-                "round";
-
-
-            contextoAssinatura.lineJoin =
-                "round";
-
-
-            contextoAssinatura.strokeStyle =
-                "#111820";
-
-        }
-
-
-        /* ========================================================
-           POSIÇÃO DO PONTEIRO
-        ======================================================== */
-
-        function obterPosicao(evento) {
-
-            const rect =
-                canvasAssinatura.getBoundingClientRect();
-
-
-            return {
-
-                x:
-                    evento.clientX - rect.left,
-
-                y:
-                    evento.clientY - rect.top
-
-            };
-
-        }
-
-
-        /* ========================================================
-           INICIAR DESENHO
-        ======================================================== */
-
-        function iniciarAssinatura(evento) {
-
-            evento.preventDefault();
-
-
-            desenhando = true;
-
-
-            if (
-                canvasAssinatura.setPointerCapture
-            ) {
-
-                try {
-
-                    canvasAssinatura.setPointerCapture(
-                        evento.pointerId
-                    );
-
-                } catch (erro) {}
-
-            }
-
-
-            const posicao =
-                obterPosicao(evento);
-
-
-            contextoAssinatura.beginPath();
-
-
-            contextoAssinatura.moveTo(
-                posicao.x,
-                posicao.y
-            );
-
-
-            assinaturaRealizada = true;
-
-
-            const placeholder =
-                document.getElementById(
-                    "assinaturaPlaceholder"
-                );
-
-
-            if (placeholder) {
-
-                placeholder.style.opacity =
-                    "0";
-
-            }
-
-        }
-
-
-        /* ========================================================
-           DESENHAR
-        ======================================================== */
-
-        function desenharAssinatura(evento) {
-
-            if (!desenhando) {
-                return;
-            }
-
-
-            evento.preventDefault();
-
-
-            const posicao =
-                obterPosicao(evento);
-
-
-            contextoAssinatura.lineTo(
-                posicao.x,
-                posicao.y
-            );
-
-
-            contextoAssinatura.stroke();
-
-        }
-
-
-        /* ========================================================
-           FINALIZAR
-        ======================================================== */
-
-        function finalizarAssinatura(evento) {
-
-            if (!desenhando) {
-                return;
-            }
-
-
-            evento.preventDefault();
-
-
-            desenhando = false;
-
-
-            if (
-                canvasAssinatura.releasePointerCapture
-            ) {
-
-                try {
-
-                    canvasAssinatura.releasePointerCapture(
-                        evento.pointerId
-                    );
-
-                } catch (erro) {}
-
-            }
-
-
-            contextoAssinatura.closePath();
-
-        }
-
-
-        /* ========================================================
-           LIMPAR ASSINATURA
-        ======================================================== */
-
-        function limparAssinatura() {
-
-            if (!canvasAssinatura) {
-                return;
-            }
-
-
-            contextoAssinatura.clearRect(
-                0,
-                0,
-                canvasAssinatura.width,
-                canvasAssinatura.height
-            );
-
-
-            assinaturaRealizada = false;
-
-
-            const placeholder =
-                document.getElementById(
-                    "assinaturaPlaceholder"
-                );
-
-
-            if (placeholder) {
-
-                placeholder.style.opacity =
-                    "1";
-
-            }
-
-        }
-
-
-        /* ========================================================
-           INICIALIZAR AO CARREGAR
-        ======================================================== */
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function() {
-
-                inicializarAssinatura();
-
-            }
+        area.classList.add(
+            "tem-imagem"
         );
 
-    </script>
+    };
+
+
+    leitor.readAsDataURL(arquivo);
+
+}
+
+
+/* =========================================================
+   REMOVER IMAGEM
+========================================================= */
+
+function removerImagem(imagemId, areaId) {
+
+    const imagem =
+        document.getElementById(imagemId);
+
+
+    const area =
+        document.getElementById(areaId);
+
+
+    imagem.src = "";
+
+
+    area.classList.remove(
+        "tem-imagem"
+    );
+
+
+    const input =
+        area.querySelector(
+            'input[type="file"]'
+        );
+
+
+    if (input) {
+
+        input.value = "";
+
+    }
+
+}
+
+
+/* =========================================================
+   IMPRESSÃO
+========================================================= */
+
+function imprimirBoletim() {
+
+    window.print();
+
+}
+
+
+/* =========================================================
+   ASSINATURA DIGITAL
+========================================================= */
+
+let assinaturaSlotAtual = null;
+let ctxAssinatura = null;
+let desenhandoAssinatura = false;
+
+
+function abrirAssinatura(slotEl) {
+
+    assinaturaSlotAtual = slotEl;
+
+    document.getElementById("modalTitulo").textContent =
+        slotEl.dataset.titulo;
+
+    document.getElementById("inputNome").value =
+        slotEl.dataset.nome || "";
+
+    document.getElementById("inputCPF").value =
+        slotEl.dataset.cpf || "";
+
+    document.getElementById("inputFuncao").value =
+        slotEl.dataset.funcaoPreenchida || slotEl.dataset.funcao;
+
+    document.getElementById("modalStep1").style.display = "block";
+    document.getElementById("modalStep2").style.display = "none";
+
+    document.getElementById("modalAssinatura").classList.add("aberto");
+
+}
+
+
+function fecharModal() {
+
+    document.getElementById("modalAssinatura").classList.remove("aberto");
+
+}
+
+
+function avancarParaAssinatura() {
+
+    const nome = document.getElementById("inputNome").value.trim();
+    const cpf = document.getElementById("inputCPF").value.trim();
+    const funcao = document.getElementById("inputFuncao").value.trim();
+
+    if (!nome || !cpf || !funcao) {
+
+        alert("Preencha nome completo, CPF e função antes de continuar.");
+
+        return;
+    }
+
+    document.getElementById("modalStep1").style.display = "none";
+    document.getElementById("modalStep2").style.display = "block";
+
+    prepararCanvas();
+
+}
+
+
+function voltarStep1() {
+
+    document.getElementById("modalStep2").style.display = "none";
+    document.getElementById("modalStep1").style.display = "block";
+
+}
+
+
+function prepararCanvas() {
+
+    const canvas = document.getElementById("canvasAssinatura");
+
+    ctxAssinatura = canvas.getContext("2d");
+
+    ctxAssinatura.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctxAssinatura.strokeStyle = "#10212d";
+    ctxAssinatura.lineWidth = 2.2;
+    ctxAssinatura.lineCap = "round";
+    ctxAssinatura.lineJoin = "round";
+
+    canvas.onpointerdown = iniciarTraco;
+    canvas.onpointermove = desenharTraco;
+    canvas.onpointerup = pararTraco;
+    canvas.onpointerleave = pararTraco;
+
+}
+
+
+function pegarPosicao(evento, canvas) {
+
+    const retangulo = canvas.getBoundingClientRect();
+
+    return {
+
+        x: (evento.clientX - retangulo.left) * (canvas.width / retangulo.width),
+        y: (evento.clientY - retangulo.top) * (canvas.height / retangulo.height)
+
+    };
+
+}
+
+
+function iniciarTraco(evento) {
+
+    desenhandoAssinatura = true;
+
+    const canvas = evento.target;
+
+    canvas.setPointerCapture(evento.pointerId);
+
+    const ponto = pegarPosicao(evento, canvas);
+
+    ctxAssinatura.beginPath();
+    ctxAssinatura.moveTo(ponto.x, ponto.y);
+
+}
+
+
+function desenharTraco(evento) {
+
+    if (!desenhandoAssinatura) {
+        return;
+    }
+
+    const ponto = pegarPosicao(evento, evento.target);
+
+    ctxAssinatura.lineTo(ponto.x, ponto.y);
+    ctxAssinatura.stroke();
+
+}
+
+
+function pararTraco() {
+
+    desenhandoAssinatura = false;
+
+}
+
+
+function limparAssinatura() {
+
+    const canvas = document.getElementById("canvasAssinatura");
+
+    ctxAssinatura.clearRect(0, 0, canvas.width, canvas.height);
+
+}
+
+
+function canvasEstaVazio(canvas) {
+
+    const contexto = canvas.getContext("2d");
+
+    const dados = contexto.getImageData(0, 0, canvas.width, canvas.height).data;
+
+    for (let i = 3; i < dados.length; i += 4) {
+
+        if (dados[i] !== 0) {
+            return false;
+        }
+
+    }
+
+    return true;
+
+}
+
+
+function confirmarAssinatura() {
+
+    const canvas = document.getElementById("canvasAssinatura");
+
+    if (canvasEstaVazio(canvas)) {
+
+        alert("Por favor, assine no campo antes de confirmar.");
+
+        return;
+    }
+
+    const nome = document.getElementById("inputNome").value.trim();
+    const cpf = document.getElementById("inputCPF").value.trim();
+    const funcao = document.getElementById("inputFuncao").value.trim();
+
+    const dataURL = canvas.toDataURL("image/png");
+
+    const agora = new Date();
+
+    const dataFormatada =
+        agora.toLocaleDateString("pt-BR") +
+        " às " +
+        agora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+
+    assinaturaSlotAtual.dataset.nome = nome;
+    assinaturaSlotAtual.dataset.cpf = cpf;
+    assinaturaSlotAtual.dataset.funcaoPreenchida = funcao;
+    assinaturaSlotAtual.dataset.assinatura = dataURL;
+    assinaturaSlotAtual.dataset.data = dataFormatada;
+
+    renderizarAssinatura(assinaturaSlotAtual);
+
+    fecharModal();
+
+}
+
+
+function renderizarAssinatura(slotEl) {
+
+    slotEl.classList.add("assinado");
+
+    const botao = slotEl.querySelector(".btn-assinar");
+
+    if (botao) {
+        botao.style.display = "none";
+    }
+
+    const resultado = slotEl.querySelector(".assinatura-resultado");
+
+    resultado.innerHTML =
+        '<div class="assinatura-img"><img src="' +
+        slotEl.dataset.assinatura +
+        '" alt="Assinatura"></div>' +
+        '<div class="assinatura-info">' +
+        "<strong>Nome:</strong> " + slotEl.dataset.nome + "<br>" +
+        "<strong>CPF:</strong> " + slotEl.dataset.cpf + "<br>" +
+        "<strong>Função:</strong> " + slotEl.dataset.funcaoPreenchida +
+        '<span class="assinatura-data">Assinado em ' + slotEl.dataset.data + '</span>' +
+        "</div>" +
+        '<button class="btn-refazer no-print" type="button" onclick="abrirAssinatura(this.closest(\'.assinatura-slot\'))">Refazer assinatura</button>';
+
+}
+
+</script>
 
 
 </body>
