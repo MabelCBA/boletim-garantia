@@ -61,6 +61,197 @@ body {
 
 
 /* =========================================================
+   TELA INICIAL
+========================================================= */
+
+#tela-inicial {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+}
+
+.tela-svg {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+}
+
+.tela-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: radial-gradient(
+        ellipse at center,
+        rgba(10,15,20,.18) 0%,
+        rgba(8,12,16,.55) 62%,
+        rgba(5,8,10,.78) 100%
+    );
+
+}
+
+.tela-conteudo {
+
+    position: relative;
+
+    z-index: 2;
+
+    text-align: center;
+
+    color: white;
+
+    padding: 40px;
+
+    max-width: 560px;
+
+}
+
+.tela-selo {
+
+    width: 72px;
+    height: 72px;
+
+    margin: 0 auto 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid rgba(255,255,255,.55);
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.08);
+
+}
+
+.tela-selo svg {
+
+    width: 36px;
+    height: 36px;
+
+}
+
+.tela-titulo {
+
+    font-size: 42px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    text-shadow: 0 4px 18px rgba(0,0,0,.5);
+
+}
+
+.tela-subtitulo {
+
+    margin-top: 12px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 7px;
+
+    color: #cfe4f0;
+
+    text-transform: uppercase;
+
+}
+
+.tela-linha {
+
+    width: 70px;
+    height: 2px;
+
+    background: rgba(255,255,255,.5);
+
+    margin: 26px auto;
+
+}
+
+.tela-btn-iniciar {
+
+    padding: 15px 40px;
+
+    border: 1.5px solid rgba(255,255,255,.65);
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.08);
+
+    backdrop-filter: blur(4px);
+
+    -webkit-backdrop-filter: blur(4px);
+
+    color: white;
+
+    font-size: 13.5px;
+
+    font-weight: 700;
+
+    letter-spacing: 2.5px;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition: background .2s, border-color .2s, transform .15s;
+
+}
+
+.tela-btn-iniciar:hover {
+
+    background: var(--azul);
+
+    border-color: var(--azul);
+
+    transform: translateY(-2px);
+
+}
+
+@media (max-width: 620px) {
+
+    .tela-titulo {
+        font-size: 30px;
+        letter-spacing: 2px;
+    }
+
+    .tela-subtitulo {
+        font-size: 12px;
+        letter-spacing: 5px;
+    }
+
+    .tela-conteudo {
+        padding: 24px;
+    }
+
+}
+
+
+/* =========================================================
    CONTAINER PRINCIPAL
 ========================================================= */
 
@@ -1834,6 +2025,20 @@ body {
     }
 
 
+    #tela-inicial {
+
+        display: none !important;
+
+    }
+
+
+    #conteudo-boletim {
+
+        display: block !important;
+
+    }
+
+
     html {
 
         background: white !important;
@@ -2016,6 +2221,88 @@ body {
 
 
 <body>
+
+
+<!-- =========================================================
+     TELA INICIAL
+========================================================= -->
+
+<div id="tela-inicial">
+
+    <svg class="tela-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+
+        <defs>
+            <linearGradient id="ceuGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0a1626"/>
+                <stop offset="34%" stop-color="#123650"/>
+                <stop offset="56%" stop-color="#2f6a86"/>
+                <stop offset="71%" stop-color="#e08a4d"/>
+                <stop offset="79%" stop-color="#f6b56a"/>
+                <stop offset="82%" stop-color="#2a3238"/>
+                <stop offset="100%" stop-color="#14181b"/>
+            </linearGradient>
+            <radialGradient id="solGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffe9c2" stop-opacity="0.95"/>
+                <stop offset="55%" stop-color="#ffbf6b" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#ffbf6b" stop-opacity="0"/>
+            </radialGradient>
+        </defs>
+
+        <rect x="0" y="0" width="1600" height="900" fill="url(#ceuGrad)"/>
+
+        <circle cx="800" cy="655" r="260" fill="url(#solGrad)"/>
+        <circle cx="800" cy="655" r="65" fill="#ffe6ba" opacity="0.9"/>
+
+        <path d="M0,660 L180,560 L340,630 L520,540 L700,650 L860,570 L1050,650 L1250,560 L1420,640 L1600,600 L1600,665 L0,665 Z" fill="#1b3a52" opacity="0.5"/>
+        <path d="M0,675 L220,610 L420,665 L640,600 L880,670 L1120,600 L1350,665 L1600,630 L1600,680 L0,680 Z" fill="#142838" opacity="0.75"/>
+
+        <path d="M655,680 L945,680 L1160,900 L440,900 Z" fill="#262b2f"/>
+        <path d="M792,680 L808,680 L726,900 L674,900 Z" fill="#e7c98a" opacity="0.8"/>
+
+        <g transform="translate(725,752)">
+            <rect x="-2" y="8" width="205" height="66" rx="5" fill="#0c151d"/>
+            <rect x="-72" y="-14" width="82" height="92" rx="7" fill="#0c151d"/>
+            <rect x="-59" y="-2" width="46" height="28" rx="3" fill="#e08a4d" opacity="0.85"/>
+            <circle cx="-32" cy="86" r="19" fill="#04070a"/>
+            <circle cx="-32" cy="86" r="7" fill="#3a4249"/>
+            <circle cx="62" cy="86" r="19" fill="#04070a"/>
+            <circle cx="62" cy="86" r="7" fill="#3a4249"/>
+            <circle cx="152" cy="86" r="19" fill="#04070a"/>
+            <circle cx="152" cy="86" r="7" fill="#3a4249"/>
+        </g>
+
+    </svg>
+
+    <div class="tela-overlay"></div>
+
+    <div class="tela-conteudo">
+
+        <div class="tela-selo">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L4 5V11C4 16 7.5 20.2 12 21.5C16.5 20.2 20 16 20 11V5L12 2Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M8.5 12L10.8 14.3L15.5 9.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <h1 class="tela-titulo">Boletim de Garantia</h1>
+        <div class="tela-subtitulo">NORS CO</div>
+
+        <div class="tela-linha"></div>
+
+        <button class="tela-btn-iniciar" type="button" onclick="iniciarBoletim()">
+            ▶ Iniciar Boletim
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     CONTEÚDO DO BOLETIM
+========================================================= -->
+
+<div id="conteudo-boletim" style="display:none;">
 
 
 <div class="boletim">
@@ -2888,12 +3175,16 @@ body {
 </div>
 
 
+</div>
+<!-- fim de #conteudo-boletim -->
+
+
 
 <!-- =========================================================
      BOTÃO
 ========================================================= -->
 
-<div class="acoes">
+<div class="acoes no-print">
 
     <button
         class="btn-imprimir"
@@ -3024,6 +3315,20 @@ body {
 
 
 <script>
+
+/* =========================================================
+   TELA INICIAL → BOLETIM
+========================================================= */
+
+function iniciarBoletim() {
+
+    document.getElementById('tela-inicial').style.display = 'none';
+    document.getElementById('conteudo-boletim').style.display = 'block';
+
+    window.scrollTo(0, 0);
+
+}
+
 
 /* =========================================================
    NÚMERO AUTOMÁTICO DO BOLETIM
