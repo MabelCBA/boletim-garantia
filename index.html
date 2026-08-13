@@ -85,7 +85,8 @@
 
   .conteudo{padding:5px 42px 40px;}
   .secao{margin-top:28px;}
-  .titulo-secao{display:flex;align-items:center;gap:11px;margin-bottom:17px;}
+  .cabecalho-secao{margin-bottom:17px;}
+  .titulo-secao{display:flex;align-items:center;gap:11px;}
   .titulo-icone{width:34px;height:34px;border-radius:50%;background:var(--azul);color:#ffffff;display:flex;justify-content:center;align-items:center;font-weight:bold;}
   .titulo-secao h3{font-size:20px;color:var(--azul-escuro);}
   .linha{height:2px;background:#e4e9ec;margin-top:8px;}
@@ -149,7 +150,6 @@
   .dica-final p{max-width:700px;margin:9px auto 0;color:#d6e3e9;font-size:13px;line-height:1.6;}
 
   /* ===== ASSINATURAS ===== */
-  /* .oculto controla visibilidade em TELA e em IMPRESSAO (sem excecao). */
   .secao-assinaturas.oculto{display:none !important;}
   .assinaturas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
   .assinatura-slot{border:1px solid #dfe5e8;border-radius:8px;padding:18px;background:#fff;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;}
@@ -181,7 +181,8 @@
   .rodape-btn:hover{background:rgba(255,255,255,.28);transform:translateY(-2px);}
   .rodape-btn.ativo{background:rgba(255,255,255,.32);border:1px solid rgba(255,255,255,.5);}
 
-  @media (max-width:750px){
+  /* Regras de responsividade PARA TELA (celular). Isoladas com "screen" para NUNCA disparar na impressao. */
+  @media screen and (max-width:750px){
     body{padding:10px;padding-bottom:100px;}
     .header{padding:25px;flex-direction:column;align-items:flex-start;gap:18px;}
     .numero{text-align:left;}
@@ -241,6 +242,7 @@
   .btn-excluir-laudo:hover{background:var(--vermelho);color:#ffffff;}
   .laudos-vazio{text-align:center;padding:60px 20px;color:#68757d;font-size:14px;}
 
+  /* ===== IMPRESSAO ===== */
   @media print{
     *,*::before,*::after{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
     .tela-inicial,.menu-superior,#modalSalvarLaudo,#modalAssinatura,.rodape-fixo,.acoes{display:none !important;}
@@ -251,9 +253,48 @@
     .no-print,.aviso-edicao{display:none !important;}
     .upload,.remover{display:none !important;}
     [contenteditable="true"]{border-color:transparent !important;border-width:0 !important;background:transparent !important;box-shadow:none !important;}
-    .header{background:linear-gradient(135deg,#10212d 0%,#162e3d 65%,#0078b8 100%) !important;}
+
+    /* Forca layout de desktop na impressao, anulando a media query mobile
+       (a largura da pagina A4 pode ser interpretada como <=750px e disparar o layout mobile) */
+    .header{
+      flex-direction:row !important;
+      align-items:center !important;
+      gap:0 !important;
+      padding:22px 30px !important;
+      background:linear-gradient(135deg,#10212d 0%,#162e3d 65%,#0078b8 100%) !important;
+    }
+    .numero{text-align:right !important;}
+    .tema,.conteudo{padding-left:30px !important;padding-right:30px !important;}
+    .regra{margin-left:30px !important;margin-right:30px !important;}
+    .comparacao{grid-template-columns:1fr 1fr !important;gap:16px !important;}
+    .duas-colunas{grid-template-columns:1fr 1fr !important;gap:14px !important;}
+    .checklist{grid-template-columns:1fr 1fr !important;gap:8px !important;}
+    .assinaturas-grid{grid-template-columns:repeat(3,1fr) !important;gap:12px !important;}
+    .passos{grid-template-columns:repeat(3,1fr) !important;gap:12px !important;}
+    .footer{flex-direction:row !important;justify-content:space-between !important;padding-left:30px !important;padding-right:30px !important;gap:0 !important;}
+
+    /* Reduz altura das fotos e espacamentos entre secoes para caber mais
+       conteudo por pagina e reduzir a chance de blocos precisarem "empurrar"
+       para a proxima pagina (o que geraria espacos em branco). */
+    .foto-area{height:200px !important;}
+    .secao{margin-top:16px !important;}
+    .tema{padding:14px 30px 6px !important;}
+    .regra{margin-top:14px !important;margin-bottom:14px !important;padding:14px 18px !important;}
+    .dica-final{margin-top:16px !important;padding:16px !important;}
+
     .regra{background:#fff7e5 !important;border-left-color:#efa900 !important;}
-    .foto-card,.passo,.lista-card,.checklist,.duas-colunas,.comparacao,.passos,.check,.assinatura-slot,.dica-final,.footer{break-inside:avoid;page-break-inside:avoid;}
+
+    /* O cabecalho da secao (icone + titulo + linha divisoria) agora e UM
+       UNICO bloco (.cabecalho-secao), tratado como unidade atomica na
+       paginacao. Isso evita o titulo ficar orfao no fim da pagina E evita
+       o artefato visual do icone circular sendo cortado/duplicado entre
+       paginas, que acontecia quando titulo e linha eram tratados como
+       elementos separados com break-after individual. */
+    .cabecalho-secao{break-inside:avoid;page-break-inside:avoid;break-after:avoid;page-break-after:avoid;}
+
+    /* Unidades pequenas continuam atomicas (nao cortam no meio) sem forcar
+       a secao inteira (que pode ser maior que uma pagina) a mover em bloco. */
+    .foto-card,.passo,.lista-card,.check,.assinatura-slot,.dica-final,.footer{break-inside:avoid;page-break-inside:avoid;}
     @page{size:A4;margin:8mm;}
   }
 </style>
@@ -364,20 +405,24 @@
 
     <main class="conteudo">
       <section class="secao">
-        <div class="titulo-secao">
-          <div class="titulo-icone">!</div>
-          <h3>O que identificamos?</h3>
+        <div class="cabecalho-secao">
+          <div class="titulo-secao">
+            <div class="titulo-icone">!</div>
+            <h3>O que identificamos?</h3>
+          </div>
+          <div class="linha"></div>
         </div>
-        <div class="linha"></div>
         <div class="problema" contenteditable="true" data-placeholder="Descreva aqui o que foi identificado neste boletim...">Foram identificados processos em que as fotografias não permitem visualizar claramente o componente, sua identificação ou a região onde ocorreu a falha. <b>Isso pode gerar solicitação de complemento e atraso na análise da garantia.</b></div>
       </section>
 
       <section class="secao">
-        <div class="titulo-secao">
-          <div class="titulo-icone">◐</div>
-          <h3>Veja a diferença</h3>
+        <div class="cabecalho-secao">
+          <div class="titulo-secao">
+            <div class="titulo-icone">◐</div>
+            <h3>Veja a diferença</h3>
+          </div>
+          <div class="linha"></div>
         </div>
-        <div class="linha"></div>
         <div class="comparacao">
           <div class="foto-card errado">
             <div class="foto-topo"><span>REGISTRO INCORRETO</span><span class="status">✕</span></div>
@@ -417,11 +462,13 @@
       </section>
 
       <section class="secao">
-        <div class="titulo-secao">
-          <div class="titulo-icone">✓</div>
-          <h3>Como devemos fazer?</h3>
+        <div class="cabecalho-secao">
+          <div class="titulo-secao">
+            <div class="titulo-icone">✓</div>
+            <h3>Como devemos fazer?</h3>
+          </div>
+          <div class="linha"></div>
         </div>
-        <div class="linha"></div>
         <div class="passos">
           <div class="passo"><div class="passo-numero">01</div><h4>Foto geral</h4><p>Mostre o componente instalado e sua localização no veículo.</p></div>
           <div class="passo"><div class="passo-numero">02</div><h4>Aproximar da falha</h4><p>Aproxime a câmera e mostre claramente a região onde está o problema.</p></div>
@@ -430,11 +477,13 @@
       </section>
 
       <section class="secao">
-        <div class="titulo-secao">
-          <div class="titulo-icone">✕</div>
-          <h3>O que evitar</h3>
+        <div class="cabecalho-secao">
+          <div class="titulo-secao">
+            <div class="titulo-icone">✕</div>
+            <h3>O que evitar</h3>
+          </div>
+          <div class="linha"></div>
         </div>
-        <div class="linha"></div>
         <div class="duas-colunas">
           <div class="lista-card nao">
             <h4>✕ NÃO FAÇA</h4>
@@ -460,11 +509,13 @@
       </section>
 
       <section class="secao">
-        <div class="titulo-secao">
-          <div class="titulo-icone">☑</div>
-          <h3>Checklist antes de enviar</h3>
+        <div class="cabecalho-secao">
+          <div class="titulo-secao">
+            <div class="titulo-icone">☑</div>
+            <h3>Checklist antes de enviar</h3>
+          </div>
+          <div class="linha"></div>
         </div>
-        <div class="linha"></div>
         <div class="checklist">
           <div class="check"><span class="check-icon">✓</span>Foto geral do componente</div>
           <div class="check"><span class="check-icon">✓</span>Foto aproximada da falha</div>
@@ -482,11 +533,13 @@
       </div>
 
       <section class="secao secao-assinaturas oculto" id="secaoAssinaturas">
-        <div class="titulo-secao">
-          <div class="titulo-icone">✎</div>
-          <h3>Assinaturas</h3>
+        <div class="cabecalho-secao">
+          <div class="titulo-secao">
+            <div class="titulo-icone">✎</div>
+            <h3>Assinaturas</h3>
+          </div>
+          <div class="linha"></div>
         </div>
-        <div class="linha"></div>
         <div class="assinaturas-grid">
           <div class="assinatura-slot" id="slotGarantia" data-titulo="Assinatura Garantia" data-funcao="Garantia">
             <div class="assinatura-label">Assinatura Garantia</div>
