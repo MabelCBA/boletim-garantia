@@ -1,3697 +1,948 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Boletim de Garantia</title>
-
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    background: #e9edf0;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #e9edf0;
-    color: #17212b;
-    padding: 30px;
-}
-
-
-/* =========================================================
-   PALETA
-========================================================= */
-
-:root {
-
-    --azul: #0078b8;
-    --azul-escuro: #10212d;
-    --azul-claro: #e8f5fb;
-
-    --cinza-1: #f5f7f8;
-    --cinza-2: #e1e6e9;
-    --cinza-3: #87939b;
-
-    --verde: #218447;
-    --verde-bg: #edf8f1;
-
-    --vermelho: #c52d2d;
-    --vermelho-bg: #fff0f0;
-
-    --amarelo: #d99500;
-    --amarelo-bg: #fff7e5;
-
-    --texto: #17212b;
-}
-
-
-/* =========================================================
-   TELA INICIAL
-========================================================= */
-
-#tela-inicial {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 2000;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    overflow: hidden;
-
-}
-
-.tela-svg {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-}
-
-.tela-overlay {
-
-    position: absolute;
-
-    inset: 0;
-
-    background: radial-gradient(
-        ellipse at center,
-        rgba(10,15,20,.18) 0%,
-        rgba(8,12,16,.55) 62%,
-        rgba(5,8,10,.78) 100%
-    );
-
-}
-
-.tela-conteudo {
-
-    position: relative;
-
-    z-index: 2;
-
-    text-align: center;
-
-    color: white;
-
-    padding: 40px;
-
-    max-width: 560px;
-
-}
-
-.tela-selo {
-
-    width: 72px;
-    height: 72px;
-
-    margin: 0 auto 24px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 2px solid rgba(255,255,255,.55);
-
-    border-radius: 50%;
-
-    background: rgba(255,255,255,.08);
-
-}
-
-.tela-selo svg {
-
-    width: 36px;
-    height: 36px;
-
-}
-
-.tela-titulo {
-
-    font-size: 42px;
-
-    font-weight: 800;
-
-    letter-spacing: 3px;
-
-    text-transform: uppercase;
-
-    text-shadow: 0 4px 18px rgba(0,0,0,.5);
-
-}
-
-.tela-subtitulo {
-
-    margin-top: 12px;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    letter-spacing: 7px;
-
-    color: #cfe4f0;
-
-    text-transform: uppercase;
-
-}
-
-.tela-linha {
-
-    width: 70px;
-    height: 2px;
-
-    background: rgba(255,255,255,.5);
-
-    margin: 26px auto;
-
-}
-
-.tela-btn-iniciar {
-
-    padding: 15px 40px;
-
-    border: 1.5px solid rgba(255,255,255,.65);
-
-    border-radius: 30px;
-
-    background: rgba(255,255,255,.08);
-
-    backdrop-filter: blur(4px);
-
-    -webkit-backdrop-filter: blur(4px);
-
-    color: white;
-
-    font-size: 13.5px;
-
-    font-weight: 700;
-
-    letter-spacing: 2.5px;
-
-    text-transform: uppercase;
-
-    cursor: pointer;
-
-    transition: background .2s, border-color .2s, transform .15s;
-
-}
-
-.tela-btn-iniciar:hover {
-
-    background: var(--azul);
-
-    border-color: var(--azul);
-
-    transform: translateY(-2px);
-
-}
-
-@media (max-width: 620px) {
-
-    .tela-titulo {
-        font-size: 30px;
-        letter-spacing: 2px;
-    }
-
-    .tela-subtitulo {
-        font-size: 12px;
-        letter-spacing: 5px;
-    }
-
-    .tela-conteudo {
-        padding: 24px;
-    }
-
-}
-
-
-/* =========================================================
-   CONTAINER PRINCIPAL
-========================================================= */
-
-.boletim {
-
-    width: 100%;
-    max-width: 1000px;
-
-    margin: auto;
-
-    background: #ffffff;
-
-    box-shadow:
-        0 15px 45px rgba(20, 35, 45, .15);
-
-    overflow: hidden;
-}
-
-
-/* =========================================================
-   CABEÇALHO
-========================================================= */
-
-.header {
-
-    position: relative;
-
-    padding: 34px 42px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #10212d 0%,
-            #162e3d 65%,
-            #0078b8 100%
-        );
-
-    color: white;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-}
-
-
-/* detalhe lateral */
-
-.header::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: 0;
-
-    width: 100%;
-
-    height: 5px;
-
-    background: #38a9dc;
-
-}
-
-
-.marca {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-}
-
-
-.marca-simbolo {
-
-    width: 52px;
-    height: 52px;
-
-    border: 2px solid rgba(255,255,255,.7);
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 22px;
-
-    font-weight: bold;
-
-}
-
-
-.marca h1 {
-
-    font-size: 27px;
-
-    letter-spacing: 1.5px;
-
-}
-
-
-.marca p {
-
-    margin-top: 5px;
-
-    font-size: 12px;
-
-    color: #c8d7df;
-
-    letter-spacing: .5px;
-
-}
-
-
-.numero {
-
-    text-align: right;
-
-}
-
-
-.numero-label {
-
-    font-size: 11px;
-
-    text-transform: uppercase;
-
-    color: #9ed8f4;
-
-    font-weight: bold;
-
-}
-
-
-.numero-valor {
-
-    font-size: 24px;
-
-    font-weight: 800;
-
-    margin-top: 2px;
-
-}
-
-
-#numeroValor:hover {
-
-    border-color: rgba(255,255,255,.5);
-
-    background: rgba(255,255,255,.08);
-
-}
-
-
-#numeroValor:focus {
-
-    border-color: #9ed8f4;
-
-    background: rgba(255,255,255,.12);
-
-    box-shadow: 0 0 0 3px rgba(158,216,244,.25);
-
-}
-
-
-/* =========================================================
-   FAIXA DE TEMA
-========================================================= */
-
-.tema {
-
-    padding: 25px 42px 10px;
-
-}
-
-
-.tag {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    padding: 7px 12px;
-
-    background: var(--azul-claro);
-
-    color: var(--azul);
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    border-radius: 4px;
-
-    letter-spacing: .5px;
-
-}
-
-
-.tema h2 {
-
-    margin-top: 15px;
-
-    max-width: 760px;
-
-    font-size: 34px;
-
-    line-height: 1.08;
-
-    color: var(--azul-escuro);
-
-}
-
-
-.tema h2 span {
-
-    color: var(--azul);
-
-}
-
-
-.tema p {
-
-    margin-top: 12px;
-
-    max-width: 760px;
-
-    font-size: 15px;
-
-    line-height: 1.6;
-
-    color: #64717a;
-
-}
-
-
-/* =========================================================
-   REGRA DE OURO
-========================================================= */
-
-.regra {
-
-    margin: 25px 42px;
-
-    padding: 20px 22px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
-
-    background: var(--amarelo-bg);
-
-    border: 1px solid #f0d89b;
-
-    border-left: 6px solid #efa900;
-
-    border-radius: 6px;
-
-}
-
-
-.regra-icone {
-
-    width: 42px;
-    height: 42px;
-
-    flex-shrink: 0;
-
-    background: #efa900;
-
-    color: white;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    font-size: 20px;
-
-}
-
-
-.regra strong {
-
-    display: block;
-
-    color: #9a6800;
-
-    font-size: 15px;
-
-    margin-bottom: 5px;
-
-}
-
-
-.regra p {
-
-    font-size: 14px;
-
-    line-height: 1.5;
-
-    color: #3f4549;
-
-}
-
-
-/* =========================================================
-   AVISO DE EDIÇÃO
-========================================================= */
-
-.aviso-edicao {
-
-    margin: 0 42px 10px;
-
-    padding: 10px 16px;
-
-    background: #f0f7fb;
-
-    border: 1px dashed #9ed8f4;
-
-    border-radius: 6px;
-
-    font-size: 12px;
-
-    color: #205a75;
-
-    line-height: 1.5;
-
-}
-
-
-/* =========================================================
-   CAMPOS EDITÁVEIS
-========================================================= */
-
-[contenteditable="true"] {
-
-    outline: none;
-
-    border: 1px dashed transparent;
-
-    border-radius: 4px;
-
-    padding: 2px 5px;
-
-    margin: -2px -5px;
-
-    cursor: text;
-
-    transition: background .15s, border-color .15s, box-shadow .15s;
-
-}
-
-
-[contenteditable="true"]:hover {
-
-    border-color: #9ed8f4;
-
-    background: #f5fbfe;
-
-}
-
-
-[contenteditable="true"]:focus {
-
-    border-color: var(--azul);
-
-    background: #eef8fd;
-
-    box-shadow: 0 0 0 3px rgba(0,120,184,.12);
-
-}
-
-
-[contenteditable="true"]:empty:before {
-
-    content: attr(data-placeholder);
-
-    color: #9aa7ae;
-
-}
-
-
-/* =========================================================
-   CONTEÚDO
-========================================================= */
-
-.conteudo {
-
-    padding: 5px 42px 40px;
-
-}
-
-
-.secao {
-
-    margin-top: 28px;
-
-}
-
-
-.titulo-secao {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 11px;
-
-    margin-bottom: 17px;
-
-}
-
-
-.titulo-icone {
-
-    width: 34px;
-    height: 34px;
-
-    border-radius: 50%;
-
-    background: var(--azul);
-
-    color: white;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    font-weight: bold;
-
-}
-
-
-.titulo-secao h3 {
-
-    font-size: 20px;
-
-    color: var(--azul-escuro);
-
-}
-
-
-.linha {
-
-    height: 2px;
-
-    background: #e4e9ec;
-
-    margin-top: 8px;
-
-}
-
-
-/* =========================================================
-   MENSAGEM IDENTIFICADA
-========================================================= */
-
-.problema {
-
-    padding: 18px 20px;
-
-    background: #f7f9fa;
-
-    border-left: 4px solid var(--azul);
-
-    font-size: 14px;
-
-    line-height: 1.6;
-
-    color: #3f4c54;
-
-    min-height: 60px;
-
-}
-
-
-/* =========================================================
-   COMPARAÇÃO DAS FOTOS
-========================================================= */
-
-.comparacao {
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 22px;
-
-}
-
-
-.foto-card {
-
-    border-radius: 8px;
-
-    overflow: hidden;
-
-    background: white;
-
-    border: 1px solid #dce3e7;
-
-    box-shadow:
-        0 5px 16px rgba(20,40,50,.07);
-
-}
-
-
-.foto-topo {
-
-    padding: 12px 15px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    font-size: 12px;
-
-    font-weight: 800;
-
-    letter-spacing: .4px;
-
-}
-
-
-.foto-card.errado .foto-topo {
-
-    background: var(--vermelho-bg);
-
-    color: var(--vermelho);
-
-}
-
-
-.foto-card.certo .foto-topo {
-
-    background: var(--verde-bg);
-
-    color: var(--verde);
-
-}
-
-
-.status {
-
-    width: 23px;
-    height: 23px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    color: white;
-
-}
-
-
-.errado .status {
-
-    background: var(--vermelho);
-
-}
-
-
-.certo .status {
-
-    background: var(--verde);
-
-}
-
-
-/* =========================================================
-   ÁREA DA FOTO
-========================================================= */
-
-.foto-area {
-
-    position: relative;
-
-    height: 290px;
-
-    background: #e2e7ea;
-
-    overflow: hidden;
-
-}
-
-
-.placeholder {
-
-    position: absolute;
-
-    inset: 0;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
-
-    text-align: center;
-
-    color: #75828a;
-
-    padding: 20px;
-
-}
-
-
-.placeholder-icon {
-
-    font-size: 42px;
-
-    margin-bottom: 10px;
-
-    opacity: .7;
-
-}
-
-
-.placeholder strong {
-
-    font-size: 14px;
-
-}
-
-
-.placeholder span {
-
-    margin-top: 5px;
-
-    font-size: 11px;
-
-}
-
-
-.imagem {
-
-    display: none;
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-}
-
-
-.foto-area.tem-imagem .imagem {
-
-    display: block;
-
-}
-
-
-.foto-area.tem-imagem .placeholder {
-
-    display: none;
-
-}
-
-
-/* =========================================================
-   BOTÃO UPLOAD
-========================================================= */
-
-.upload {
-
-    margin-top: 12px;
-
-    padding: 9px 14px;
-
-    background: var(--azul);
-
-    color: white;
-
-    border-radius: 4px;
-
-    cursor: pointer;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-}
-
-
-.upload:hover {
-
-    background: #005e91;
-
-}
-
-
-.upload input {
-
-    display: none;
-
-}
-
-
-/* =========================================================
-   REMOVER FOTO
-========================================================= */
-
-.remover {
-
-    display: none;
-
-    position: absolute;
-
-    right: 10px;
-
-    top: 10px;
-
-    z-index: 5;
-
-    border: none;
-
-    padding: 7px 10px;
-
-    border-radius: 4px;
-
-    background: rgba(0,0,0,.75);
-
-    color: white;
-
-    cursor: pointer;
-
-    font-size: 10px;
-
-    font-weight: bold;
-
-}
-
-
-.tem-imagem .remover {
-
-    display: block;
-
-}
-
-
-/* =========================================================
-   TEXTO FOTO
-========================================================= */
-
-.foto-descricao {
-
-    padding: 17px;
-
-}
-
-
-.foto-descricao strong {
-
-    display: block;
-
-    font-size: 14px;
-
-    margin-bottom: 6px;
-
-}
-
-
-.errado .foto-descricao strong {
-
-    color: var(--vermelho);
-
-}
-
-
-.certo .foto-descricao strong {
-
-    color: var(--verde);
-
-}
-
-
-.foto-descricao p {
-
-    font-size: 13px;
-
-    line-height: 1.5;
-
-    color: #58656d;
-
-}
-
-
-/* =========================================================
-   PASSO A PASSO
-========================================================= */
-
-.passos {
-
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 15px;
-
-}
-
-
-.passo {
-
-    position: relative;
-
-    padding: 20px 17px;
-
-    border: 1px solid #dfe5e8;
-
-    border-radius: 7px;
-
-    background: #fff;
-
-}
-
-
-.passo-numero {
-
-    width: 34px;
-    height: 34px;
-
-    border-radius: 50%;
-
-    background: var(--azul);
-
-    color: white;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-weight: bold;
-
-    margin-bottom: 12px;
-
-}
-
-
-.passo h4 {
-
-    font-size: 14px;
-
-    color: var(--azul-escuro);
-
-    margin-bottom: 7px;
-
-}
-
-
-.passo p {
-
-    font-size: 12px;
-
-    line-height: 1.5;
-
-    color: #68757d;
-
-}
-
-
-/* =========================================================
-   NÃO FAÇA / FAÇA
-========================================================= */
-
-.duas-colunas {
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 18px;
-
-}
-
-
-.lista-card {
-
-    border-radius: 7px;
-
-    padding: 20px;
-
-}
-
-
-.lista-card h4 {
-
-    font-size: 15px;
-
-    margin-bottom: 14px;
-
-}
-
-
-.lista-card ul {
-
-    list-style: none;
-
-}
-
-
-.lista-card li {
-
-    display: flex;
-
-    align-items: flex-start;
-
-    gap: 9px;
-
-    margin-bottom: 10px;
-
-    font-size: 13px;
-
-    line-height: 1.45;
-
-}
-
-
-.li-icone {
-
-    flex-shrink: 0;
-
-    width: 16px;
-
-    font-weight: bold;
-
-    line-height: 1.45;
-
-}
-
-
-.li-texto {
-
-    flex: 1;
-
-}
-
-
-.nao {
-
-    background: var(--vermelho-bg);
-
-    border: 1px solid #efcccc;
-
-}
-
-
-.nao h4 {
-
-    color: var(--vermelho);
-
-}
-
-
-.nao .li-icone {
-
-    color: var(--vermelho);
-
-}
-
-
-.sim {
-
-    background: var(--verde-bg);
-
-    border: 1px solid #c8e4d1;
-
-}
-
-
-.sim h4 {
-
-    color: var(--verde);
-
-}
-
-
-.sim .li-icone {
-
-    color: var(--verde);
-
-}
-
-
-/* =========================================================
-   CHECKLIST
-========================================================= */
-
-.checklist {
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 9px;
-
-}
-
-
-.check {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding: 13px;
-
-    background: #f5f7f8;
-
-    border: 1px solid #e2e7e9;
-
-    border-radius: 5px;
-
-    font-size: 12px;
-
-    color: #37444c;
-
-}
-
-
-.check-icon {
-
-    width: 22px;
-    height: 22px;
-
-    flex-shrink: 0;
-
-    border-radius: 50%;
-
-    background: var(--verde);
-
-    color: white;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-}
-
-
-/* =========================================================
-   DICA FINAL
-========================================================= */
-
-.dica-final {
-
-    margin-top: 28px;
-
-    padding: 24px;
-
-    border-radius: 8px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #10212d,
-            #17445c
-        );
-
-    color: white;
-
-    text-align: center;
-
-}
-
-
-.dica-final .mini {
-
-    color: #7dd0f6;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
-
-}
-
-
-.dica-final h3 {
-
-    margin-top: 7px;
-
-    font-size: 19px;
-
-}
-
-
-.dica-final p {
-
-    max-width: 700px;
-
-    margin: 9px auto 0;
-
-    color: #d6e3e9;
-
-    font-size: 13px;
-
-    line-height: 1.6;
-
-}
-
-
-/* =========================================================
-   ASSINATURAS
-========================================================= */
-
-.assinaturas-grid {
-
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 15px;
-
-}
-
-
-.assinatura-slot {
-
-    border: 1px solid #dfe5e8;
-
-    border-radius: 8px;
-
-    padding: 18px;
-
-    background: #fff;
-
-    text-align: center;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 10px;
-
-}
-
-
-.assinatura-slot.assinado {
-
-    border-color: #c8e4d1;
-
-    background: var(--verde-bg);
-
-}
-
-
-.assinatura-label {
-
-    font-size: 13px;
-
-    font-weight: 800;
-
-    color: var(--azul-escuro);
-
-}
-
-
-.btn-assinar {
-
-    border: none;
-
-    padding: 10px 16px;
-
-    background: var(--azul);
-
-    color: white;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-}
-
-
-.btn-assinar:hover {
-
-    background: #005e91;
-
-}
-
-
-.assinatura-resultado {
-
-    width: 100%;
-
-}
-
-
-.assinatura-resultado:empty {
-
-    display: none;
-
-}
-
-
-.assinatura-img {
-
-    width: 100%;
-
-    max-width: 220px;
-
-    margin: 0 auto 8px;
-
-    border: 1px solid #c8e4d1;
-
-    border-radius: 5px;
-
-    background: white;
-
-}
-
-
-.assinatura-img img {
-
-    width: 100%;
-
-    display: block;
-
-}
-
-
-.assinatura-info {
-
-    font-size: 11.5px;
-
-    line-height: 1.6;
-
-    color: #2c4a37;
-
-    text-align: left;
-
-}
-
-
-.assinatura-info strong {
-
-    color: var(--verde);
-
-}
-
-
-.assinatura-data {
-
-    display: block;
-
-    margin-top: 4px;
-
-    font-size: 10.5px;
-
-    color: #5c7a68;
-
-}
-
-
-.btn-refazer {
-
-    margin-top: 8px;
-
-    border: none;
-
-    background: none;
-
-    color: var(--azul);
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    text-decoration: underline;
-
-}
-
-
-/* =========================================================
-   RODAPÉ
-========================================================= */
-
-.footer {
-
-    padding: 17px 42px;
-
-    background: #f1f4f5;
-
-    border-top: 1px solid #dfe5e8;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    font-size: 10px;
-
-    color: #77838a;
-
-}
-
-
-.footer strong {
-
-    color: #34434c;
-
-}
-
-
-/* =========================================================
-   BOTÃO DE IMPRESSÃO
-========================================================= */
-
-.acoes {
-
-    max-width: 1000px;
-
-    margin: 20px auto;
-
-    display: flex;
-
-    justify-content: center;
-
-}
-
-
-.btn-imprimir {
-
-    border: none;
-
-    padding: 13px 22px;
-
-    background: #10212d;
-
-    color: white;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-    font-weight: bold;
-
-    box-shadow: 0 4px 12px rgba(0,0,0,.15);
-
-}
-
-
-.btn-imprimir:hover {
-
-    background: #0078b8;
-
-}
-
-
-/* =========================================================
-   MODAL DE ASSINATURA
-========================================================= */
-
-.modal-overlay {
-
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    background: rgba(16, 33, 45, .55);
-
-    z-index: 100;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 20px;
-
-}
-
-
-.modal-overlay.aberto {
-
-    display: flex;
-
-}
-
-
-.modal-box {
-
-    position: relative;
-
-    width: 100%;
-
-    max-width: 480px;
-
-    background: white;
-
-    border-radius: 10px;
-
-    padding: 28px 26px;
-
-    box-shadow: 0 20px 60px rgba(0,0,0,.3);
-
-}
-
-
-.modal-fechar {
-
-    position: absolute;
-
-    top: 14px;
-
-    right: 14px;
-
-    border: none;
-
-    background: #f1f4f5;
-
-    width: 28px;
-
-    height: 28px;
-
-    border-radius: 50%;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-    color: #55636a;
-
-}
-
-
-.modal-box h3 {
-
-    font-size: 18px;
-
-    color: var(--azul-escuro);
-
-    margin-bottom: 6px;
-
-}
-
-
-.modal-sub {
-
-    font-size: 12.5px;
-
-    color: #68757d;
-
-    margin-bottom: 18px;
-
-    line-height: 1.5;
-
-}
-
-
-.modal-box label {
-
-    display: block;
-
-    font-size: 11.5px;
-
-    font-weight: bold;
-
-    color: #37444c;
-
-    margin-bottom: 5px;
-
-    margin-top: 14px;
-
-}
-
-
-.modal-box input[type="text"] {
-
-    width: 100%;
-
-    padding: 10px 12px;
-
-    border: 1px solid #d5dde1;
-
-    border-radius: 5px;
-
-    font-size: 13px;
-
-    font-family: inherit;
-
-}
-
-
-.modal-box input[type="text"]:focus {
-
-    outline: none;
-
-    border-color: var(--azul);
-
-    box-shadow: 0 0 0 3px rgba(0,120,184,.12);
-
-}
-
-
-.btn-modal-avancar {
-
-    width: 100%;
-
-    margin-top: 22px;
-
-    border: none;
-
-    padding: 12px;
-
-    background: var(--azul);
-
-    color: white;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-    font-weight: bold;
-
-}
-
-
-.btn-modal-avancar:hover {
-
-    background: #005e91;
-
-}
-
-
-#canvasAssinatura {
-
-    width: 100%;
-
-    height: 180px;
-
-    border: 1.5px dashed #b7c3c9;
-
-    border-radius: 6px;
-
-    background: #fbfcfc;
-
-    touch-action: none;
-
-    cursor: crosshair;
-
-}
-
-
-.modal-canvas-acoes {
-
-    display: flex;
-
-    justify-content: flex-end;
-
-    margin-top: 8px;
-
-}
-
-
-.btn-limpar {
-
-    border: none;
-
-    background: none;
-
-    color: var(--vermelho);
-
-    font-size: 11.5px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    text-decoration: underline;
-
-}
-
-
-.modal-step2-botoes {
-
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 18px;
-
-}
-
-
-.btn-voltar {
-
-    flex: 1;
-
-    border: 1px solid #d5dde1;
-
-    background: white;
-
-    color: #37444c;
-
-    padding: 11px;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
-    font-size: 12.5px;
-
-    font-weight: bold;
-
-}
-
-
-.btn-confirmar {
-
-    flex: 2;
-
-    border: none;
-
-    background: var(--verde);
-
-    color: white;
-
-    padding: 11px;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
-    font-size: 12.5px;
-
-    font-weight: bold;
-
-}
-
-
-.btn-confirmar:hover {
-
-    background: #196b38;
-
-}
-
-
-/* =========================================================
-   RESPONSIVO
-========================================================= */
-
-@media(max-width: 750px) {
-
-    body {
-        padding: 10px;
-    }
-
-    .header {
-        padding: 25px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 18px;
-    }
-
-    .numero {
-        text-align: left;
-    }
-
-    .tema,
-    .conteudo {
-        padding-left: 25px;
-        padding-right: 25px;
-    }
-
-    .regra,
-    .aviso-edicao {
-        margin-left: 25px;
-        margin-right: 25px;
-    }
-
-    .tema h2 {
-        font-size: 27px;
-    }
-
-    .comparacao,
-    .duas-colunas,
-    .checklist,
-    .assinaturas-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .passos {
-        grid-template-columns: 1fr;
-    }
-
-    .footer {
-        padding-left: 25px;
-        padding-right: 25px;
-        flex-direction: column;
-        gap: 7px;
-    }
-
-}
-
-
-/* =========================================================
-   IMPRESSÃO
-========================================================= */
-
-@media print {
-
-    *,
-    *::before,
-    *::after {
-
-        -webkit-print-color-adjust: exact !important;
-
-        print-color-adjust: exact !important;
-
-    }
-
-
-    #tela-inicial {
-
-        display: none !important;
-
-    }
-
-
-    #conteudo-boletim {
-
-        display: block !important;
-
-    }
-
-
-    html {
-
-        background: white !important;
-
-    }
-
-
-    body {
-
-        padding: 0 !important;
-
-        margin: 0 !important;
-
-        background: white !important;
-
-    }
-
-
-    .boletim {
-
-        max-width: none !important;
-
-        width: 100% !important;
-
-        box-shadow: none !important;
-
-        margin: 0 !important;
-
-    }
-
-
-    .acoes,
-    .no-print,
-    .aviso-edicao,
-    .modal-overlay {
-
-        display: none !important;
-
-    }
-
-
-    .upload,
-    .remover {
-
-        display: none !important;
-
-    }
-
-
-    [contenteditable="true"] {
-
-        border-color: transparent !important;
-
-        border-width: 0 !important;
-
-        background: transparent !important;
-
-        box-shadow: none !important;
-
-    }
-
-
-    .header {
-
-        background:
-            linear-gradient(
-                135deg,
-                #10212d 0%,
-                #162e3d 65%,
-                #0078b8 100%
-            ) !important;
-
-    }
-
-
-    .regra {
-
-        background: #fff7e5 !important;
-
-        border-left-color: #efa900 !important;
-
-    }
-
-
-    .foto-card {
-
-        break-inside: avoid;
-
-        page-break-inside: avoid;
-
-    }
-
-
-    .passo {
-
-        break-inside: avoid;
-
-        page-break-inside: avoid;
-
-    }
-
-
-    .lista-card {
-
-        break-inside: avoid;
-
-        page-break-inside: avoid;
-
-    }
-
-
-    .checklist,
-    .duas-colunas,
-    .comparacao,
-    .passos {
-
-        break-inside: avoid;
-
-        page-break-inside: avoid;
-
-    }
-
-
-    .check {
-
-        break-inside: avoid;
-
-        page-break-inside: avoid;
-
-    }
-
-
-    .assinatura-slot {
-
-        break-inside: avoid;
-
-        page-break-inside: avoid;
-
-    }
-
-
-    .dica-final {
-
-        background:
-            linear-gradient(
-                135deg,
-                #10212d,
-                #17445c
-            ) !important;
-
-        break-inside: avoid;
-
-        page-break-inside: avoid;
-
-    }
-
-
-    .footer {
-
-        break-inside: avoid;
-
-        page-break-inside: avoid;
-
-    }
-
-
-    @page {
-
-        size: A4;
-
-        margin: 8mm;
-
-    }
-
-}
-
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{background:#e9edf0;}
+  body{font-family:Arial, Helvetica, sans-serif;background:#e9edf0;color:#17212b;padding:30px;padding-bottom:100px;}
+
+  :root{
+    --azul:#0078b8;
+    --azul-escuro:#10212d;
+    --azul-claro:#e8f5fb;
+    --cinza-1:#f5f7f8;
+    --cinza-2:#e1e6e9;
+    --cinza-3:#87939b;
+    --verde:#218447;
+    --verde-bg:#edf8f1;
+    --vermelho:#c52d2d;
+    --vermelho-bg:#fff0f0;
+    --amarelo:#d99500;
+    --amarelo-bg:#fff7e5;
+    --texto:#17212b;
+    --branco:#ffffff;
+  }
+
+  /* ===== TELA INICIAL ===== */
+  .tela-inicial{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .tela-svg{position:absolute;inset:0;width:100%;height:100%;}
+  .tela-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at center, rgba(10,15,20,.18) 0%, rgba(8,12,16,.55) 62%, rgba(5,8,10,.78) 100%);}
+  .tela-conteudo{position:relative;z-index:2;text-align:center;color:#ffffff;padding:40px;max-width:560px;}
+  .tela-selo{width:72px;height:72px;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.65);border-radius:50%;background:rgba(255,255,255,.10);}
+  .tela-titulo{font-size:42px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#ffffff;text-shadow:0 3px 14px rgba(0,0,0,.65);}
+  .tela-subtitulo{margin-top:12px;font-size:14px;font-weight:700;letter-spacing:7px;color:#cfe4f0;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.5);}
+  .tela-linha{width:70px;height:2px;background:rgba(255,255,255,.6);margin:26px auto;}
+  .tela-btn-iniciar{padding:15px 40px;border:1.5px solid rgba(255,255,255,.8);border-radius:30px;background:rgba(255,255,255,.12);color:#ffffff;font-size:13.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:background .2s, border-color .2s, transform .15s;}
+  .tela-btn-iniciar:hover{background:var(--azul);border-color:var(--azul);transform:translateY(-2px);}
+  @media (max-width:620px){
+    .tela-titulo{font-size:30px;letter-spacing:2px;}
+    .tela-subtitulo{font-size:12px;letter-spacing:5px;}
+    .tela-conteudo{padding:24px;}
+  }
+
+  /* ===== MENU SUPERIOR ===== */
+  .menu-superior{display:none;position:fixed;top:0;left:0;right:0;z-index:1500;background:linear-gradient(135deg,#10212d 0%,#162e3d 65%,#0078b8 100%);box-shadow:0 4px 20px rgba(0,0,0,.25);}
+  .menu-superior.visivel{display:flex;justify-content:space-between;align-items:center;padding:0 30px;height:60px;}
+  .menu-esquerda,.menu-direita{display:flex;align-items:center;gap:15px;}
+  .menu-btn{border:none;background:rgba(255,255,255,.14);color:#ffffff;padding:8px 16px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.5px;transition:background .2s, transform .15s;}
+  .menu-btn:hover{background:rgba(255,255,255,.28);transform:translateY(-1px);}
+  .menu-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+  .menu-titulo{color:#ffffff;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+
+  /* ===== BOLETIM ===== */
+  .boletim{width:100%;max-width:1000px;margin:auto;background:#ffffff;box-shadow:0 15px 45px rgba(20,35,45,.15);overflow:hidden;}
+
+  .header{position:relative;padding:34px 42px;background:linear-gradient(135deg,#10212d 0%,#162e3d 65%,#0078b8 100%);color:#ffffff;display:flex;justify-content:space-between;align-items:center;}
+  .header::after{content:'';position:absolute;left:0;bottom:0;width:100%;height:5px;background:#38a9dc;}
+  .marca{display:flex;align-items:center;gap:15px;}
+  .marca-simbolo{width:52px;height:52px;border:2px solid rgba(255,255,255,.8);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:bold;color:#ffffff;background:rgba(255,255,255,.08);}
+  .marca h1{font-size:27px;letter-spacing:1.5px;color:#ffffff !important;text-shadow:0 2px 8px rgba(0,0,0,.55);}
+  .marca p{margin-top:5px;font-size:12px;color:#d7e6ee !important;letter-spacing:.5px;text-shadow:0 1px 4px rgba(0,0,0,.4);}
+  .numero{text-align:right;}
+  .numero-label{font-size:11px;text-transform:uppercase;color:#9ed8f4 !important;font-weight:bold;letter-spacing:.5px;}
+  .numero-valor{font-size:24px;font-weight:800;margin-top:2px;color:#ffffff !important;}
+
+  .tema{padding:25px 42px 10px;}
+  .tag{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;background:var(--azul-claro);color:var(--azul);font-size:11px;font-weight:800;border-radius:4px;letter-spacing:.5px;}
+  .tema h2{margin-top:15px;max-width:760px;font-size:34px;line-height:1.08;color:var(--azul-escuro);}
+  .tema h2 span{color:var(--azul);}
+  .tema p{margin-top:12px;max-width:760px;font-size:15px;line-height:1.6;color:#64717a;}
+
+  .regra{margin:25px 42px;padding:20px 22px;display:flex;align-items:center;gap:18px;background:var(--amarelo-bg);border:1px solid #f0d89b;border-left:6px solid #efa900;border-radius:6px;}
+  .regra-icone{width:42px;height:42px;flex-shrink:0;background:#efa900;color:#ffffff;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:20px;font-weight:bold;}
+  .regra strong{display:block;color:#9a6800;font-size:15px;margin-bottom:5px;}
+  .regra p{font-size:14px;line-height:1.5;color:#3f4549;}
+
+  .aviso-edicao{margin:0 42px 10px;padding:10px 16px;background:#f0f7fb;border:1px dashed #9ed8f4;border-radius:6px;font-size:12px;color:#205a75;line-height:1.5;}
+
+  [contenteditable="true"]{outline:none;border:1px dashed transparent;border-radius:4px;padding:2px 5px;margin:-2px -5px;cursor:text;transition:background .15s,border-color .15s,box-shadow .15s;}
+  [contenteditable="true"]:hover{border-color:#9ed8f4;background:#f5fbfe;}
+  [contenteditable="true"]:focus{border-color:var(--azul);background:#eef8fd;box-shadow:0 0 0 3px rgba(0,120,184,.12);}
+  [contenteditable="true"]:empty:before{content:attr(data-placeholder);color:#9aa7ae;}
+
+  .conteudo{padding:5px 42px 40px;}
+  .secao{margin-top:28px;}
+  .titulo-secao{display:flex;align-items:center;gap:11px;margin-bottom:17px;}
+  .titulo-icone{width:34px;height:34px;border-radius:50%;background:var(--azul);color:#ffffff;display:flex;justify-content:center;align-items:center;font-weight:bold;}
+  .titulo-secao h3{font-size:20px;color:var(--azul-escuro);}
+  .linha{height:2px;background:#e4e9ec;margin-top:8px;}
+
+  .problema{padding:18px 20px;background:#f7f9fa;border-left:4px solid var(--azul);font-size:14px;line-height:1.6;color:#3f4c54;min-height:60px;}
+
+  .comparacao{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .foto-card{border-radius:8px;overflow:hidden;background:#ffffff;border:1px solid #dce3e7;box-shadow:0 5px 16px rgba(20,40,50,.07);}
+  .foto-topo{padding:12px 15px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;letter-spacing:.4px;}
+  .foto-card.errado .foto-topo{background:var(--vermelho-bg);color:var(--vermelho);}
+  .foto-card.certo .foto-topo{background:var(--verde-bg);color:var(--verde);}
+  .status{width:23px;height:23px;border-radius:50%;display:flex;justify-content:center;align-items:center;color:#ffffff;font-size:12px;font-weight:bold;}
+  .errado .status{background:var(--vermelho);}
+  .certo .status{background:var(--verde);}
+  .foto-area{position:relative;height:290px;background:#e2e7ea;overflow:hidden;}
+  .placeholder{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#5c6a72;padding:20px;}
+  .placeholder-icon{font-size:42px;margin-bottom:10px;opacity:.7;}
+  .placeholder strong{font-size:14px;color:#3f4c54;}
+  .placeholder span{margin-top:5px;font-size:11px;color:#5c6a72;}
+  .imagem{display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .foto-area.tem-imagem .imagem{display:block;}
+  .foto-area.tem-imagem .placeholder{display:none;}
+  .upload{margin-top:12px;padding:9px 14px;background:var(--azul);color:#ffffff;border-radius:4px;cursor:pointer;font-size:11px;font-weight:bold;display:inline-block;}
+  .upload:hover{background:#005e91;}
+  .upload input{display:none;}
+  .remover{display:none;position:absolute;right:10px;top:10px;z-index:5;border:none;padding:7px 10px;border-radius:4px;background:rgba(0,0,0,.75);color:#ffffff;cursor:pointer;font-size:10px;font-weight:bold;}
+  .tem-imagem .remover{display:block;}
+  .foto-descricao{padding:17px;}
+  .foto-descricao strong{display:block;font-size:14px;margin-bottom:6px;}
+  .errado .foto-descricao strong{color:var(--vermelho);}
+  .certo .foto-descricao strong{color:var(--verde);}
+  .foto-descricao p{font-size:13px;line-height:1.5;color:#58656d;}
+
+  .passos{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
+  .passo{position:relative;padding:20px 17px;border:1px solid #dfe5e8;border-radius:7px;background:#fff;}
+  .passo-numero{width:34px;height:34px;border-radius:50%;background:var(--azul);color:#ffffff;display:flex;align-items:center;justify-content:center;font-weight:bold;margin-bottom:12px;}
+  .passo h4{font-size:14px;color:var(--azul-escuro);margin-bottom:7px;}
+  .passo p{font-size:12px;line-height:1.5;color:#68757d;}
+
+  .duas-colunas{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .lista-card{border-radius:7px;padding:20px;}
+  .lista-card h4{font-size:15px;margin-bottom:14px;}
+  .lista-card ul{list-style:none;}
+  .lista-card li{display:flex;align-items:flex-start;gap:9px;margin-bottom:10px;font-size:13px;line-height:1.45;}
+  .li-icone{flex-shrink:0;width:16px;font-weight:bold;line-height:1.45;}
+  .li-texto{flex:1;}
+  .nao{background:var(--vermelho-bg);border:1px solid #efcccc;}
+  .nao h4{color:var(--vermelho);}
+  .nao .li-icone{color:var(--vermelho);}
+  .sim{background:var(--verde-bg);border:1px solid #c8e4d1;}
+  .sim h4{color:var(--verde);}
+  .sim .li-icone{color:var(--verde);}
+
+  .checklist{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+  .check{display:flex;align-items:center;gap:10px;padding:13px;background:#f5f7f8;border:1px solid #e2e7e9;border-radius:5px;font-size:12px;color:#37444c;}
+  .check-icon{width:22px;height:22px;flex-shrink:0;border-radius:50%;background:var(--verde);color:#ffffff;display:flex;justify-content:center;align-items:center;font-size:11px;font-weight:bold;}
+
+  .dica-final{margin-top:28px;padding:24px;border-radius:8px;background:linear-gradient(135deg,#10212d,#17445c);color:#ffffff;text-align:center;}
+  .dica-final .mini{color:#7dd0f6;font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;}
+  .dica-final h3{margin-top:7px;font-size:19px;color:#ffffff;}
+  .dica-final p{max-width:700px;margin:9px auto 0;color:#d6e3e9;font-size:13px;line-height:1.6;}
+
+  /* ===== ASSINATURAS ===== */
+  .secao-assinaturas.oculto{display:none !important;}
+  .assinaturas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
+  .assinatura-slot{border:1px solid #dfe5e8;border-radius:8px;padding:18px;background:#fff;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .assinatura-slot.assinado{border-color:#c8e4d1;background:var(--verde-bg);}
+  .assinatura-label{font-size:13px;font-weight:800;color:var(--azul-escuro);}
+  .btn-assinar{border:none;padding:10px 16px;background:var(--azul);color:#ffffff;border-radius:5px;cursor:pointer;font-size:12px;font-weight:bold;}
+  .btn-assinar:hover{background:#005e91;}
+  .assinatura-resultado{width:100%;}
+  .assinatura-resultado:empty{display:none;}
+  .assinatura-img{width:100%;max-width:220px;margin:0 auto 8px;border:1px solid #c8e4d1;border-radius:5px;background:#ffffff;}
+  .assinatura-img img{width:100%;display:block;}
+  .assinatura-info{font-size:11.5px;line-height:1.6;color:#2c4a37;text-align:left;}
+  .assinatura-info strong{color:var(--verde);}
+  .assinatura-data{display:block;margin-top:4px;font-size:10.5px;color:#5c7a68;}
+  .btn-refazer{margin-top:8px;border:none;background:none;color:var(--azul);font-size:11px;font-weight:bold;cursor:pointer;text-decoration:underline;}
+
+  .footer{padding:17px 42px;background:#f1f4f5;border-top:1px solid #dfe5e8;display:flex;justify-content:space-between;font-size:10px;color:#77838a;}
+  .footer strong{color:#34434c;}
+
+  .acoes{max-width:1000px;margin:20px auto;display:flex;justify-content:center;gap:15px;}
+  .btn-imprimir{border:none;padding:13px 22px;background:#10212d;color:#ffffff;border-radius:5px;cursor:pointer;font-size:13px;font-weight:bold;box-shadow:0 4px 12px rgba(0,0,0,.15);}
+  .btn-imprimir:hover{background:#0078b8;}
+  .btn-salvar{border:none;padding:13px 22px;background:var(--verde);color:#ffffff;border-radius:5px;cursor:pointer;font-size:13px;font-weight:bold;box-shadow:0 4px 12px rgba(0,0,0,.15);}
+  .btn-salvar:hover{background:#196b38;}
+
+  .rodape-fixo{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#10212d 0%,#162e3d 65%,#0078b8 100%);box-shadow:0 -4px 20px rgba(0,0,0,.25);z-index:1900;display:none;}
+  .rodape-fixo.visivel{display:flex;justify-content:center;align-items:center;gap:20px;padding:15px 30px;}
+  .rodape-btn{border:none;background:rgba(255,255,255,.14);color:#ffffff;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.5px;transition:background .2s,transform .15s;display:flex;align-items:center;gap:8px;}
+  .rodape-btn:hover{background:rgba(255,255,255,.28);transform:translateY(-2px);}
+  .rodape-btn.ativo{background:rgba(255,255,255,.32);border:1px solid rgba(255,255,255,.5);}
+
+  @media (max-width:750px){
+    body{padding:10px;padding-bottom:100px;}
+    .header{padding:25px;flex-direction:column;align-items:flex-start;gap:18px;}
+    .numero{text-align:left;}
+    .tema,.conteudo{padding-left:25px;padding-right:25px;}
+    .regra,.aviso-edicao{margin-left:25px;margin-right:25px;}
+    .tema h2{font-size:27px;}
+    .comparacao,.duas-colunas,.checklist,.assinaturas-grid{grid-template-columns:1fr;}
+    .passos{grid-template-columns:1fr;}
+    .footer{padding-left:25px;padding-right:25px;flex-direction:column;gap:7px;}
+    .menu-superior{padding:0 15px;}
+    .menu-titulo{display:none;}
+    .rodape-fixo{padding:12px 15px;}
+    .rodape-btn{padding:8px 14px;font-size:12px;}
+  }
+
+  /* ===== MODAIS ===== */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(16,33,45,.6);z-index:1700;align-items:center;justify-content:center;padding:20px;}
+  .modal-overlay.aberto{display:flex;}
+  .modal-box{position:relative;width:100%;max-width:480px;background:#ffffff;border-radius:10px;padding:28px 26px;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+  .modal-fechar{position:absolute;top:14px;right:14px;border:none;background:#f1f4f5;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:13px;color:#55636a;}
+  .modal-box h3{font-size:18px;color:var(--azul-escuro);margin-bottom:6px;}
+  .modal-sub{font-size:12.5px;color:#68757d;margin-bottom:18px;line-height:1.5;}
+  .modal-box label{display:block;font-size:11.5px;font-weight:bold;color:#37444c;margin-bottom:5px;margin-top:14px;}
+  .modal-box input[type="text"]{width:100%;padding:10px 12px;border:1px solid #d5dde1;border-radius:5px;font-size:13px;font-family:inherit;}
+  .modal-box input[type="text"]:focus{outline:none;border-color:var(--azul);box-shadow:0 0 0 3px rgba(0,120,184,.12);}
+  .btn-modal-avancar,.btn-modal-salvar{width:100%;margin-top:22px;border:none;padding:12px;background:var(--verde);color:#ffffff;border-radius:5px;cursor:pointer;font-size:13px;font-weight:bold;}
+  .btn-modal-avancar:hover,.btn-modal-salvar:hover{background:#196b38;}
+
+  #canvasAssinatura{width:100%;max-width:100%;border:1px solid #d5dde1;border-radius:6px;background:#fbfcfd;touch-action:none;cursor:crosshair;}
+  .modal-canvas-acoes{display:flex;justify-content:flex-end;margin-top:8px;}
+  .btn-limpar{border:none;background:#f1f4f5;color:#55636a;padding:6px 14px;border-radius:5px;cursor:pointer;font-size:11px;font-weight:bold;}
+  .btn-limpar:hover{background:#e1e6e9;}
+  .modal-step2-botoes{display:flex;gap:10px;margin-top:18px;}
+  .btn-voltar{flex:1;border:none;background:#f1f4f5;color:#37444c;padding:12px;border-radius:5px;cursor:pointer;font-size:13px;font-weight:bold;}
+  .btn-voltar:hover{background:#e1e6e9;}
+  .btn-confirmar{flex:2;border:none;background:var(--azul);color:#ffffff;padding:12px;border-radius:5px;cursor:pointer;font-size:13px;font-weight:bold;}
+  .btn-confirmar:hover{background:#005e91;}
+
+  /* ===== TELA LAUDOS SALVOS ===== */
+  .tela-laudos-salvos{display:none;position:fixed;inset:0;z-index:1800;background:#e9edf0;overflow-y:auto;padding-top:80px;padding-bottom:100px;}
+  .tela-laudos-salvos.visivel{display:block;}
+  .laudos-container{max-width:900px;margin:0 auto;padding:20px 30px 60px;}
+  .laudos-titulo{font-size:28px;color:var(--azul-escuro);margin-bottom:25px;font-weight:800;}
+  .laudos-barra-pesquisa{display:flex;gap:15px;margin-bottom:25px;}
+  .laudos-input-pesquisa{flex:1;padding:12px 16px;border:1px solid #d5dde1;border-radius:6px;font-size:14px;font-family:inherit;}
+  .laudos-input-pesquisa:focus{outline:none;border-color:var(--azul);box-shadow:0 0 0 3px rgba(0,120,184,.12);}
+  .laudos-lista{display:flex;flex-direction:column;gap:12px;}
+  .laudo-item{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;background:#ffffff;border-radius:8px;box-shadow:0 3px 12px rgba(0,0,0,.08);cursor:pointer;transition:transform .15s,box-shadow .15s;}
+  .laudo-item:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.12);}
+  .laudo-info{display:flex;flex-direction:column;gap:5px;}
+  .laudo-nome{font-size:15px;font-weight:700;color:var(--azul-escuro);}
+  .laudo-data{font-size:12px;color:#68757d;}
+  .laudo-acoes{display:flex;gap:10px;}
+  .btn-abrir-laudo{border:none;padding:8px 16px;background:var(--azul);color:#ffffff;border-radius:5px;cursor:pointer;font-size:12px;font-weight:700;}
+  .btn-abrir-laudo:hover{background:#005e91;}
+  .btn-excluir-laudo{border:none;padding:8px 16px;background:var(--vermelho-bg);color:var(--vermelho);border-radius:5px;cursor:pointer;font-size:12px;font-weight:700;}
+  .btn-excluir-laudo:hover{background:var(--vermelho);color:#ffffff;}
+  .laudos-vazio{text-align:center;padding:60px 20px;color:#68757d;font-size:14px;}
+
+  @media print{
+    *,*::before,*::after{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+    .tela-inicial,.menu-superior,#modalSalvarLaudo,#modalAssinatura,.rodape-fixo,.acoes{display:none !important;}
+    #conteudo-boletim{display:block !important;}
+    html{background:#ffffff !important;}
+    body{padding:0 !important;margin:0 !important;background:#ffffff !important;}
+    .boletim{max-width:none !important;width:100% !important;box-shadow:none !important;margin:0 !important;}
+    .no-print,.aviso-edicao{display:none !important;}
+    .upload,.remover{display:none !important;}
+    [contenteditable="true"]{border-color:transparent !important;border-width:0 !important;background:transparent !important;box-shadow:none !important;}
+    .header{background:linear-gradient(135deg,#10212d 0%,#162e3d 65%,#0078b8 100%) !important;}
+    .regra{background:#fff7e5 !important;border-left-color:#efa900 !important;}
+    .secao-assinaturas.oculto{display:block !important;}
+    .foto-card,.passo,.lista-card,.checklist,.duas-colunas,.comparacao,.passos,.check,.assinatura-slot,.dica-final,.footer{break-inside:avoid;page-break-inside:avoid;}
+    @page{size:A4;margin:8mm;}
+  }
 </style>
-
 </head>
-
-
 <body>
 
-
-<!-- =========================================================
-     TELA INICIAL
-========================================================= -->
-
-<div id="tela-inicial">
-
-    <svg class="tela-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-
-        <defs>
-            <linearGradient id="ceuGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#0a1626"/>
-                <stop offset="34%" stop-color="#123650"/>
-                <stop offset="56%" stop-color="#2f6a86"/>
-                <stop offset="71%" stop-color="#e08a4d"/>
-                <stop offset="79%" stop-color="#f6b56a"/>
-                <stop offset="82%" stop-color="#2a3238"/>
-                <stop offset="100%" stop-color="#14181b"/>
-            </linearGradient>
-            <radialGradient id="solGrad" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#ffe9c2" stop-opacity="0.95"/>
-                <stop offset="55%" stop-color="#ffbf6b" stop-opacity="0.5"/>
-                <stop offset="100%" stop-color="#ffbf6b" stop-opacity="0"/>
-            </radialGradient>
-        </defs>
-
-        <rect x="0" y="0" width="1600" height="900" fill="url(#ceuGrad)"/>
-
-        <circle cx="800" cy="655" r="260" fill="url(#solGrad)"/>
-        <circle cx="800" cy="655" r="65" fill="#ffe6ba" opacity="0.9"/>
-
-        <path d="M0,660 L180,560 L340,630 L520,540 L700,650 L860,570 L1050,650 L1250,560 L1420,640 L1600,600 L1600,665 L0,665 Z" fill="#1b3a52" opacity="0.5"/>
-        <path d="M0,675 L220,610 L420,665 L640,600 L880,670 L1120,600 L1350,665 L1600,630 L1600,680 L0,680 Z" fill="#142838" opacity="0.75"/>
-
-        <path d="M655,680 L945,680 L1160,900 L440,900 Z" fill="#262b2f"/>
-        <path d="M792,680 L808,680 L726,900 L674,900 Z" fill="#e7c98a" opacity="0.8"/>
-
-        <g transform="translate(725,752)">
-            <rect x="-2" y="8" width="205" height="66" rx="5" fill="#0c151d"/>
-            <rect x="-72" y="-14" width="82" height="92" rx="7" fill="#0c151d"/>
-            <rect x="-59" y="-2" width="46" height="28" rx="3" fill="#e08a4d" opacity="0.85"/>
-            <circle cx="-32" cy="86" r="19" fill="#04070a"/>
-            <circle cx="-32" cy="86" r="7" fill="#3a4249"/>
-            <circle cx="62" cy="86" r="19" fill="#04070a"/>
-            <circle cx="62" cy="86" r="7" fill="#3a4249"/>
-            <circle cx="152" cy="86" r="19" fill="#04070a"/>
-            <circle cx="152" cy="86" r="7" fill="#3a4249"/>
-        </g>
-
-    </svg>
-
-    <div class="tela-overlay"></div>
-
-    <div class="tela-conteudo">
-
-        <div class="tela-selo">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L4 5V11C4 16 7.5 20.2 12 21.5C16.5 20.2 20 16 20 11V5L12 2Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
-                <path d="M8.5 12L10.8 14.3L15.5 9.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div>
-
-        <h1 class="tela-titulo">Boletim de Garantia</h1>
-        <div class="tela-subtitulo">NORS CO</div>
-
-        <div class="tela-linha"></div>
-
-        <button class="tela-btn-iniciar" type="button" onclick="iniciarBoletim()">
-            ▶ Iniciar Boletim
-        </button>
-
+<div id="tela-inicial" class="tela-inicial">
+  <svg class="tela-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="ceuGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0a1626"/>
+        <stop offset="34%" stop-color="#123650"/>
+        <stop offset="56%" stop-color="#2f6a86"/>
+        <stop offset="71%" stop-color="#e08a4d"/>
+        <stop offset="79%" stop-color="#f6b56a"/>
+        <stop offset="82%" stop-color="#2a3238"/>
+        <stop offset="100%" stop-color="#14181b"/>
+      </linearGradient>
+      <radialGradient id="solGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffe9c2" stop-opacity="0.95"/>
+        <stop offset="55%" stop-color="#ffbf6b" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="#ffbf6b" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect x="0" y="0" width="1600" height="900" fill="url(#ceuGrad)"/>
+    <circle cx="800" cy="655" r="260" fill="url(#solGrad)"/>
+    <circle cx="800" cy="655" r="65" fill="#ffe6ba" opacity="0.9"/>
+  </svg>
+  <div class="tela-overlay"></div>
+  <div class="tela-conteudo">
+    <div class="tela-selo">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L4 5V11C4 16 7.5 20.2 12 21.5C16.5 20.2 20 16 20 11V5L12 2Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M8.5 12L10.8 14.3L15.5 9.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
-
+    <h1 class="tela-titulo">Boletim de Garantia</h1>
+    <div class="tela-subtitulo">NORS CO</div>
+    <div class="tela-linha"></div>
+    <button class="tela-btn-iniciar" type="button" onclick="iniciarBoletim()">Iniciar Boletim de Garantia</button>
+  </div>
 </div>
 
+<div class="menu-superior" id="menuSuperior">
+  <div class="menu-esquerda">
+    <button class="menu-btn" id="btnVoltar" onclick="voltarTela()">← Voltar</button>
+    <button class="menu-btn" id="btnAvancar" onclick="avancarTela()">Avançar →</button>
+    <span class="menu-titulo" id="menuTitulo">Iniciar Boletim de Garantia</span>
+  </div>
+  <div class="menu-direita">
+    <button class="menu-btn" onclick="irParaLaudosSalvos()">Boletins Salvos</button>
+  </div>
+</div>
 
-<!-- =========================================================
-     CONTEÚDO DO BOLETIM
-========================================================= -->
+<div id="tela-laudos-salvos" class="tela-laudos-salvos">
+  <div class="laudos-container">
+    <h2 class="laudos-titulo">Boletins Salvos</h2>
+    <div class="laudos-barra-pesquisa">
+      <input type="text" class="laudos-input-pesquisa" id="inputPesquisaLaudo" placeholder="Pesquisar por nome do boletim..." oninput="filtrarLaudos()">
+    </div>
+    <div class="laudos-lista" id="listaLaudos"></div>
+    <div class="laudos-vazio" id="laudosVazio" style="display:none;">Nenhum boletim salvo ainda.</div>
+  </div>
+</div>
+
+<div id="modalSalvarLaudo" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-fechar" type="button" onclick="fecharModalSalvar()">✕</button>
+    <h3>Salvar Boletim</h3>
+    <p class="modal-sub">Dê um nome para este boletim antes de salvar.</p>
+    <label for="inputNomeLaudo">Nome do boletim</label>
+    <input type="text" id="inputNomeLaudo" placeholder="Ex: Falha - Veículo ABC">
+    <button class="btn-modal-salvar" type="button" onclick="confirmarSalvarLaudo()">Salvar Boletim</button>
+  </div>
+</div>
 
 <div id="conteudo-boletim" style="display:none;">
-
-
-<div class="boletim">
-
-
-<!-- =========================================================
-     CABEÇALHO
-========================================================= -->
-
-<header class="header">
-
-
-    <div class="marca">
-
-
-        <div class="marca-simbolo">
-            ✓
-        </div>
-
-
+  <div class="boletim">
+    <header class="header">
+      <div class="marca">
+        <div class="marca-simbolo">⛨</div>
         <div>
-
-            <h1>
-                BOLETIM DE GARANTIA
-            </h1>
-
-            <p>
-                DEPARTAMENTO DE GARANTIA
-            </p>
-
+          <h1>BOLETIM DE GARANTIA</h1>
+          <p>DEPARTAMENTO DE GARANTIA</p>
         </div>
+      </div>
+      <div class="numero">
+        <div class="numero-label">Boletim nº</div>
+        <div class="numero-valor" id="numeroValor" contenteditable="true" data-placeholder="000/2026"></div>
+      </div>
+    </header>
 
+    <section class="tema">
+      <span class="tag">GARANTIA · EVIDÊNCIA FOTOGRÁFICA</span>
+      <h2><span>Como registrar</span> corretamente uma falha em garantia</h2>
+      <p>Uma boa evidência fotográfica permite que o processo seja compreendido mesmo por quem não está na oficina. Quanto melhor o registro, mais rápido e assertivo será o processo de garantia.</p>
+    </section>
 
+    <div class="regra">
+      <div class="regra-icone">!</div>
+      <div>
+        <strong>REGRA DE OURO DA GARANTIA</strong>
+        <p><b>Antes de desmontar ou substituir qualquer componente, registre primeiro as evidências da falha.</b> Depois da desmontagem, algumas evidências importantes podem deixar de existir.</p>
+      </div>
     </div>
 
+    <div class="aviso-edicao no-print">Os campos com borda tracejada (ao passar o mouse fica azul) são editáveis — clique neles e digite o novo texto. Esse aviso não é impresso.</div>
 
-    <div class="numero">
-
-        <div class="numero-label">
-            Boletim nº
+    <main class="conteudo">
+      <section class="secao">
+        <div class="titulo-secao">
+          <div class="titulo-icone">!</div>
+          <h3>O que identificamos?</h3>
         </div>
+        <div class="linha"></div>
+        <div class="problema" contenteditable="true" data-placeholder="Descreva aqui o que foi identificado neste boletim...">Foram identificados processos em que as fotografias não permitem visualizar claramente o componente, sua identificação ou a região onde ocorreu a falha. <b>Isso pode gerar solicitação de complemento e atraso na análise da garantia.</b></div>
+      </section>
 
-        <div
-            class="numero-valor"
-            id="numeroValor"
-            contenteditable="true"
-            data-placeholder="000/0000"
-        >
-            001/2026
+      <section class="secao">
+        <div class="titulo-secao">
+          <div class="titulo-icone">◐</div>
+          <h3>Veja a diferença</h3>
         </div>
-
-    </div>
-
-
-</header>
-
-
-
-<!-- =========================================================
-     TEMA
-========================================================= -->
-
-<section class="tema">
-
-
-    <span class="tag">
-        ● GARANTIA • EVIDÊNCIA FOTOGRÁFICA
-    </span>
-
-
-    <h2>
-
-        <span>Como registrar</span>
-        corretamente uma falha em garantia
-
-    </h2>
-
-
-    <p>
-
-        Uma boa evidência fotográfica permite que o processo
-        seja compreendido mesmo por quem não está na oficina.
-        Quanto melhor o registro, mais rápido e assertivo será
-        o processo de garantia.
-
-    </p>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     REGRA DE OURO
-========================================================= -->
-
-<div class="regra">
-
-
-    <div class="regra-icone">
-        !
-    </div>
-
-
-    <div>
-
-        <strong>
-            REGRA DE OURO DA GARANTIA
-        </strong>
-
-
-        <p>
-
-            <b>Antes de desmontar ou substituir qualquer componente,
-            registre primeiro as evidências da falha.</b>
-
-            Depois da desmontagem, algumas evidências importantes
-            podem deixar de existir.
-
-        </p>
-
-    </div>
-
-
-</div>
-
-
-<!-- =========================================================
-     AVISO DE EDIÇÃO (não aparece na impressão)
-========================================================= -->
-
-<div class="aviso-edicao no-print">
-
-    ✎ Os campos com borda tracejada (ao passar o mouse fica azul)
-    são editáveis: clique neles e digite o novo texto. Esse aviso
-    não é impresso.
-
-</div>
-
-
-
-<!-- =========================================================
-     CONTEÚDO
-========================================================= -->
-
-<main class="conteudo">
-
-
-
-<!-- =========================================================
-     O QUE IDENTIFICAMOS
-========================================================= -->
-
-<section class="secao">
-
-
-    <div class="titulo-secao">
-
-        <div class="titulo-icone">
-            !
-        </div>
-
-        <div>
-            <h3>O que identificamos?</h3>
-            <div class="linha"></div>
-        </div>
-
-    </div>
-
-
-    <div
-        class="problema"
-        contenteditable="true"
-        data-placeholder="Descreva aqui o que foi identificado neste boletim..."
-    >
-
-        Foram identificados processos em que as fotografias
-        não permitem visualizar claramente o componente,
-        sua identificação ou a região onde ocorreu a falha.
-
-        <b>Isso pode gerar solicitação de complemento
-        e atraso na análise da garantia.</b>
-
-    </div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     COMPARAÇÃO
-========================================================= -->
-
-<section class="secao">
-
-
-    <div class="titulo-secao">
-
-        <div class="titulo-icone">
-            📷
-        </div>
-
-        <div>
-            <h3>Veja a diferença</h3>
-            <div class="linha"></div>
-        </div>
-
-    </div>
-
-
-
-    <div class="comparacao">
-
-
-
-        <!-- FOTO ERRADA -->
-
-        <div class="foto-card errado">
-
-
-            <div class="foto-topo">
-
-                <span>
-                    ✕ REGISTRO INCORRETO
-                </span>
-
-                <span class="status">
-                    ✕
-                </span>
-
+        <div class="linha"></div>
+        <div class="comparacao">
+          <div class="foto-card errado">
+            <div class="foto-topo"><span>REGISTRO INCORRETO</span><span class="status">✕</span></div>
+            <div class="foto-area" id="areaErrada">
+              <div class="placeholder">
+                <div class="placeholder-icon">📷</div>
+                <strong>INSIRA A FOTO DO EXEMPLO INCORRETO</strong>
+                <span>Clique abaixo para selecionar uma imagem</span>
+                <label class="upload no-print">Inserir imagem<input type="file" accept="image/*" onchange="carregarImagem(this,'imgErrada','areaErrada')"></label>
+              </div>
+              <img id="imgErrada" class="imagem" alt="Exemplo incorreto">
+              <button class="remover no-print" type="button" onclick="removerImagem('imgErrada','areaErrada')">Remover</button>
             </div>
-
-
-            <div
-                class="foto-area"
-                id="areaErrada"
-            >
-
-
-                <div class="placeholder">
-
-
-                    <div class="placeholder-icon">
-                        📷
-                    </div>
-
-
-                    <strong>
-                        INSIRA A FOTO DO EXEMPLO INCORRETO
-                    </strong>
-
-
-                    <span>
-                        Clique abaixo para selecionar uma imagem
-                    </span>
-
-
-                    <label class="upload">
-
-                        + Inserir imagem
-
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onchange="
-                                carregarImagem(
-                                    this,
-                                    'imgErrada',
-                                    'areaErrada'
-                                )
-                            "
-                        >
-
-                    </label>
-
-
-                </div>
-
-
-                <img
-                    id="imgErrada"
-                    class="imagem"
-                    alt="Exemplo incorreto"
-                >
-
-
-                <button
-                    class="remover"
-                    type="button"
-                    onclick="
-                        removerImagem(
-                            'imgErrada',
-                            'areaErrada'
-                        )
-                    "
-                >
-                    ✕ Remover
-                </button>
-
-
-            </div>
-
-
             <div class="foto-descricao">
-
-                <strong
-                    contenteditable="true"
-                    data-placeholder="Título curto..."
-                >Evidência insuficiente</strong>
-
-                <p
-                    contenteditable="true"
-                    data-placeholder="Descreva o que está errado nesta foto..."
-                >
-                    A imagem não permite identificar claramente
-                    o componente, a falha ou a região afetada.
-                </p>
-
+              <strong contenteditable="true" data-placeholder="Título curto...">Evidência insuficiente</strong>
+              <p contenteditable="true" data-placeholder="Descreva o que está errado nesta foto...">A imagem não permite identificar claramente o componente, a falha ou a região afetada.</p>
             </div>
-
-
-        </div>
-
-
-
-        <!-- FOTO CORRETA -->
-
-        <div class="foto-card certo">
-
-
-            <div class="foto-topo">
-
-                <span>
-                    ✓ REGISTRO CORRETO
-                </span>
-
-                <span class="status">
-                    ✓
-                </span>
-
+          </div>
+          <div class="foto-card certo">
+            <div class="foto-topo"><span>REGISTRO CORRETO</span><span class="status">✓</span></div>
+            <div class="foto-area" id="areaCerta">
+              <div class="placeholder">
+                <div class="placeholder-icon">📷</div>
+                <strong>INSIRA A FOTO DO EXEMPLO CORRETO</strong>
+                <span>Clique abaixo para selecionar uma imagem</span>
+                <label class="upload no-print">Inserir imagem<input type="file" accept="image/*" onchange="carregarImagem(this,'imgCerta','areaCerta')"></label>
+              </div>
+              <img id="imgCerta" class="imagem" alt="Exemplo correto">
+              <button class="remover no-print" type="button" onclick="removerImagem('imgCerta','areaCerta')">Remover</button>
             </div>
-
-
-            <div
-                class="foto-area"
-                id="areaCerta"
-            >
-
-
-                <div class="placeholder">
-
-
-                    <div class="placeholder-icon">
-                        📷
-                    </div>
-
-
-                    <strong>
-                        INSIRA A FOTO DO EXEMPLO CORRETO
-                    </strong>
-
-
-                    <span>
-                        Clique abaixo para selecionar uma imagem
-                    </span>
-
-
-                    <label class="upload">
-
-                        + Inserir imagem
-
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onchange="
-                                carregarImagem(
-                                    this,
-                                    'imgCerta',
-                                    'areaCerta'
-                                )
-                            "
-                        >
-
-                    </label>
-
-
-                </div>
-
-
-                <img
-                    id="imgCerta"
-                    class="imagem"
-                    alt="Exemplo correto"
-                >
-
-
-                <button
-                    class="remover"
-                    type="button"
-                    onclick="
-                        removerImagem(
-                            'imgCerta',
-                            'areaCerta'
-                        )
-                    "
-                >
-                    ✕ Remover
-                </button>
-
-
-            </div>
-
-
             <div class="foto-descricao">
-
-                <strong
-                    contenteditable="true"
-                    data-placeholder="Título curto..."
-                >Evidência adequada</strong>
-
-                <p
-                    contenteditable="true"
-                    data-placeholder="Descreva o que está certo nesta foto..."
-                >
-                    A imagem mostra o componente, sua identificação
-                    e a região exata onde a falha foi identificada.
-                </p>
-
+              <strong contenteditable="true" data-placeholder="Título curto...">Evidência adequada</strong>
+              <p contenteditable="true" data-placeholder="Descreva o que está certo nesta foto...">A imagem mostra o componente, sua identificação e a região exata onde a falha foi identificada.</p>
             </div>
-
-
+          </div>
         </div>
+      </section>
 
-
-    </div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     PASSO A PASSO
-========================================================= -->
-
-<section class="secao">
-
-
-    <div class="titulo-secao">
-
-        <div class="titulo-icone">
-            ✓
+      <section class="secao">
+        <div class="titulo-secao">
+          <div class="titulo-icone">✓</div>
+          <h3>Como devemos fazer?</h3>
         </div>
-
-        <div>
-            <h3>Como devemos fazer?</h3>
-            <div class="linha"></div>
+        <div class="linha"></div>
+        <div class="passos">
+          <div class="passo"><div class="passo-numero">01</div><h4>Foto geral</h4><p>Mostre o componente instalado e sua localização no veículo.</p></div>
+          <div class="passo"><div class="passo-numero">02</div><h4>Aproximar da falha</h4><p>Aproxime a câmera e mostre claramente a região onde está o problema.</p></div>
+          <div class="passo"><div class="passo-numero">03</div><h4>Identificar</h4><p>Registre número da peça, etiqueta, código de falha ou qualquer identificação disponível.</p></div>
         </div>
+      </section>
 
-    </div>
-
-
-
-    <div class="passos">
-
-
-        <div class="passo">
-
-            <div class="passo-numero">
-                01
-            </div>
-
-            <h4>
-                Foto geral
-            </h4>
-
-            <p>
-                Mostre o componente instalado e sua localização
-                no veículo.
-            </p>
-
+      <section class="secao">
+        <div class="titulo-secao">
+          <div class="titulo-icone">✕</div>
+          <h3>O que evitar</h3>
         </div>
-
-
-        <div class="passo">
-
-            <div class="passo-numero">
-                02
-            </div>
-
-            <h4>
-                Aproximar da falha
-            </h4>
-
-            <p>
-                Aproxime a câmera e mostre claramente a região
-                onde está o problema.
-            </p>
-
-        </div>
-
-
-        <div class="passo">
-
-            <div class="passo-numero">
-                03
-            </div>
-
-            <h4>
-                Identificar
-            </h4>
-
-            <p>
-                Registre número da peça, etiqueta, código de falha
-                ou qualquer identificação disponível.
-            </p>
-
-        </div>
-
-
-    </div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     NÃO FAÇA / FAÇA
-========================================================= -->
-
-<section class="secao">
-
-
-    <div class="titulo-secao">
-
-        <div class="titulo-icone">
-            !
-        </div>
-
-        <div>
-            <h3>O que evitar</h3>
-            <div class="linha"></div>
-        </div>
-
-    </div>
-
-
-
-    <div class="duas-colunas">
-
-
-        <div class="lista-card nao">
-
-            <h4>
-                ✕ NÃO FAÇA
-            </h4>
-
-
+        <div class="linha"></div>
+        <div class="duas-colunas">
+          <div class="lista-card nao">
+            <h4>✕ NÃO FAÇA</h4>
             <ul>
-
-                <li>
-                    <span class="li-icone">✕</span>
-                    <span class="li-texto" contenteditable="true">Enviar somente uma foto distante.</span>
-                </li>
-
-                <li>
-                    <span class="li-icone">✕</span>
-                    <span class="li-texto" contenteditable="true">Fotografar sem mostrar a identificação.</span>
-                </li>
-
-                <li>
-                    <span class="li-icone">✕</span>
-                    <span class="li-texto" contenteditable="true">Desmontar antes de registrar a falha.</span>
-                </li>
-
-                <li>
-                    <span class="li-icone">✕</span>
-                    <span class="li-texto" contenteditable="true">Enviar imagens sem contexto.</span>
-                </li>
-
-                <li>
-                    <span class="li-icone">✕</span>
-                    <span class="li-texto" contenteditable="true">Utilizar fotos escuras, desfocadas ou cortadas.</span>
-                </li>
-
+              <li><span class="li-icone">✕</span><span class="li-texto" contenteditable="true">Enviar somente uma foto distante.</span></li>
+              <li><span class="li-icone">✕</span><span class="li-texto" contenteditable="true">Fotografar sem mostrar a identificação.</span></li>
+              <li><span class="li-icone">✕</span><span class="li-texto" contenteditable="true">Desmontar antes de registrar a falha.</span></li>
+              <li><span class="li-icone">✕</span><span class="li-texto" contenteditable="true">Enviar imagens sem contexto.</span></li>
+              <li><span class="li-icone">✕</span><span class="li-texto" contenteditable="true">Utilizar fotos escuras, desfocadas ou cortadas.</span></li>
             </ul>
-
-        </div>
-
-
-
-        <div class="lista-card sim">
-
-            <h4>
-                ✓ FAÇA ASSIM
-            </h4>
-
-
+          </div>
+          <div class="lista-card sim">
+            <h4>✓ FAÇA ASSIM</h4>
             <ul>
-
-                <li>
-                    <span class="li-icone">✓</span>
-                    <span class="li-texto" contenteditable="true">Faça uma foto geral do componente.</span>
-                </li>
-
-                <li>
-                    <span class="li-icone">✓</span>
-                    <span class="li-texto" contenteditable="true">Aproxime a câmera da região da falha.</span>
-                </li>
-
-                <li>
-                    <span class="li-icone">✓</span>
-                    <span class="li-texto" contenteditable="true">Mostre claramente a identificação.</span>
-                </li>
-
-                <li>
-                    <span class="li-icone">✓</span>
-                    <span class="li-texto" contenteditable="true">Registre as evidências do diagnóstico.</span>
-                </li>
-
-                <li>
-                    <span class="li-icone">✓</span>
-                    <span class="li-texto" contenteditable="true">Garanta que a imagem esteja nítida e iluminada.</span>
-                </li>
-
+              <li><span class="li-icone">✓</span><span class="li-texto" contenteditable="true">Faça uma foto geral do componente.</span></li>
+              <li><span class="li-icone">✓</span><span class="li-texto" contenteditable="true">Aproxime a câmera da região da falha.</span></li>
+              <li><span class="li-icone">✓</span><span class="li-texto" contenteditable="true">Mostre claramente a identificação.</span></li>
+              <li><span class="li-icone">✓</span><span class="li-texto" contenteditable="true">Registre as evidências do diagnóstico.</span></li>
+              <li><span class="li-icone">✓</span><span class="li-texto" contenteditable="true">Garanta que a imagem esteja nítida e iluminada.</span></li>
             </ul>
-
+          </div>
         </div>
+      </section>
 
-
-    </div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     CHECKLIST
-========================================================= -->
-
-<section class="secao">
-
-
-    <div class="titulo-secao">
-
-        <div class="titulo-icone">
-            ✓
+      <section class="secao">
+        <div class="titulo-secao">
+          <div class="titulo-icone">☑</div>
+          <h3>Checklist antes de enviar</h3>
         </div>
-
-        <div>
-            <h3>Checklist antes de enviar</h3>
-            <div class="linha"></div>
+        <div class="linha"></div>
+        <div class="checklist">
+          <div class="check"><span class="check-icon">✓</span>Foto geral do componente</div>
+          <div class="check"><span class="check-icon">✓</span>Foto aproximada da falha</div>
+          <div class="check"><span class="check-icon">✓</span>Identificação (número da peça)</div>
+          <div class="check"><span class="check-icon">✓</span>Evidência do diagnóstico</div>
+          <div class="check"><span class="check-icon">✓</span>Código de falha, quando aplicável</div>
+          <div class="check"><span class="check-icon">✓</span>Informações adicionais necessárias</div>
         </div>
+      </section>
 
-    </div>
+      <div class="dica-final">
+        <div class="mini">DICA DA GARANTIA</div>
+        <h3>Pense como quem vai analisar o processo.</h3>
+        <p>"Se outra pessoa receber este processo sem estar na oficina, ela conseguirá entender a falha somente pelas evidências que estou enviando?"</p>
+      </div>
 
-
-
-    <div class="checklist">
-
-
-        <div class="check">
-            <span class="check-icon">✓</span>
-            Foto geral do componente
+      <section class="secao secao-assinaturas oculto" id="secaoAssinaturas">
+        <div class="titulo-secao">
+          <div class="titulo-icone">✎</div>
+          <h3>Assinaturas</h3>
         </div>
-
-
-        <div class="check">
-            <span class="check-icon">✓</span>
-            Foto aproximada da falha
-        </div>
-
-
-        <div class="check">
-            <span class="check-icon">✓</span>
-            Identificação / número da peça
-        </div>
-
-
-        <div class="check">
-            <span class="check-icon">✓</span>
-            Evidência do diagnóstico
-        </div>
-
-
-        <div class="check">
-            <span class="check-icon">✓</span>
-            Código de falha, quando aplicável
-        </div>
-
-
-        <div class="check">
-            <span class="check-icon">✓</span>
-            Informações adicionais necessárias
-        </div>
-
-
-    </div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     DICA FINAL
-========================================================= -->
-
-<div class="dica-final">
-
-
-    <div class="mini">
-        DICA DA GARANTIA
-    </div>
-
-
-    <h3>
-        Pense como quem vai analisar o processo.
-    </h3>
-
-
-    <p>
-
-        "Se outra pessoa receber este processo sem estar na oficina,
-        ela conseguirá entender a falha somente pelas evidências
-        que estou enviando?"
-
-    </p>
-
-
-</div>
-
-
-
-<!-- =========================================================
-     ASSINATURAS
-========================================================= -->
-
-<section class="secao">
-
-
-    <div class="titulo-secao">
-
-        <div class="titulo-icone">
-            ✍
-        </div>
-
-        <div>
-            <h3>Assinaturas</h3>
-            <div class="linha"></div>
-        </div>
-
-    </div>
-
-
-    <div class="assinaturas-grid">
-
-
-        <div
-            class="assinatura-slot"
-            id="slotGarantia"
-            data-titulo="Assinatura Garantia"
-            data-funcao="Garantia"
-        >
-
-            <div class="assinatura-label">
-                Assinatura Garantia
-            </div>
-
-            <button
-                class="btn-assinar no-print"
-                type="button"
-                onclick="abrirAssinatura(this.closest('.assinatura-slot'))"
-            >
-                ✍ Assinar
-            </button>
-
+        <div class="linha"></div>
+        <div class="assinaturas-grid">
+          <div class="assinatura-slot" id="slotGarantia" data-titulo="Assinatura Garantia" data-funcao="Garantia">
+            <div class="assinatura-label">Assinatura Garantia</div>
+            <button class="btn-assinar no-print" type="button" onclick="abrirAssinatura(this.closest('.assinatura-slot'))">Assinar</button>
             <div class="assinatura-resultado"></div>
-
-        </div>
-
-
-        <div
-            class="assinatura-slot"
-            id="slotLider"
-            data-titulo="Assinatura Líder/Responsável"
-            data-funcao="Líder/Responsável"
-        >
-
-            <div class="assinatura-label">
-                Assinatura Líder/Responsável
-            </div>
-
-            <button
-                class="btn-assinar no-print"
-                type="button"
-                onclick="abrirAssinatura(this.closest('.assinatura-slot'))"
-            >
-                ✍ Assinar
-            </button>
-
+          </div>
+          <div class="assinatura-slot" id="slotLider" data-titulo="Assinatura Líder/Responsável" data-funcao="Líder/Responsável">
+            <div class="assinatura-label">Assinatura Líder/Responsável</div>
+            <button class="btn-assinar no-print" type="button" onclick="abrirAssinatura(this.closest('.assinatura-slot'))">Assinar</button>
             <div class="assinatura-resultado"></div>
-
-        </div>
-
-
-        <div
-            class="assinatura-slot"
-            id="slotMecanico"
-            data-titulo="Assinatura Mecânico"
-            data-funcao="Mecânico"
-        >
-
-            <div class="assinatura-label">
-                Assinatura Mecânico
-            </div>
-
-            <button
-                class="btn-assinar no-print"
-                type="button"
-                onclick="abrirAssinatura(this.closest('.assinatura-slot'))"
-            >
-                ✍ Assinar
-            </button>
-
+          </div>
+          <div class="assinatura-slot" id="slotMecanico" data-titulo="Assinatura Mecânico" data-funcao="Mecânico">
+            <div class="assinatura-label">Assinatura Mecânico</div>
+            <button class="btn-assinar no-print" type="button" onclick="abrirAssinatura(this.closest('.assinatura-slot'))">Assinar</button>
             <div class="assinatura-resultado"></div>
-
+          </div>
         </div>
+      </section>
+    </main>
 
+    <footer class="footer">
+      <div><strong>Departamento de Garantia</strong></div>
+      <div>Boletim interno · 001/2026</div>
+    </footer>
+  </div>
 
-    </div>
-
-
-</section>
-
-
-</main>
-
-
-
-<!-- =========================================================
-     RODAPÉ
-========================================================= -->
-
-<footer class="footer">
-
-
-    <div>
-
-        <strong>
-            Departamento de Garantia
-        </strong>
-
-    </div>
-
-
-    <div>
-
-        Boletim interno • 001/2026
-
-    </div>
-
-
-</footer>
-
-
+  <div class="acoes no-print" id="acoesBoletim">
+    <button class="btn-salvar" onclick="abrirModalSalvar()">Salvar Boletim</button>
+    <button class="btn-imprimir" onclick="imprimirBoletim()">Imprimir / Salvar em PDF</button>
+  </div>
 </div>
 
-
+<div class="rodape-fixo" id="rodapeFixo">
+  <button class="rodape-btn" id="rodapeInicio" onclick="irParaInicio()">INÍCIO</button>
+  <button class="rodape-btn" id="rodapeCriar" onclick="irParaCriarBoletim()">CRIAR BOLETIM</button>
+  <button class="rodape-btn" id="rodapeLaudos" onclick="irParaLaudosSalvos()">BOLETINS SALVOS</button>
 </div>
-<!-- fim de #conteudo-boletim -->
-
-
-
-<!-- =========================================================
-     BOTÃO
-========================================================= -->
-
-<div class="acoes no-print">
-
-    <button
-        class="btn-imprimir"
-        onclick="imprimirBoletim()"
-    >
-
-        🖨 Imprimir / Salvar em PDF
-
-    </button>
-
-</div>
-
-
-
-<!-- =========================================================
-     MODAL DE ASSINATURA
-========================================================= -->
 
 <div class="modal-overlay" id="modalAssinatura">
-
-    <div class="modal-box">
-
-        <button
-            class="modal-fechar"
-            type="button"
-            onclick="fecharModal()"
-        >
-            ✕
-        </button>
-
-
-        <!-- ETAPA 1 - DADOS -->
-
-        <div id="modalStep1">
-
-            <h3 id="modalTitulo">Assinatura</h3>
-
-            <p class="modal-sub">
-                Preencha seus dados antes de assinar.
-            </p>
-
-            <label for="inputNome">Nome completo</label>
-
-            <input
-                type="text"
-                id="inputNome"
-                placeholder="Digite o nome completo"
-            >
-
-            <label for="inputCPF">CPF</label>
-
-            <input
-                type="text"
-                id="inputCPF"
-                placeholder="000.000.000-00"
-            >
-
-            <label for="inputFuncao">Função</label>
-
-            <input
-                type="text"
-                id="inputFuncao"
-                placeholder="Função"
-            >
-
-            <button
-                class="btn-modal-avancar"
-                type="button"
-                onclick="avancarParaAssinatura()"
-            >
-                Avançar para assinatura →
-            </button>
-
-        </div>
-
-
-        <!-- ETAPA 2 - ASSINATURA -->
-
-        <div id="modalStep2" style="display:none;">
-
-            <h3>Assine abaixo</h3>
-
-            <p class="modal-sub">
-                Use o mouse ou o dedo para assinar no campo abaixo.
-            </p>
-
-            <canvas id="canvasAssinatura" width="460" height="180"></canvas>
-
-            <div class="modal-canvas-acoes">
-
-                <button
-                    class="btn-limpar"
-                    type="button"
-                    onclick="limparAssinatura()"
-                >
-                    Limpar
-                </button>
-
-            </div>
-
-            <div class="modal-step2-botoes">
-
-                <button
-                    class="btn-voltar"
-                    type="button"
-                    onclick="voltarStep1()"
-                >
-                    ← Voltar
-                </button>
-
-                <button
-                    class="btn-confirmar"
-                    type="button"
-                    onclick="confirmarAssinatura()"
-                >
-                    Confirmar assinatura
-                </button>
-
-            </div>
-
-        </div>
-
-
+  <div class="modal-box">
+    <button class="modal-fechar" type="button" onclick="fecharModal()">✕</button>
+    <div id="modalStep1">
+      <h3 id="modalTituloAssinatura">Assinatura</h3>
+      <p class="modal-sub">Preencha seus dados antes de assinar.</p>
+      <label for="inputNome">Nome completo</label>
+      <input type="text" id="inputNome" placeholder="Digite o nome completo">
+      <label for="inputCPF">CPF</label>
+      <input type="text" id="inputCPF" placeholder="000.000.000-00">
+      <label for="inputFuncao">Função</label>
+      <input type="text" id="inputFuncao" placeholder="Função">
+      <button class="btn-modal-avancar" type="button" onclick="avancarParaAssinatura()">Avançar para assinatura</button>
     </div>
-
+    <div id="modalStep2" style="display:none;">
+      <h3>Assine abaixo</h3>
+      <p class="modal-sub">Use o mouse ou o dedo para assinar no campo abaixo.</p>
+      <canvas id="canvasAssinatura" width="420" height="180"></canvas>
+      <div class="modal-canvas-acoes">
+        <button class="btn-limpar" type="button" onclick="limparAssinatura()">Limpar</button>
+      </div>
+      <div class="modal-step2-botoes">
+        <button class="btn-voltar" type="button" onclick="voltarStep1()">Voltar</button>
+        <button class="btn-confirmar" type="button" onclick="confirmarAssinatura()">Confirmar assinatura</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-
-
 <script>
-
-/* =========================================================
-   TELA INICIAL → BOLETIM
-========================================================= */
-
-function iniciarBoletim() {
-
-    document.getElementById('tela-inicial').style.display = 'none';
-    document.getElementById('conteudo-boletim').style.display = 'block';
-
-    window.scrollTo(0, 0);
-
-}
-
-
-/* =========================================================
-   NÚMERO AUTOMÁTICO DO BOLETIM
-   (incrementa a cada abertura do link neste navegador)
-========================================================= */
-
-function atualizarNumeroBoletim() {
-
-    const anoAtual = new Date().getFullYear();
-
-    const chave = "boletim_contador_" + anoAtual;
-
-    let contador = parseInt(localStorage.getItem(chave) || "0", 10);
-
-    contador += 1;
-
-    localStorage.setItem(chave, contador);
-
-    const numeroFormatado =
-        String(contador).padStart(3, "0") + "/" + anoAtual;
-
-    document.getElementById("numeroValor").textContent = numeroFormatado;
-
-}
-
-window.addEventListener("DOMContentLoaded", atualizarNumeroBoletim);
-
-
-/* =========================================================
-   INSERIR IMAGEM
-========================================================= */
-
-function carregarImagem(input, imagemId, areaId) {
-
-    const arquivo = input.files[0];
-
-    if (!arquivo) {
-        return;
-    }
-
-
-    if (!arquivo.type.startsWith("image/")) {
-
-        alert("Selecione uma imagem válida.");
-
-        input.value = "";
-
-        return;
-    }
-
-
-    const imagem =
-        document.getElementById(imagemId);
-
-
-    const area =
-        document.getElementById(areaId);
-
-
-    const leitor =
-        new FileReader();
-
-
-    leitor.onload = function(evento) {
-
-        imagem.src =
-            evento.target.result;
-
-        area.classList.add(
-            "tem-imagem"
-        );
-
-    };
-
-
-    leitor.readAsDataURL(arquivo);
-
-}
-
-
-/* =========================================================
-   REMOVER IMAGEM
-========================================================= */
-
-function removerImagem(imagemId, areaId) {
-
-    const imagem =
-        document.getElementById(imagemId);
-
-
-    const area =
-        document.getElementById(areaId);
-
-
-    imagem.src = "";
-
-
-    area.classList.remove(
-        "tem-imagem"
-    );
-
-
-    const input =
-        area.querySelector(
-            'input[type="file"]'
-        );
-
-
-    if (input) {
-
-        input.value = "";
-
-    }
-
-}
-
-
-/* =========================================================
-   IMPRESSÃO
-========================================================= */
-
-function imprimirBoletim() {
-
-    window.print();
-
-}
-
-
-/* =========================================================
-   ASSINATURA DIGITAL
-========================================================= */
-
+let telaAtual = 'inicial';
+let historicoTelas = ['inicial'];
+let indiceHistorico = 0;
 let assinaturaSlotAtual = null;
 let ctxAssinatura = null;
 let desenhandoAssinatura = false;
+let templateOriginalBoletim = null;
 
+window.addEventListener('DOMContentLoaded', function(){
+  atualizarNumeroBoletim();
+  templateOriginalBoletim = document.getElementById('conteudo-boletim').innerHTML;
+});
 
-function abrirAssinatura(slotEl) {
-
-    assinaturaSlotAtual = slotEl;
-
-    document.getElementById("modalTitulo").textContent =
-        slotEl.dataset.titulo;
-
-    document.getElementById("inputNome").value =
-        slotEl.dataset.nome || "";
-
-    document.getElementById("inputCPF").value =
-        slotEl.dataset.cpf || "";
-
-    document.getElementById("inputFuncao").value =
-        slotEl.dataset.funcaoPreenchida || slotEl.dataset.funcao;
-
-    document.getElementById("modalStep1").style.display = "block";
-    document.getElementById("modalStep2").style.display = "none";
-
-    document.getElementById("modalAssinatura").classList.add("aberto");
-
+function iniciarBoletim(){
+  document.getElementById('tela-inicial').style.display = 'none';
+  document.getElementById('conteudo-boletim').style.display = 'block';
+  document.getElementById('menuSuperior').classList.add('visivel');
+  document.getElementById('rodapeFixo').classList.add('visivel');
+  document.getElementById('acoesBoletim').style.display = 'flex';
+  telaAtual = 'boletim';
+  historicoTelas = historicoTelas.slice(0, indiceHistorico + 1);
+  historicoTelas.push('boletim');
+  indiceHistorico = historicoTelas.length - 1;
+  atualizarMenu();
+  atualizarRodape();
+  window.scrollTo(0, 0);
 }
 
-
-function fecharModal() {
-
-    document.getElementById("modalAssinatura").classList.remove("aberto");
-
+function atualizarMenu(){
+  const menuTitulo = document.getElementById('menuTitulo');
+  if(telaAtual === 'boletim'){
+    menuTitulo.textContent = 'Boletim de Garantia';
+  } else if(telaAtual === 'laudos'){
+    menuTitulo.textContent = 'Boletins Salvos';
+  }
+  document.getElementById('btnVoltar').disabled = indiceHistorico === 0;
+  document.getElementById('btnAvancar').disabled = indiceHistorico === historicoTelas.length - 1;
 }
 
-
-function avancarParaAssinatura() {
-
-    const nome = document.getElementById("inputNome").value.trim();
-    const cpf = document.getElementById("inputCPF").value.trim();
-    const funcao = document.getElementById("inputFuncao").value.trim();
-
-    if (!nome || !cpf || !funcao) {
-
-        alert("Preencha nome completo, CPF e função antes de continuar.");
-
-        return;
-    }
-
-    document.getElementById("modalStep1").style.display = "none";
-    document.getElementById("modalStep2").style.display = "block";
-
-    prepararCanvas();
-
+function atualizarRodape(){
+  const rI = document.getElementById('rodapeInicio');
+  const rC = document.getElementById('rodapeCriar');
+  const rL = document.getElementById('rodapeLaudos');
+  rI.classList.remove('ativo');
+  rC.classList.remove('ativo');
+  rL.classList.remove('ativo');
+  if(telaAtual === 'inicial'){ rI.classList.add('ativo'); }
+  else if(telaAtual === 'boletim'){ rC.classList.add('ativo'); }
+  else if(telaAtual === 'laudos'){ rL.classList.add('ativo'); }
 }
 
-
-function voltarStep1() {
-
-    document.getElementById("modalStep2").style.display = "none";
-    document.getElementById("modalStep1").style.display = "block";
-
+function voltarTela(){
+  if(indiceHistorico > 0){
+    indiceHistorico--;
+    navegarParaTela(historicoTelas[indiceHistorico]);
+  }
 }
 
-
-function prepararCanvas() {
-
-    const canvas = document.getElementById("canvasAssinatura");
-
-    ctxAssinatura = canvas.getContext("2d");
-
-    ctxAssinatura.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctxAssinatura.strokeStyle = "#10212d";
-    ctxAssinatura.lineWidth = 2.2;
-    ctxAssinatura.lineCap = "round";
-    ctxAssinatura.lineJoin = "round";
-
-    canvas.onpointerdown = iniciarTraco;
-    canvas.onpointermove = desenharTraco;
-    canvas.onpointerup = pararTraco;
-    canvas.onpointerleave = pararTraco;
-
+function avancarTela(){
+  if(indiceHistorico < historicoTelas.length - 1){
+    indiceHistorico++;
+    navegarParaTela(historicoTelas[indiceHistorico]);
+  }
 }
 
-
-function pegarPosicao(evento, canvas) {
-
-    const retangulo = canvas.getBoundingClientRect();
-
-    return {
-
-        x: (evento.clientX - retangulo.left) * (canvas.width / retangulo.width),
-        y: (evento.clientY - retangulo.top) * (canvas.height / retangulo.height)
-
-    };
-
+function navegarParaTela(t){
+  telaAtual = t;
+  if(t === 'inicial'){
+    document.getElementById('tela-inicial').style.display = 'flex';
+    document.getElementById('conteudo-boletim').style.display = 'none';
+    document.getElementById('tela-laudos-salvos').classList.remove('visivel');
+    document.getElementById('menuSuperior').classList.remove('visivel');
+    document.getElementById('rodapeFixo').classList.remove('visivel');
+    document.getElementById('acoesBoletim').style.display = 'none';
+  } else if(t === 'boletim'){
+    document.getElementById('tela-inicial').style.display = 'none';
+    document.getElementById('conteudo-boletim').style.display = 'block';
+    document.getElementById('tela-laudos-salvos').classList.remove('visivel');
+    document.getElementById('menuSuperior').classList.add('visivel');
+    document.getElementById('rodapeFixo').classList.add('visivel');
+    document.getElementById('acoesBoletim').style.display = 'flex';
+  } else if(t === 'laudos'){
+    document.getElementById('tela-inicial').style.display = 'none';
+    document.getElementById('conteudo-boletim').style.display = 'none';
+    document.getElementById('tela-laudos-salvos').classList.add('visivel');
+    document.getElementById('menuSuperior').classList.add('visivel');
+    document.getElementById('rodapeFixo').classList.add('visivel');
+    document.getElementById('acoesBoletim').style.display = 'none';
+    carregarLaudos();
+  }
+  atualizarMenu();
+  atualizarRodape();
 }
 
-
-function iniciarTraco(evento) {
-
-    desenhandoAssinatura = true;
-
-    const canvas = evento.target;
-
-    canvas.setPointerCapture(evento.pointerId);
-
-    const ponto = pegarPosicao(evento, canvas);
-
-    ctxAssinatura.beginPath();
-    ctxAssinatura.moveTo(ponto.x, ponto.y);
-
+function irParaInicio(){
+  historicoTelas = historicoTelas.slice(0, indiceHistorico + 1);
+  historicoTelas.push('inicial');
+  indiceHistorico = historicoTelas.length - 1;
+  navegarParaTela('inicial');
 }
 
-
-function desenharTraco(evento) {
-
-    if (!desenhandoAssinatura) {
-        return;
-    }
-
-    const ponto = pegarPosicao(evento, evento.target);
-
-    ctxAssinatura.lineTo(ponto.x, ponto.y);
-    ctxAssinatura.stroke();
-
+function irParaCriarBoletim(){
+  document.getElementById('conteudo-boletim').innerHTML = templateOriginalBoletim;
+  atualizarNumeroBoletim();
+  if(telaAtual !== 'boletim'){
+    historicoTelas = historicoTelas.slice(0, indiceHistorico + 1);
+    historicoTelas.push('boletim');
+    indiceHistorico = historicoTelas.length - 1;
+  }
+  navegarParaTela('boletim');
 }
 
-
-function pararTraco() {
-
-    desenhandoAssinatura = false;
-
+function irParaLaudosSalvos(){
+  if(telaAtual !== 'laudos'){
+    historicoTelas = historicoTelas.slice(0, indiceHistorico + 1);
+    historicoTelas.push('laudos');
+    indiceHistorico = historicoTelas.length - 1;
+  }
+  navegarParaTela('laudos');
 }
 
-
-function limparAssinatura() {
-
-    const canvas = document.getElementById("canvasAssinatura");
-
-    ctxAssinatura.clearRect(0, 0, canvas.width, canvas.height);
-
+function atualizarNumeroBoletim(){
+  const numeroEl = document.getElementById('numeroValor');
+  if(!numeroEl || numeroEl.textContent.trim() !== '') return;
+  const anoAtual = new Date().getFullYear();
+  const chave = 'boletimContador' + anoAtual;
+  let contador = parseInt(localStorage.getItem(chave) || '0', 10);
+  contador++;
+  localStorage.setItem(chave, contador);
+  numeroEl.textContent = String(contador).padStart(3, '0') + '/' + anoAtual;
 }
 
-
-function canvasEstaVazio(canvas) {
-
-    const contexto = canvas.getContext("2d");
-
-    const dados = contexto.getImageData(0, 0, canvas.width, canvas.height).data;
-
-    for (let i = 3; i < dados.length; i += 4) {
-
-        if (dados[i] !== 0) {
-            return false;
-        }
-
-    }
-
-    return true;
-
+function carregarImagem(input, imagemId, areaId){
+  const arquivo = input.files[0];
+  if(!arquivo) return;
+  if(!arquivo.type.startsWith('image/')){
+    alert('Selecione uma imagem válida.');
+    input.value = '';
+    return;
+  }
+  const imagem = document.getElementById(imagemId);
+  const area = document.getElementById(areaId);
+  const leitor = new FileReader();
+  leitor.onload = (e) => {
+    imagem.src = e.target.result;
+    area.classList.add('tem-imagem');
+  };
+  leitor.readAsDataURL(arquivo);
 }
 
-
-function confirmarAssinatura() {
-
-    const canvas = document.getElementById("canvasAssinatura");
-
-    if (canvasEstaVazio(canvas)) {
-
-        alert("Por favor, assine no campo antes de confirmar.");
-
-        return;
-    }
-
-    const nome = document.getElementById("inputNome").value.trim();
-    const cpf = document.getElementById("inputCPF").value.trim();
-    const funcao = document.getElementById("inputFuncao").value.trim();
-
-    const dataURL = canvas.toDataURL("image/png");
-
-    const agora = new Date();
-
-    const dataFormatada =
-        agora.toLocaleDateString("pt-BR") +
-        " às " +
-        agora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
-
-    assinaturaSlotAtual.dataset.nome = nome;
-    assinaturaSlotAtual.dataset.cpf = cpf;
-    assinaturaSlotAtual.dataset.funcaoPreenchida = funcao;
-    assinaturaSlotAtual.dataset.assinatura = dataURL;
-    assinaturaSlotAtual.dataset.data = dataFormatada;
-
-    renderizarAssinatura(assinaturaSlotAtual);
-
-    fecharModal();
-
+function removerImagem(imagemId, areaId){
+  const imagem = document.getElementById(imagemId);
+  const area = document.getElementById(areaId);
+  imagem.src = '';
+  area.classList.remove('tem-imagem');
+  const input = area.querySelector('input[type="file"]');
+  if(input) input.value = '';
 }
 
-
-function renderizarAssinatura(slotEl) {
-
-    slotEl.classList.add("assinado");
-
-    const botao = slotEl.querySelector(".btn-assinar");
-
-    if (botao) {
-        botao.style.display = "none";
-    }
-
-    const resultado = slotEl.querySelector(".assinatura-resultado");
-
-    resultado.innerHTML =
-        '<div class="assinatura-img"><img src="' +
-        slotEl.dataset.assinatura +
-        '" alt="Assinatura"></div>' +
-        '<div class="assinatura-info">' +
-        "<strong>Nome:</strong> " + slotEl.dataset.nome + "<br>" +
-        "<strong>CPF:</strong> " + slotEl.dataset.cpf + "<br>" +
-        "<strong>Função:</strong> " + slotEl.dataset.funcaoPreenchida +
-        '<span class="assinatura-data">Assinado em ' + slotEl.dataset.data + '</span>' +
-        "</div>" +
-        '<button class="btn-refazer no-print" type="button" onclick="abrirAssinatura(this.closest(\'.assinatura-slot\'))">Refazer assinatura</button>';
-
+function imprimirBoletim(){
+  window.print();
 }
 
+function abrirAssinatura(slotEl){
+  assinaturaSlotAtual = slotEl;
+  document.getElementById('modalTituloAssinatura').textContent = slotEl.dataset.titulo;
+  document.getElementById('inputNome').value = slotEl.dataset.nome || '';
+  document.getElementById('inputCPF').value = slotEl.dataset.cpf || '';
+  document.getElementById('inputFuncao').value = slotEl.dataset.funcaoPreenchida || slotEl.dataset.funcao || '';
+  document.getElementById('modalStep1').style.display = 'block';
+  document.getElementById('modalStep2').style.display = 'none';
+  document.getElementById('modalAssinatura').classList.add('aberto');
+}
+
+function fecharModal(){
+  document.getElementById('modalAssinatura').classList.remove('aberto');
+}
+
+function avancarParaAssinatura(){
+  const nome = document.getElementById('inputNome').value.trim();
+  const cpf = document.getElementById('inputCPF').value.trim();
+  const funcao = document.getElementById('inputFuncao').value.trim();
+  if(!nome || !cpf || !funcao){
+    alert('Preencha nome completo, CPF e função antes de continuar.');
+    return;
+  }
+  document.getElementById('modalStep1').style.display = 'none';
+  document.getElementById('modalStep2').style.display = 'block';
+  prepararCanvas();
+}
+
+function voltarStep1(){
+  document.getElementById('modalStep2').style.display = 'none';
+  document.getElementById('modalStep1').style.display = 'block';
+}
+
+function prepararCanvas(){
+  const canvas = document.getElementById('canvasAssinatura');
+  ctxAssinatura = canvas.getContext('2d');
+  ctxAssinatura.clearRect(0, 0, canvas.width, canvas.height);
+  ctxAssinatura.strokeStyle = '#10212d';
+  ctxAssinatura.lineWidth = 2.2;
+  ctxAssinatura.lineCap = 'round';
+  ctxAssinatura.lineJoin = 'round';
+  canvas.onpointerdown = iniciarTraco;
+  canvas.onpointermove = desenharTraco;
+  canvas.onpointerup = pararTraco;
+  canvas.onpointerleave = pararTraco;
+}
+
+function pegarPosicao(evento, canvas){
+  const r = canvas.getBoundingClientRect();
+  return {
+    x: (evento.clientX - r.left) * (canvas.width / r.width),
+    y: (evento.clientY - r.top) * (canvas.height / r.height)
+  };
+}
+
+function iniciarTraco(evento){
+  desenhandoAssinatura = true;
+  const canvas = evento.target;
+  canvas.setPointerCapture(evento.pointerId);
+  const p = pegarPosicao(evento, canvas);
+  ctxAssinatura.beginPath();
+  ctxAssinatura.moveTo(p.x, p.y);
+}
+
+function desenharTraco(evento){
+  if(!desenhandoAssinatura) return;
+  const p = pegarPosicao(evento, evento.target);
+  ctxAssinatura.lineTo(p.x, p.y);
+  ctxAssinatura.stroke();
+}
+
+function pararTraco(){
+  desenhandoAssinatura = false;
+}
+
+function limparAssinatura(){
+  const canvas = document.getElementById('canvasAssinatura');
+  ctxAssinatura.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function canvasEstaVazio(canvas){
+  const ctx = canvas.getContext('2d');
+  const dados = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+  for(let i = 3; i < dados.length; i += 4){
+    if(dados[i] !== 0) return false;
+  }
+  return true;
+}
+
+function confirmarAssinatura(){
+  const canvas = document.getElementById('canvasAssinatura');
+  if(canvasEstaVazio(canvas)){
+    alert('Por favor, assine no campo antes de confirmar.');
+    return;
+  }
+  const nome = document.getElementById('inputNome').value.trim();
+  const cpf = document.getElementById('inputCPF').value.trim();
+  const funcao = document.getElementById('inputFuncao').value.trim();
+  const dataURL = canvas.toDataURL('image/png');
+  const agora = new Date();
+  const dataFormatada = agora.toLocaleDateString('pt-BR') + ' às ' + agora.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+
+  assinaturaSlotAtual.dataset.nome = nome;
+  assinaturaSlotAtual.dataset.cpf = cpf;
+  assinaturaSlotAtual.dataset.funcaoPreenchida = funcao;
+  assinaturaSlotAtual.dataset.assinatura = dataURL;
+  assinaturaSlotAtual.dataset.data = dataFormatada;
+
+  renderizarAssinatura(assinaturaSlotAtual);
+  fecharModal();
+}
+
+function renderizarAssinatura(slotEl){
+  slotEl.classList.add('assinado');
+  const botao = slotEl.querySelector('.btn-assinar');
+  if(botao) botao.style.display = 'none';
+  const resultado = slotEl.querySelector('.assinatura-resultado');
+  resultado.innerHTML =
+    '<div class="assinatura-img"><img src="' + slotEl.dataset.assinatura + '" alt="Assinatura"></div>' +
+    '<div class="assinatura-info">' +
+      '<strong>Nome:</strong> ' + slotEl.dataset.nome + '<br>' +
+      '<strong>CPF:</strong> ' + slotEl.dataset.cpf + '<br>' +
+      '<strong>Função:</strong> ' + slotEl.dataset.funcaoPreenchida +
+      '<span class="assinatura-data">Assinado em ' + slotEl.dataset.data + '</span>' +
+    '</div>' +
+    '<button class="btn-refazer no-print" type="button" onclick="abrirAssinatura(this.closest(\'.assinatura-slot\'))">Refazer assinatura</button>';
+}
+
+function abrirModalSalvar(){
+  document.getElementById('inputNomeLaudo').value = '';
+  document.getElementById('modalSalvarLaudo').classList.add('aberto');
+}
+
+function fecharModalSalvar(){
+  document.getElementById('modalSalvarLaudo').classList.remove('aberto');
+}
+
+function confirmarSalvarLaudo(){
+  const nomeLaudo = document.getElementById('inputNomeLaudo').value.trim();
+  if(!nomeLaudo){
+    alert('Por favor, digite um nome para o laudo.');
+    return;
+  }
+
+  const secaoAssinaturas = document.getElementById('secaoAssinaturas');
+  const estavaOculto = secaoAssinaturas.classList.contains('oculto');
+  secaoAssinaturas.classList.remove('oculto');
+
+  const boletimHTML = document.getElementById('conteudo-boletim').innerHTML;
+
+  if(estavaOculto) secaoAssinaturas.classList.add('oculto');
+
+  const agora = new Date();
+  const dataSalvamento = agora.toISOString();
+  const laudos = JSON.parse(localStorage.getItem('laudosSalvos') || '[]');
+  laudos.push({ id: Date.now(), nome: nomeLaudo, conteudo: boletimHTML, data: dataSalvamento });
+  localStorage.setItem('laudosSalvos', JSON.stringify(laudos));
+
+  fecharModalSalvar();
+  alert('Boletim salvo com sucesso!');
+  irParaLaudosSalvos();
+}
+
+function carregarLaudos(){
+  const laudos = JSON.parse(localStorage.getItem('laudosSalvos') || '[]');
+  const lista = document.getElementById('listaLaudos');
+  const vazio = document.getElementById('laudosVazio');
+  lista.innerHTML = '';
+  if(laudos.length === 0){
+    vazio.style.display = 'block';
+    return;
+  }
+  vazio.style.display = 'none';
+  laudos.sort((a, b) => new Date(b.data) - new Date(a.data));
+  laudos.forEach((laudo) => {
+    const d = new Date(laudo.data);
+    const df = d.toLocaleDateString('pt-BR') + ' às ' + d.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+    const item = document.createElement('div');
+    item.className = 'laudo-item';
+    item.innerHTML =
+      '<div class="laudo-info"><div class="laudo-nome">' + laudo.nome + '</div><div class="laudo-data">Salvo em ' + df + '</div></div>' +
+      '<div class="laudo-acoes">' +
+        '<button class="btn-abrir-laudo" onclick="abrirLaudo(' + laudo.id + ')">Abrir</button>' +
+        '<button class="btn-excluir-laudo" onclick="excluirLaudo(' + laudo.id + ')">Excluir</button>' +
+      '</div>';
+    lista.appendChild(item);
+  });
+}
+
+function filtrarLaudos(){
+  const termo = document.getElementById('inputPesquisaLaudo').value.toLowerCase();
+  const itens = document.querySelectorAll('.laudo-item');
+  itens.forEach((item) => {
+    const nome = item.querySelector('.laudo-nome').textContent.toLowerCase();
+    item.style.display = nome.includes(termo) ? 'flex' : 'none';
+  });
+}
+
+function abrirLaudo(id){
+  const laudos = JSON.parse(localStorage.getItem('laudosSalvos') || '[]');
+  const laudo = laudos.find((l) => l.id === id);
+  if(!laudo){
+    alert('Boletim não encontrado.');
+    return;
+  }
+  document.getElementById('conteudo-boletim').innerHTML = laudo.conteudo;
+  document.getElementById('conteudo-boletim').style.display = 'block';
+  document.getElementById('tela-laudos-salvos').classList.remove('visivel');
+  document.getElementById('acoesBoletim').style.display = 'flex';
+  telaAtual = 'boletim';
+  historicoTelas = historicoTelas.slice(0, indiceHistorico + 1);
+  historicoTelas.push('boletim');
+  indiceHistorico = historicoTelas.length - 1;
+  atualizarMenu();
+  atualizarRodape();
+  window.scrollTo(0, 0);
+}
+
+function excluirLaudo(id){
+  if(!confirm('Tem certeza que deseja excluir este boletim?')) return;
+  let laudos = JSON.parse(localStorage.getItem('laudosSalvos') || '[]');
+  laudos = laudos.filter((l) => l.id !== id);
+  localStorage.setItem('laudosSalvos', JSON.stringify(laudos));
+  carregarLaudos();
+}
 </script>
-
-
 </body>
-
 </html>
