@@ -149,6 +149,7 @@
   .dica-final p{max-width:700px;margin:9px auto 0;color:#d6e3e9;font-size:13px;line-height:1.6;}
 
   /* ===== ASSINATURAS ===== */
+  /* .oculto controla visibilidade em TELA e em IMPRESSAO (sem excecao). */
   .secao-assinaturas.oculto{display:none !important;}
   .assinaturas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
   .assinatura-slot{border:1px solid #dfe5e8;border-radius:8px;padding:18px;background:#fff;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;}
@@ -252,7 +253,6 @@
     [contenteditable="true"]{border-color:transparent !important;border-width:0 !important;background:transparent !important;box-shadow:none !important;}
     .header{background:linear-gradient(135deg,#10212d 0%,#162e3d 65%,#0078b8 100%) !important;}
     .regra{background:#fff7e5 !important;border-left-color:#efa900 !important;}
-    .secao-assinaturas.oculto{display:block !important;}
     .foto-card,.passo,.lista-card,.checklist,.duas-colunas,.comparacao,.passos,.check,.assinatura-slot,.dica-final,.footer{break-inside:avoid;page-break-inside:avoid;}
     @page{size:A4;margin:8mm;}
   }
